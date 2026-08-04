@@ -37,7 +37,7 @@ export default function PortfolioAboutPage() {
             <p className="mt-6 max-w-[570px] text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">I bring structure to complex problems, combining frontend development, UI design, and 15 years of technical experience to create clear, usable digital products.</p>
           </div>
           <nav aria-label="Professional profiles" className="flex flex-wrap gap-2 border-t border-slate-200 pt-5 text-sm">
-            <a href="mailto:jacob.bernard68@gmail.com" className="rounded-lg bg-[#e2e8f2] px-4 py-2 font-medium text-[#1f2937] transition hover:bg-[#b8cadc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795]">Email</a>
+            <button type="button" disabled aria-disabled="true" title="Email contact coming soon" className="cursor-not-allowed rounded-lg bg-[#e2e8f2] px-4 py-2 font-medium text-[#1f2937] opacity-55">Email · Soon</button>
             <a href="https://github.com/jacobbernard68-ux" target="_blank" rel="noreferrer" className="rounded-lg bg-[#e2e8f2] px-4 py-2 font-medium text-[#1f2937] transition hover:bg-[#b8cadc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795]">GitHub ↗</a>
             <a href="https://linkedin.com/in/jacobbernard159" target="_blank" rel="noreferrer" className="rounded-lg bg-[#e2e8f2] px-4 py-2 font-medium text-[#1f2937] transition hover:bg-[#b8cadc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795]">LinkedIn ↗</a>
           </nav>

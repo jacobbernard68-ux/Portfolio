@@ -58,21 +58,27 @@ export default function PortfolioContactPage() {
               <p className="mt-2 text-sm leading-6 text-slate-700">Share the challenge, timeline, and what a strong outcome would look like.</p>
             </article>
           </div>
-          <form data-cursor-reactive onPointerMove={trackCard} onPointerLeave={resetCard} action="https://formbold.com/s/unique_form_id" method="POST" className="grid gap-4 rounded-xl bg-[#c7d2de] p-5 sm:grid-cols-2 sm:p-6">
+          <form data-cursor-reactive onPointerMove={trackCard} onPointerLeave={resetCard} onSubmit={(event) => event.preventDefault()} aria-describedby="contact-status contact-notice" className="grid gap-4 rounded-xl bg-[#c7d2de] p-5 sm:grid-cols-2 sm:p-6">
             <div>
               <label htmlFor="name" className="mb-2 block text-sm font-medium text-[#111]">Name</label>
-              <input id="name" name="name" required autoComplete="name" className="w-full rounded-lg border border-slate-500/20 bg-white px-4 py-3 text-[#111] outline-none transition focus:border-slate-700 focus:ring-2 focus:ring-slate-700/15" />
+              <input id="name" name="name" disabled autoComplete="name" className="w-full cursor-not-allowed rounded-lg border border-slate-500/20 bg-white/70 px-4 py-3 text-[#111] opacity-70 outline-none" />
             </div>
             <div>
               <label htmlFor="email" className="mb-2 block text-sm font-medium text-[#111]">Email</label>
-              <input id="email" name="email" type="email" required autoComplete="email" className="w-full rounded-lg border border-slate-500/20 bg-white px-4 py-3 text-[#111] outline-none transition focus:border-slate-700 focus:ring-2 focus:ring-slate-700/15" />
+              <input id="email" name="email" type="email" disabled autoComplete="email" className="w-full cursor-not-allowed rounded-lg border border-slate-500/20 bg-white/70 px-4 py-3 text-[#111] opacity-70 outline-none" />
             </div>
             <div className="sm:col-span-2">
               <label htmlFor="message" className="mb-2 block text-sm font-medium text-[#111]">Message</label>
-              <textarea id="message" name="message" rows={4} required className="w-full resize-none rounded-lg border border-slate-500/20 bg-white px-4 py-3 text-[#111] outline-none transition focus:border-slate-700 focus:ring-2 focus:ring-slate-700/15" />
+              <textarea id="message" name="message" rows={4} disabled className="w-full cursor-not-allowed resize-none rounded-lg border border-slate-500/20 bg-white/70 px-4 py-3 text-[#111] opacity-70 outline-none" />
             </div>
-            <div className="sm:col-span-2 sm:text-right">
-              <button type="submit" className="rounded-lg bg-[#26354a] px-6 py-3 font-medium text-white transition hover:bg-[#1d2a3c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#26354a] focus-visible:ring-offset-2">Send message</button>
+            <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-end sm:justify-between">
+              <div className="max-w-[520px]">
+                <p id="contact-status" className="mb-1 text-xs font-semibold text-[#26354a]">Contact form coming soon — submissions are currently disabled.</p>
+                <p id="contact-notice" className="text-[11px] leading-[1.55] text-slate-600">
+                  For general inquiries only. Do not submit passwords, financial, medical, classified, or other sensitive information. Submitting this form does not create a client, employment, advisory, or confidential relationship and does not guarantee a response.
+                </p>
+              </div>
+              <button type="submit" disabled aria-disabled="true" className="shrink-0 cursor-not-allowed rounded-lg bg-[#26354a] px-6 py-3 font-medium text-white opacity-55">Send message</button>
             </div>
           </form>
         </div>
