@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const SingleReview = ({ review }: { review: Review }) => {
   return (
-    <div className="user-border-gradient relative overflow-hidden rounded-[19px] px-8 py-9">
+    <div className="brand-card relative overflow-hidden px-8 py-9">
       <div className="flex items-center gap-4.5">
         <div className="relative h-12 w-full max-w-[48px] overflow-hidden rounded-full">
           <Image
@@ -14,14 +14,14 @@ const SingleReview = ({ review }: { review: Review }) => {
           />
         </div>
         <div>
-          <h3 className="text-sm font-medium text-white">{review.userName}</h3>
+          <h3 className="text-sm font-medium text-[#111]">{review.userName}</h3>
           <p className="text-sm font-medium lowercase">
             {review.userDesignation}
           </p>
         </div>
       </div>
 
-      <div className="user-divider relative my-6 h-[1px] w-full"></div>
+      <div className="relative my-6 h-px w-full bg-[#2f3e5c]/10"></div>
 
       <p>{review.description}</p>
 

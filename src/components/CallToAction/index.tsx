@@ -5,7 +5,7 @@ const CallToAction = () => {
   return (
     <section>
       <div className="mx-auto max-w-[1170px] px-4 sm:px-8 xl:px-0">
-        <div className="cta-box-gradient relative z-999 overflow-hidden rounded-[30px] bg-dark px-4 py-20 lg:py-25">
+        <div className="relative z-20 overflow-hidden rounded-2xl bg-[#b7c5dd] px-4 py-20 shadow-[0_18px_60px_rgba(0,0,0,0.08)] lg:py-25">
           {/* <!-- bg shapes --> */}
 
           <div className="absolute bottom-0 left-0 -z-1 h-full w-full bg-[url(/images/cta/grid.svg)] bg-cover bg-bottom bg-no-repeat"></div>
@@ -54,7 +54,7 @@ const CallToAction = () => {
 
               <span className="hero-subtitle-text">Try our tool for Free</span>
             </span>
-            <h2 className="mb-4.5 text-2xl font-extrabold text-white sm:text-4xl xl:text-heading-2">
+            <h2 className="mb-4.5 text-2xl font-semibold text-[#111] sm:text-4xl xl:text-[36px]">
               What are you waiting for?
             </h2>
             <p className="mx-auto mb-9 max-w-[714px] font-medium">

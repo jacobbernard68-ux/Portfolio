@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -23,58 +22,58 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleStickyMenu);
-  });
+    return () => window.removeEventListener("scroll", handleStickyMenu);
+  }, []);
 
   return (
     <>
       <header
-        className={`fixed left-0 top-0 z-1000 w-full ${
+        className={`fixed left-0 top-0 z-1000 flex min-h-[88px] w-full items-center bg-[#b7c5dd] text-[#111] md:min-h-[120px] ${
           stickyMenu
-            ? "before:features-row-border bg-dark/70 py-4! shadow-sm backdrop-blur-lg transition duration-100 before:absolute before:bottom-0 before:left-0 before:h-[1px] before:w-full lg:py-0!"
-            : "py-7 lg:py-0"
+            ? "border-b border-[#2f3e5c]/10 py-4! shadow-[0_8px_30px_rgba(47,62,92,0.08)] transition duration-200 lg:py-0!"
+            : "py-5 lg:py-0"
         }`}
       >
-        <div className="relative mx-auto max-w-[1170px] items-center justify-between px-4 sm:px-8 lg:flex xl:px-0">
+        <div className="relative mx-auto w-full max-w-[1200px] items-center justify-between px-4 sm:px-8 lg:flex xl:px-0">
           <div className="flex w-full items-center justify-between lg:w-1/4">
             <Link href="/">
-              <Image
-                src="/images/logo/logo.svg"
-                alt="Logo"
-                width={164}
-                height={36}
-              />
+              <span className="text-xl font-semibold leading-6 text-[#1f2937] md:text-2xl">
+                Jacob Bernard
+              </span>
             </Link>
 
             <button
               onClick={() => setNavigationOpen(!navigationOpen)}
-              className="block lg:hidden"
+                className="block rounded-md p-2 lg:hidden"
+                aria-label="Toggle navigation"
+                aria-expanded={navigationOpen}
             >
               <span className="relative block h-5.5 w-5.5 cursor-pointer">
                 <span className="du-block absolute right-0 h-full w-full">
                   <span
-                    className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-white delay-0 duration-200 ease-in-out ${
+                    className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-[#1f2937] delay-0 duration-200 ease-in-out ${
                       !navigationOpen ? "w-full! delay-300" : "w-0"
                     }`}
                   ></span>
                   <span
-                    className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-white delay-150 duration-200 ease-in-out ${
+                    className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-[#1f2937] delay-150 duration-200 ease-in-out ${
                       !navigationOpen ? "delay-400 w-full!" : "w-0"
                     }`}
                   ></span>
                   <span
-                    className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-white delay-200 duration-200 ease-in-out ${
+                    className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-[#1f2937] delay-200 duration-200 ease-in-out ${
                       !navigationOpen ? "w-full! delay-500" : "w-0"
                     }`}
                   ></span>
                 </span>
                 <span className="du-block absolute right-0 h-full w-full rotate-45">
                   <span
-                    className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-white delay-300 duration-200 ease-in-out ${
+                    className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-[#1f2937] delay-300 duration-200 ease-in-out ${
                       !navigationOpen ? "h-0! delay-0" : "h-full"
                     }`}
                   ></span>
                   <span
-                    className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-white duration-200 ease-in-out ${
+                    className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-[#1f2937] duration-200 ease-in-out ${
                       !navigationOpen ? "h-0! delay-200" : "h-0.5"
                     }`}
                   ></span>
@@ -86,11 +85,11 @@ const Header = () => {
           <div
             className={`invisible h-0 w-full items-center justify-between lg:visible lg:flex lg:h-auto lg:w-3/4 ${
               navigationOpen
-                ? "visible! relative mt-4 h-auto! max-h-[400px] overflow-y-scroll rounded-md bg-dark p-7.5 shadow-lg"
+                ? "visible! relative mt-4 h-auto! max-h-[400px] overflow-y-auto rounded-xl bg-white p-6 shadow-[0_18px_60px_rgba(0,0,0,0.08)]"
                 : ""
             }`}
           >
-            <nav>
+            <nav className="ml-auto">
               <ul className="flex flex-col gap-5 lg:flex-row lg:items-center lg:gap-2">
                 {menuData.map((menuItem, key) => (
                   <li
@@ -104,10 +103,10 @@ const Header = () => {
                     ) : (
                       <Link
                         href={`${menuItem.path}`}
-                        className={`hover:nav-gradient relative border border-transparent px-4 py-1.5 text-sm hover:text-white ${
+                        className={`relative rounded-md border border-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-white/60 hover:text-[#111] ${
                           pathUrl === menuItem.path
-                            ? "nav-gradient text-white"
-                            : "text-white/80"
+                            ? "text-[#111]"
+                            : "text-[#1f2937]"
                         }`}
                       >
                         {menuItem.title}
@@ -118,14 +117,14 @@ const Header = () => {
               </ul>
             </nav>
 
-            <div className="mt-7 flex items-center gap-6 lg:mt-0">
+            <div className="hidden">
               {false ? (
                 <>
                   <p>{""}</p>
                   <button
                     aria-label="Sign Out button"
                     onClick={() => void 0}
-                    className="text-sm text-white hover:text-opacity-75"
+                    className="text-sm text-[#1f2937] hover:text-[#111]"
                   >
                     Sign Out
                   </button>
@@ -134,13 +133,13 @@ const Header = () => {
                 <>
                   <Link
                     href="/auth/signin"
-                    className="text-sm text-white hover:text-opacity-75"
+                    className="text-sm text-[#1f2937] hover:text-[#111]"
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/auth/signup"
-                    className="button-border-gradient hover:button-gradient-hover relative flex items-center gap-1.5 rounded-lg px-4.5 py-2 text-sm text-white shadow-button hover:shadow-none"
+                    className="relative flex items-center gap-1.5 rounded-lg bg-[#2f3e5c] px-4.5 py-2.5 text-sm text-white shadow-[0_8px_24px_rgba(47,62,92,0.18)] transition hover:bg-[#253149]"
                   >
                     Sign up
                     <svg

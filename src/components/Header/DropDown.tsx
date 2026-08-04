@@ -11,10 +11,10 @@ const DropDown = ({ menuItem }: { menuItem: Menu }) => {
       {menuItem.title !== "Pages" ? (
         <Link
           onClick={() => setDropdownToggler(!dropdownToggler)}
-          className={`hover:nav-gradient relative flex items-center justify-between gap-3 border border-transparent px-4 py-1.5 text-sm hover:text-white ${
+          className={`relative flex items-center justify-between gap-3 rounded-md border border-transparent px-4 py-2 text-sm font-medium hover:bg-white/60 hover:text-[#111] ${
             pathUrl === menuItem.path
-              ? "nav-gradient text-white"
-              : "text-white/80"
+              ? "bg-white/70 text-[#111]"
+              : "text-[#1f2937]"
           }`}
           href={`${menuItem.path ? menuItem.path : ""}`}
         >
@@ -32,10 +32,10 @@ const DropDown = ({ menuItem }: { menuItem: Menu }) => {
       ) : (
         <button
           onClick={() => setDropdownToggler(!dropdownToggler)}
-          className={`hover:nav-gradient relative flex items-center justify-between gap-3 border border-transparent px-4 py-1.5 text-sm hover:text-white ${
+          className={`relative flex items-center justify-between gap-3 rounded-md border border-transparent px-4 py-2 text-sm font-medium hover:bg-white/60 hover:text-[#111] ${
             pathUrl === menuItem.path
-              ? "nav-gradient text-white"
-              : "text-white/80"
+              ? "bg-white/70 text-[#111]"
+              : "text-[#1f2937]"
           }`}
         >
           {menuItem.title}
@@ -57,7 +57,7 @@ const DropDown = ({ menuItem }: { menuItem: Menu }) => {
             <li key={key}>
               <Link
                 href={item.path || "#"}
-                className="flex rounded-md px-4 py-2 text-sm text-white/70 hover:bg-white/5 hover:text-white"
+                className="flex rounded-md px-4 py-2 text-sm text-[#334155] hover:bg-[#e2e8f2] hover:text-[#111]"
               >
                 {item.title}
               </Link>

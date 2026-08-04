@@ -4,71 +4,41 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <section
-      id='home'
-      className='relative z-10 overflow-hidden pt-35 md:pt-40 xl:pt-45'
+      id="home"
+      className="mt-[88px] flex min-h-[calc(100svh-176px)] items-center overflow-hidden bg-transparent py-16 md:mt-[120px] md:h-[calc(100svh-208px)] md:min-h-0 md:py-12"
     >
-      {/* <!-- Hero Bg Shapes --> */}
-      <div className='mx-auto max-w-7xl'>
-        <div className='pointer-events-none absolute inset-0 -z-10 -mx-28 overflow-hidden'>
-          <div className='-u-z-10 hero-circle-gradient absolute -top-[128%] left-1/2 -z-1 h-[1282px] w-full max-w-[1282px] -translate-x-1/2 rounded-full sm:-top-[107%] xl:-top-[73%]'></div>
-          <div className='-u-z-10 hero-circle-gradient absolute -top-[112%] left-1/2 -z-1 h-[1046px] w-full max-w-[1046px] -translate-x-1/2 rounded-full sm:-top-[93%] xl:-top-[62%]'></div>
-          <div className='-u-z-10 absolute top-0 left-1/2 aspect-1204/394 w-full max-w-[1204px] -translate-x-1/2'>
-            <Image
-              src='/images/blur/blur-02.svg'
-              alt='blur-sm'
-              fill
-              className='max-w-none'
-            />
-          </div>
-          <div className='-u-z-10 absolute top-0 left-1/2 h-full w-full -translate-x-1/2 bg-[url(/images/blur/blur-01.svg)] bg-cover bg-top bg-no-repeat'></div>
-        </div>
-      </div>
-
-      {/* <!-- Hero Content --> */}
-      <div className='relative z-1 mx-auto max-w-[900px] px-4 sm:px-8 xl:px-0'>
-        <div className='text-center'>
-          <span className='hero-subtitle-gradient hover:hero-subtitle-hover relative mb-5 inline-flex items-center gap-2 rounded-full px-4.5 py-2 text-sm font-medium'>
-            <Image
-              src='/images/hero/icon-title.svg'
-              alt='icon'
-              width={16}
-              height={16}
-            />
-
-            <span className='hero-subtitle-text'>
-              Launch Your AI Startup with
-            </span>
-          </span>
-          <h1 className='xl:text-heading-1 mb-6 text-3xl font-extrabold text-white sm:text-5xl'>
-            OpenAI + Next.js SaaS Boilerplate and Starter Kit
+      <div className="mx-auto grid w-full max-w-[1200px] items-center gap-14 px-6 sm:px-8 lg:grid-cols-[1.05fr_1fr] lg:gap-0 xl:px-0">
+        <div className="relative z-10 max-w-[690px]">
+          <h1 className="max-w-[660px] text-[42px] font-bold leading-[1.08] tracking-[-0.035em] text-[#111] sm:text-5xl md:text-[56px] md:leading-[64px]">
+            UX Designer building structured, scalable experiences
           </h1>
-
-          <p className='mx-auto mb-9 max-w-[500px] font-medium md:text-lg'>
-            Ideal for developers looking to build SaaS applications using OpenAI
-            and Next.js, this starter kit comes with pre-configured and
-            pre-built examples, making it easier to quickly kickstart your AI
-            startup.
+          <p className="mt-8 text-base leading-6 text-[#333]">
+            Designing systems that stay intuitive as products evolve.
           </p>
-
           <Link
-            href='/ai-examples'
-            className='hero-button-gradient inline-flex rounded-lg px-7 py-3 font-medium text-white duration-300 ease-in hover:opacity-80'
+            href="/work"
+            className="mt-8 inline-flex rounded-lg bg-[#2f3e5c] px-6 py-4 text-base font-normal leading-6 text-white shadow-[0_8px_24px_rgba(47,62,92,0.18)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#253149] hover:shadow-lg"
           >
-            Try AI Examples
+            View Work
           </Link>
         </div>
-      </div>
 
-      <div
-        className='relative mx-auto mt-17 aspect-1170/411 w-full max-w-[1170px]'
-        data-wow-delay='0.1s'
-      >
-        <Image
-          className='mx-auto'
-          src='./images/hero/hero.svg'
-          alt='hero'
-          fill
-        />
+        <Link
+          href="/beans-place/index.html"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="View selected work"
+          className="relative aspect-[55/37] w-full overflow-hidden rounded-2xl bg-white shadow-[0_12px_40px_rgba(0,0,0,0.1)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(0,0,0,0.14)] lg:-ml-6 lg:max-w-[590px]"
+        >
+          <Image
+            src="/images/portfolio/beans/home-preview-tall.png"
+            alt="The Bean's Place coffee shop website home page"
+            fill
+            priority
+            className="object-cover object-top"
+            sizes="(max-width: 1024px) 100vw, 590px"
+          />
+        </Link>
       </div>
     </section>
   );

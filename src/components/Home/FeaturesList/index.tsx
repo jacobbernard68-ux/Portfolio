@@ -10,8 +10,8 @@ const FeaturesList = () => {
           {/* <!-- features item --> */}
           <div className="sm:col-span-12">
             <Highlighter>
-              <div className="features-box-border relative rounded-3xl">
-                <div className="box-hover relative overflow-hidden rounded-3xl p-10 xl:p-15">
+              <div className="brand-card relative rounded-2xl">
+                <div className="box-hover relative overflow-hidden rounded-2xl p-10 xl:p-15">
                   <div className="relative z-20 flex items-center justify-between">
                     <div className="w-full max-w-[477px]">
                       <span className="hero-subtitle-gradient relative mb-4 inline-flex items-center gap-2 rounded-full px-4.5 py-2 text-sm font-medium">
@@ -36,7 +36,7 @@ const FeaturesList = () => {
                         startup.
                       </p>
                       <Link
-                        href="/#"
+                        href="/ai-examples"
                         className="features-button-gradient relative inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm text-white duration-300 ease-in hover:shadow-button"
                       >
                         Learn more
@@ -122,8 +122,8 @@ const FeaturesList = () => {
           {/* <!-- features item --> */}
           <div className="sm:col-span-7">
             <Highlighter>
-              <div className="features-box-border relative rounded-3xl">
-                <div className="box-hover box-hover-small relative overflow-hidden rounded-3xl px-11 pb-14 pt-12.5">
+              <div className="brand-card relative rounded-2xl">
+                <div className="box-hover box-hover-small relative overflow-hidden rounded-2xl px-11 pb-14 pt-12.5">
                   <div className="relative z-20">
                     <span className="icon-border relative mx-auto mb-13.5 inline-flex h-20 w-full max-w-[80px] items-center justify-center rounded-full">
                       <Image
@@ -183,8 +183,8 @@ const FeaturesList = () => {
           {/* <!-- features item --> */}
           <div className="sm:col-span-5">
             <Highlighter>
-              <div className="features-box-border relative rounded-3xl">
-                <div className="box-hover box-hover-small relative overflow-hidden rounded-3xl px-11 pb-14 pt-12.5">
+              <div className="brand-card relative rounded-2xl">
+                <div className="box-hover box-hover-small relative overflow-hidden rounded-2xl px-11 pb-14 pt-12.5">
                   <div className="relative z-20">
                     <span className="icon-border relative mx-auto mb-13.5 inline-flex h-20 w-full max-w-[80px] items-center justify-center rounded-full">
                       <Image

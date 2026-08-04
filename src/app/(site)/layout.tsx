@@ -5,13 +5,14 @@ import '@/styles/tailwind.css';
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import CursorBubble from '@/components/CursorBubble';
 import ScrollToTop from '@/components/ScrollToTop';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
 import AuthProvider from '../context/AuthContext';
 import ToasterContext from '../context/ToastContext';
 
-const plusJakarta = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
 });
@@ -22,11 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className={plusJakarta.className}>
+    <html lang='en' className={inter.className}>
       <body>
-        <div className='isolate'>
+        <CursorBubble />
+        <div className='relative z-10 isolate'>
           <NextTopLoader
-            color='#8646F4'
+            color='#2F3E5C'
             crawlSpeed={300}
             showSpinner={false}
             shadow='none'

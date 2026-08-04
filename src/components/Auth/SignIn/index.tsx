@@ -62,12 +62,12 @@ const Signin = () => {
     <>
       <section className="pb-17.5 pt-17.5 lg:pb-22.5 xl:pb-27.5">
         <div className="mx-auto max-w-[1170px] px-4 sm:px-8 xl:px-0">
-          <div className="wow fadeInUp rounded-3xl bg-white/[0.05]">
+          <div className="brand-surface wow fadeInUp rounded-2xl">
             <div className="flex">
               <div className="hidden w-full lg:block lg:w-1/2">
                 <div className="relative py-20 pl-17.5 pr-22">
                   <div className="absolute right-0 top-0 h-full w-[1px] bg-linear-to-b from-white/0 via-white/20 to-white/0"></div>
-                  <h2 className="mb-10 max-w-[292px] text-heading-4 font-bold text-white">
+                  <h2 className="mb-10 max-w-[292px] text-heading-4 font-bold text-[#111]">
                     Unlock the Power of Writing Tool
                   </h2>
                   <div className="relative aspect-61/50 w-full max-w-[427px]">
@@ -100,7 +100,7 @@ const Signin = () => {
                             placeholder="Enter your email"
                             value={data.email}
                             onChange={(e) => setData({ ...data, email: e.target.value })}
-                            className="w-full rounded-lg border border-white/[0.12] bg-transparent py-3.5 pl-14.5 pr-4 font-medium text-white outline-hidden focus:border-purple focus-visible:shadow-none"
+                            className="w-full rounded-lg border border-[#2f3e5c]/20 bg-[#f7f9fc] py-3.5 pl-14.5 pr-4 font-medium text-[#111] outline-hidden focus:border-[#2f3e5c] focus-visible:shadow-none"
                           />
                         </div>
                         <div className="relative mb-4">
@@ -109,11 +109,11 @@ const Signin = () => {
                             placeholder="Enter your password"
                             value={data.password}
                             onChange={(e) => setData({ ...data, password: e.target.value })}
-                            className="w-full rounded-lg border border-white/[0.12] bg-transparent py-3.5 px-4 font-medium text-white outline-hidden focus:border-purple focus-visible:shadow-none"
+                            className="w-full rounded-lg border border-[#2f3e5c]/20 bg-[#f7f9fc] py-3.5 px-4 font-medium text-[#111] outline-hidden focus:border-[#2f3e5c] focus-visible:shadow-none"
                           />
                         </div>
                         <div className="flex items-center justify-between mb-4">
-                          <label className="flex items-center gap-2 text-sm text-white">
+                          <label className="flex items-center gap-2 text-sm text-[#334155]">
                             <input
                               type="checkbox"
                               checked={remember}

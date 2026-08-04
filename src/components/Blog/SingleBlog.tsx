@@ -7,7 +7,7 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
   const imageUrl = typeof mainImage === 'string' ? mainImage : mainImage?.url || '/images/blur/blur-1.png';
 
   return (
-    <div className='wow fadeInUp group relative isolate'>
+    <div className='brand-card wow fadeInUp group relative isolate h-full overflow-hidden p-5'>
       <div className='relative mb-6 h-[222px] w-full overflow-hidden rounded-xl'>
         <Image
           src={imageUrl}
@@ -21,7 +21,7 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
         {tags?.map((tag) => (
           <span
             key={tag}
-            className='cursor-pointer rounded-full border border-white/10 bg-white/[0.07] px-2.5 py-[3px] text-xs font-medium duration-300 ease-out hover:border-white/25 hover:text-white'
+            className='cursor-pointer rounded-full border border-[#2f3e5c]/10 bg-[#b7c5dd]/35 px-2.5 py-[3px] text-xs font-medium text-[#334155] duration-300 ease-out hover:border-[#2f3e5c]/30 hover:text-[#111]'
           >
             {tag}
           </span>
@@ -31,7 +31,7 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
       <h3>
         <Link
           href={`/blog/${typeof slug === 'object' ? slug?.current || '' : slug || ''}`}
-          className='line-clamp-2 text-xl font-semibold text-white duration-300 ease-in hover:opacity-80'
+          className='line-clamp-2 text-xl font-semibold text-[#111] duration-300 ease-in hover:opacity-70'
         >
           <span className='absolute inset-0' aria-hidden></span>
           {title}
@@ -40,8 +40,8 @@ const SingleBlog = ({ blog }: { blog: Blog }) => {
       <p className='mt-4 line-clamp-3 font-medium'>{metadata}</p>
 
       <div className='relative mt-6 flex flex-wrap items-center gap-4.5'>
-        <div className='text-sm font-medium text-white'>{author?.name}</div>
-        <div className='text-sm font-medium text-white'>
+        <div className='text-sm font-medium text-[#334155]'>{author?.name}</div>
+        <div className='text-sm font-medium text-[#334155]'>
           {publishedAt && new Date(publishedAt).toDateString().split(' ').slice(1).join(' ')}
         </div>
       </div>

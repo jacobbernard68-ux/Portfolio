@@ -9,8 +9,8 @@ const SidebarLink = ({ post }: any) => {
     <li>
       <Link
         href={`/docs/${post?.slug}`}
-        className={`block rounded-md px-3 py-2.5 font-medium duration-300 hover:text-white ${
-          pathUrl === `/docs/${post?.slug}` ? "bg-white/10 text-white" : ""
+        className={`block rounded-md px-3 py-2.5 font-medium duration-300 hover:bg-[#b7c5dd]/40 hover:text-[#111] ${
+          pathUrl === `/docs/${post?.slug}` ? "bg-[#b7c5dd]/55 text-[#111]" : ""
         }`}
       >
         {post?.title}

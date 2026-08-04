@@ -8,19 +8,19 @@ const SwitchOptions = ({
   setIsPassword: (value: boolean) => void;
 }) => {
   return (
-    <div className="mx-auto mb-12.5 mt-9 flex flex-col items-center justify-center gap-2.5 rounded-lg border border-white/[0.12] p-2 md:flex-row">
+    <div className="mx-auto mb-12.5 mt-9 flex flex-col items-center justify-center gap-2.5 rounded-lg border border-[#2f3e5c]/15 bg-[#f7f9fc] p-2 md:flex-row">
       <button
-        className={`hover:text-primary w-full rounded-lg px-6 py-3 text-base outline-hidden transition-all duration-300 hover:border-white/[0.12] hover:bg-white/25 hover:text-white
-        ${!isPassword ? "border-white/[0.12] bg-white/25 text-white" : "bg-white/5"}`}
+        className={`w-full rounded-lg px-6 py-3 text-base text-[#334155] outline-hidden transition-all duration-300 hover:bg-[#b7c5dd]/50 hover:text-[#111]
+        ${!isPassword ? "bg-[#b7c5dd]/60 text-[#111]" : "bg-transparent"}`}
         onClick={() => setIsPassword(false)}
       >
         Magic Link
       </button>
       <button
-        className={`hover:text-primary w-full rounded-lg  px-6 py-3 text-base outline-hidden transition-all duration-300 hover:border-white/[0.12] hover:bg-white/25 hover:text-white ${
+        className={`w-full rounded-lg px-6 py-3 text-base text-[#334155] outline-hidden transition-all duration-300 hover:bg-[#b7c5dd]/50 hover:text-[#111] ${
           isPassword
-            ? " border-white/[0.12] bg-white/25 text-white"
-            : "bg-white/5"
+            ? "bg-[#b7c5dd]/60 text-[#111]"
+            : "bg-transparent"
         }`}
         onClick={() => setIsPassword(true)}
       >

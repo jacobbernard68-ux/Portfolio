@@ -63,7 +63,7 @@ const MagicLink = () => {
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-lg border border-white/[0.12] bg-transparent py-3.5 pl-14.5 pr-4 font-medium text-white outline-hidden focus:border-purple focus-visible:shadow-none"
+          className="w-full rounded-lg border border-[#2f3e5c]/20 bg-[#f7f9fc] py-3.5 pl-14.5 pr-4 font-medium text-[#111] outline-hidden focus:border-[#2f3e5c] focus-visible:shadow-none"
         />
       </div>
 

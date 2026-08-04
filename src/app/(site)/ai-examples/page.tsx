@@ -50,7 +50,7 @@ const AiToolPage = () => {
 
       <section className="pb-25 pt-3">
         <div className="z-10 mx-auto max-w-[1170px] px-4 sm:px-8 xl:px-0">
-          <div className="aiExamples-border-gredient relative flex flex-col items-center justify-center rounded-lg bg-white/[0.05] p-4 md:justify-between lg:flex-row lg:px-6 lg:py-2">
+          <div className="brand-card relative flex flex-col items-center justify-center p-4 md:justify-between lg:flex-row lg:px-6 lg:py-3">
             <p className="text-center md:text-left">
               <Image
                 src={"/images/ai-tools/icon-1.svg"}

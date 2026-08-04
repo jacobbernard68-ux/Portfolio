@@ -23,8 +23,8 @@ const Options = ({ title, name, values, handleChange, selected }: Props) => {
           setIsSelected(true);
         }}
         id={name}
-        className={`rounded-lg border border-white/[0.12] bg-dark-7 py-3 pl-5 outline-hidden focus:border-purple ${
-          isSelected && "text-white"
+        className={`rounded-lg border border-[#2f3e5c]/20 bg-white py-3 pl-5 text-[#111] outline-hidden focus:border-[#2f3e5c] ${
+          isSelected && "text-[#111]"
         }`}
       >
         <option value="Select Option">Select option</option>

@@ -79,13 +79,13 @@ const ResetPassword = ({ token }: { token: string }) => {
   return (
     <section className="pb-17.5 pt-17.5 lg:pb-22.5 xl:pb-27.5">
       <div className="mx-auto max-w-[1170px] px-4 sm:px-8 xl:px-0">
-        <div className="wow fadeInUp rounded-3xl bg-white/[0.05]">
+          <div className="brand-surface wow fadeInUp rounded-2xl">
           <div className="flex">
             <div className="hidden w-full lg:block lg:w-1/2">
               <div className="relative py-20 pl-17.5 pr-22">
                 <div className="absolute right-0 top-0 h-full w-[1px] bg-linear-to-b from-white/0 via-white/20 to-white/0"></div>
 
-                <h2 className="mb-10 max-w-[292px] text-heading-4 font-bold text-white">
+                <h2 className="mb-10 max-w-[292px] text-heading-4 font-bold text-[#111]">
                   Unlock the Power of Writing Tool
                 </h2>
                 <div className="relative aspect-61/50 w-full max-w-[427px]">

@@ -12,8 +12,8 @@ const APIkeyModal = ({ handleModal }: { handleModal: () => void }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="fixed inset-0 -z-1 bg-dark opacity-90"></div>
-      <div className="modal-content relative w-10/12 rounded-lg border-[1px] border-white/10 bg-dark-6 p-5 text-center shadow-md md:w-[608px] lg:p-12.5">
+      <div className="fixed inset-0 -z-1 bg-[#1f2937] opacity-55"></div>
+      <div className="modal-content brand-surface relative w-10/12 rounded-2xl p-5 text-center md:w-[608px] lg:p-12.5">
         <button
           className="absolute right-2 top-2 rounded-full bg-white/5 p-3 duration-500 hover:bg-white/10 "
           onClick={handleModal}
@@ -26,7 +26,7 @@ const APIkeyModal = ({ handleModal }: { handleModal: () => void }) => {
           />
         </button>
         <div>
-          <h2 className=" text-2xl text-white md:text-3xl">
+          <h2 className="text-2xl text-[#111] md:text-3xl">
             Enter your OpenAI API Key
           </h2>
           <p className="pb-8 pt-4">
@@ -37,7 +37,7 @@ const APIkeyModal = ({ handleModal }: { handleModal: () => void }) => {
           <form onSubmit={handleSubmit} className="flex justify-between gap-3">
             <input
               onChange={(e) => setKey(e.target.value)}
-              className="w-full rounded-lg border border-white/[0.12] bg-dark-6 px-6 py-3 text-white outline-hidden focus:border-purple"
+              className="w-full rounded-lg border border-[#2f3e5c]/20 bg-[#f7f9fc] px-6 py-3 text-[#111] outline-hidden focus:border-[#2f3e5c]"
               type="text"
               placeholder="API-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
               required

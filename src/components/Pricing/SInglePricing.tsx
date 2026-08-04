@@ -31,15 +31,15 @@ const SinglePricing = ({ price }: any) => {
   };
 
   return (
-    <div className="wow fadeInUp pricing-item-border relative z-20 overflow-hidden rounded-3xl bg-dark px-8 pb-10 pt-12.5 xl:px-10">
+    <div className="brand-card wow fadeInUp relative z-20 overflow-hidden px-8 pb-10 pt-12.5 xl:px-10">
       <span className="absolute right-9 top-9">
         <Image
           src={
             price.nickname === "Small"
-              ? "./images/pricing/pricing-icon-01.svg"
+              ? "/images/pricing/pricing-icon-01.svg"
               : price.nickname === "Medium"
-                ? "./images/pricing/pricing-icon-02.svg"
-                : "./images/pricing/pricing-icon-03.svg"
+                ? "/images/pricing/pricing-icon-02.svg"
+                : "/images/pricing/pricing-icon-03.svg"
           }
           alt="icon"
           width={44}
@@ -47,7 +47,7 @@ const SinglePricing = ({ price }: any) => {
         />
       </span>
 
-      <h3 className="mb-5.5 text-heading-6 font-semibold text-white">
+      <h3 className="mb-5.5 text-heading-6 font-semibold text-[#111]">
         {price.nickname === "Small" && "Starter"}
         {price.nickname === "Medium" && "Medium"}
         {price.nickname === "Large" && "Business"}
@@ -104,7 +104,7 @@ const SinglePricing = ({ price }: any) => {
       <button
         aria-label="Get the plan button"
         onClick={handleSubscription}
-        className="pricing-button-gradient relative mt-11 flex w-full items-center justify-center gap-1.5 rounded-lg p-3 font-medium text-white transition-all duration-300 ease-in-out hover:shadow-button"
+        className="relative mt-11 flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#2f3e5c] p-3 font-medium text-white transition-all duration-300 ease-in-out hover:bg-[#253149] hover:shadow-button"
       >
         Get the plan
         <svg

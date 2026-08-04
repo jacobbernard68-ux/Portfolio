@@ -9,7 +9,7 @@
                     "dev":  "next dev --turbopack",
                     "build":  "next build",
                     "start":  "next start",
-                    "lint":  "next lint"
+                    "lint":  "eslint ."
                 },
     "dependencies":  {
                          "@tailwindcss/postcss":  "^4.0.9",
@@ -28,7 +28,6 @@
                          "react":  "^19.2.1",
                          "react-dom":  "^19.2.1",
                          "react-hot-toast":  "^2.4.1",
-                         "react-infinite-scroll-component":  "^6.1.0",
                          "react-share":  "^5.2.2",
                          "remark":  "^15.0.1",
                          "remark-html":  "^16.0.1",

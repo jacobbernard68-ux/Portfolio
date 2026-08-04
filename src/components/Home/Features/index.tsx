@@ -5,8 +5,8 @@ import featuresData from "./featuresData";
 const Features = () => {
   return (
     <section
-      id="features"
-      className="scroll-mt-17 overflow-hidden pt-17.5 lg:pt-22.5 xl:pt-27.5"
+      id="work"
+      className="scroll-mt-28 overflow-hidden pt-17.5 lg:pt-22.5 xl:pt-27.5"
     >
       <div className="mx-auto max-w-[1222px] px-4 sm:px-8 xl:px-0">
         <SectionTitle

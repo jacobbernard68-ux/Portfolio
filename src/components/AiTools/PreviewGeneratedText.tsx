@@ -23,10 +23,10 @@ const PreviewGeneratedText = ({ generatedContent, height }: Props) => {
   };
 
   return (
-    <div className="gradient-box rounded-lg bg-dark-8 px-8 pb-8 pt-5 lg:col-span-8">
+    <div className="brand-card rounded-xl px-8 pb-8 pt-5 lg:col-span-8">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="pb-2 text-2xl font-bold text-white">Output Result</h2>
+          <h2 className="pb-2 text-2xl font-bold text-[#111]">Output Result</h2>
           <p>Enjoy your outstanding content based on your topic</p>
         </div>
         <button
@@ -61,9 +61,9 @@ const PreviewGeneratedText = ({ generatedContent, height }: Props) => {
         </button>
       </div>
       <textarea
-        className={`mt-6 w-full rounded-lg border border-white/[0.12] bg-dark-7 p-5 outline-hidden focus:border-white/10 ${
+        className={`mt-6 w-full rounded-lg border border-[#2f3e5c]/20 bg-[#f7f9fc] p-5 text-[#111] outline-hidden focus:border-[#2f3e5c] ${
           height === 442 ? "min-h-[442px]" : "min-h-[262px]"
-        } ${generatedContent ? "text-white" : "cursor-no-drop"}`}
+        } ${generatedContent ? "text-[#111]" : "cursor-no-drop"}`}
         value={
           generatedContent
             ? generatedContent
