@@ -767,6 +767,11 @@ textarea {
   z-index: 1;
 }
 
+[data-cursor-reactive][data-scrollable-card] {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 [data-page-glow] {
   position: relative;
   isolation: isolate;
