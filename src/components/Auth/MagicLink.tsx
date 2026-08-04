@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { validateEmail } from "@/libs/validateEmail";
-import { signIn } from "next-auth/react";
 import Loader from "../Common/Loader";
 import { integrations, messages } from "../../../integrations.config";
 import z from "zod";
@@ -35,23 +34,11 @@ const MagicLink = () => {
       setLoader(false);
       toast.error("Please enter a valid email address.");
       return;
-    } else {
-      signIn("email", {
-        redirect: false,
-        email: email,
-      })
-        .then((callback) => {
-          if (callback?.ok) {
-            toast.success("Email sent");
-            setEmail("");
-            setLoader(false);
-          }
-        })
-        .catch((error) => {
-          toast.error(error);
-          setLoader(false);
-        });
     }
+
+    toast.error("Authentication is disabled.");
+    setLoader(false);
+    return;
   };
 
   return (
@@ -76,7 +63,6 @@ const MagicLink = () => {
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          // required
           className="w-full rounded-lg border border-white/[0.12] bg-transparent py-3.5 pl-14.5 pr-4 font-medium text-white outline-hidden focus:border-purple focus-visible:shadow-none"
         />
       </div>
@@ -92,3 +78,4 @@ const MagicLink = () => {
 };
 
 export default MagicLink;
+

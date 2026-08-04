@@ -1,48 +1,21 @@
-import { Feature } from "@/types/feature";
-
-const featuresData: Feature[] = [
+const featuresData = [
   {
     id: 1,
-    title: "OpenAI Integration",
-    description:
-      "Our AI writing tool analyzes your content, suggests improvements",
-    icon: "/images/features/icon-01.svg",
+    title: "Built for AI products",
+    description: "Launch fast with a modern AI SaaS starter kit that includes payments, auth, and blog scaffolding.",
+    icon: "AiOutlineRocket",
   },
   {
     id: 2,
-    title: "Next.js 15, React 19, TS",
-    description: "Say goodbye to embarrassing typos and grammar mistakes",
-    icon: "/images/features/icon-02.svg",
+    title: "Modern frontend",
+    description: "Next.js 16, React 19, Tailwind v4, and server components make building fast interfaces easy.",
+    icon: "AiOutlineAppstore",
   },
   {
     id: 3,
-    title: "Auth, DB, Sanity Blog",
-    description:
-      "Originality is key, and our AI writing tool helps you maintain it",
-    icon: "/images/features/icon-03.svg",
-  },
-  {
-    id: 4,
-    title: "Cutting-edge Technologies",
-    description:
-      "Transform your spoken words into written text easily & effortlessly",
-    icon: "/images/features/icon-04.svg",
-    rotate: true,
-  },
-  {
-    id: 5,
-    title: "Pre-made AI Examples",
-    description:
-      "Whether you need a professional, or positive tone it has everyone",
-    icon: "/images/features/icon-05.svg",
-    rotate: true,
-  },
-  {
-    id: 6,
-    title: "Rich Documentation",
-    description: "Need inspiration or assistance with generating content?",
-    icon: "/images/features/icon-06.svg",
-    rotate: true,
+    title: "Developer friendly",
+    description: "A modular codebase with reusable UI, API routes, and integrations that are easy to customize.",
+    icon: "AiOutlineBulb",
   },
 ];
 

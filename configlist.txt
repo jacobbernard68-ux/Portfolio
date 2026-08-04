@@ -1,0 +1,3 @@
+﻿package.json
+next.config.js
+integrations.config.tsx

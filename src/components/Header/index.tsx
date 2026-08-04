@@ -1,10 +1,8 @@
 "use client";
-import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import logo from "../../../public/images/logo/logo.svg";
 import DropDown from "./DropDown";
 import menuData from "./menuData";
 
@@ -12,9 +10,7 @@ const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
 
-  const { data: session } = useSession();
-
-  const pathUrl = usePathname();
+    const pathUrl = usePathname();
 
   // Sticky menu
   const handleStickyMenu = () => {
@@ -41,7 +37,12 @@ const Header = () => {
         <div className="relative mx-auto max-w-[1170px] items-center justify-between px-4 sm:px-8 lg:flex xl:px-0">
           <div className="flex w-full items-center justify-between lg:w-1/4">
             <Link href="/">
-              <Image src={logo} alt="Logo" width={164} height={36} />
+              <Image
+                src="/images/logo/logo.svg"
+                alt="Logo"
+                width={164}
+                height={36}
+              />
             </Link>
 
             <button
@@ -99,9 +100,7 @@ const Header = () => {
                     }`}
                   >
                     {menuItem.submenu ? (
-                      <>
-                        <DropDown menuItem={menuItem} />
-                      </>
+                      <DropDown menuItem={menuItem} />
                     ) : (
                       <Link
                         href={`${menuItem.path}`}
@@ -120,12 +119,12 @@ const Header = () => {
             </nav>
 
             <div className="mt-7 flex items-center gap-6 lg:mt-0">
-              {session ? (
+              {false ? (
                 <>
-                  <p>{session?.user?.name}</p>
+                  <p>{""}</p>
                   <button
                     aria-label="Sign Out button"
-                    onClick={() => signOut()}
+                    onClick={() => void 0}
                     className="text-sm text-white hover:text-opacity-75"
                   >
                     Sign Out
@@ -146,8 +145,8 @@ const Header = () => {
                     Sign up
                     <svg
                       className="mt-0.5"
-                      width="16"
-                      height="16"
+                      width={16}
+                      height={16}
                       viewBox="0 0 16 16"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -169,3 +168,4 @@ const Header = () => {
 };
 
 export default Header;
+
