@@ -1,6 +1,7 @@
 "use client";
 
 import { type PointerEvent as ReactPointerEvent, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 type Section = {
   id: string;
@@ -78,6 +79,7 @@ const sections: Section[] = [
 export default function ResumeSections() {
   const [active, setActive] = useState<Section | null>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
+  const modalScroll = useRef<HTMLDivElement>(null);
 
   const trackGlow = (event: ReactPointerEvent<HTMLElement>) => {
     const card = event.currentTarget;
@@ -140,17 +142,35 @@ export default function ResumeSections() {
         ))}
       </div>
 
-      {active && (
-        <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-[#111827]/65 p-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActive(null)}>
-          <section role="dialog" aria-modal="true" aria-labelledby="resume-section-title" className="max-h-[88svh] w-full max-w-[820px] overflow-y-auto rounded-2xl bg-[#e2e8f2] p-5 shadow-2xl sm:p-8">
-            <div className="sticky top-0 z-10 flex items-start justify-between gap-6 bg-[#e2e8f2] pb-5">
-              <div>
+      {active && createPortal((
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-[#111827]/65 p-6 backdrop-blur-sm" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setActive(null)}>
+          <section role="dialog" aria-modal="true" aria-labelledby="resume-section-title" className="relative max-h-[calc(100svh-48px)] w-full max-w-[840px] overflow-hidden rounded-2xl bg-[#e2e8f2] shadow-2xl">
+            <button ref={closeButton} type="button" onClick={() => setActive(null)} aria-label={`Close ${active.title}`} className="absolute right-3 top-3 z-30 grid size-11 place-items-center rounded-full bg-[#1f2937] text-2xl text-white shadow-lg transition hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1f2937] focus-visible:ring-offset-2">×</button>
+            <div ref={modalScroll} className="max-h-[calc(100svh-48px)] overflow-y-auto">
+              <nav aria-label="Resume sections" className="sticky top-0 z-20 border-b border-slate-400/25 bg-[#e2e8f2]/95 px-5 py-3 pr-16 backdrop-blur-md sm:px-8 sm:pr-20">
+                <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  {sections.map((section) => (
+                    <button
+                      key={section.id}
+                      type="button"
+                      onClick={() => {
+                        setActive(section);
+                        modalScroll.current?.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      aria-current={active.id === section.id ? "page" : undefined}
+                      className={`shrink-0 rounded-full px-3 py-2 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 ${active.id === section.id ? "bg-[#1f2937] text-white" : "bg-[#b8cadc] text-[#1f2937] hover:bg-[#afc2d5]"}`}
+                    >
+                      {section.title}
+                    </button>
+                  ))}
+                </div>
+              </nav>
+              <div className="p-5 sm:p-8">
+                <div className="pb-5 pr-14">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#607795]">{active.label}</p>
                 <h2 id="resume-section-title" className="mt-2 text-3xl font-semibold tracking-[-0.035em] text-[#111] sm:text-4xl">{active.title}</h2>
-              </div>
-              <button ref={closeButton} type="button" onClick={() => setActive(null)} aria-label={`Close ${active.title}`} className="grid size-11 shrink-0 place-items-center rounded-full bg-[#1f2937] text-2xl text-white transition hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1f2937] focus-visible:ring-offset-2">×</button>
-            </div>
-            <div className="space-y-3">
+                </div>
+                <div className="space-y-3">
               {active.content.map((item, index) => {
                 const activeCardIndex = sections.findIndex((section) => section.id === active.id);
                 const cardIsDark = [1, 2, 5].includes(activeCardIndex);
@@ -170,10 +190,12 @@ export default function ResumeSections() {
                   </article>
                 );
               })}
+                </div>
+              </div>
             </div>
           </section>
         </div>
-      )}
+      ), document.body)}
     </>
   );
 }
