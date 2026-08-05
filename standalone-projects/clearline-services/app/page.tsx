@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+const portfolioUrl = "https://portfolio-git-main-jacob159.vercel.app";
+
 const services = [
   { title: "Workspace Cleaning", copy: "Reliable cleaning for offices, studios, and small business environments." },
   { title: "Residential Cleaning", copy: "Thoughtful care for everyday living spaces." },
@@ -23,6 +25,7 @@ export default function ClearlineServicesPage() {
   const [submitted, setSubmitted] = useState(false);
 
   return <main className="min-h-screen bg-[#f4f5f5] text-[#1f1f1f]">
+    <a href={`${portfolioUrl}/work`} aria-label="Close project and return to selected work" title="Back to selected work" className="fixed right-5 top-5 z-[1000] grid size-11 place-items-center rounded-full border border-white/40 bg-[#182331]/85 text-2xl font-light text-white shadow-xl backdrop-blur-md transition hover:scale-105 hover:bg-[#111827] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2">×</a>
     <header className="sticky top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
       <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between pl-5 pr-20 sm:pl-8 sm:pr-24 lg:pl-[60px]">
         <Link href="#home" className="flex items-center gap-3"><span className="grid size-8 place-items-center rounded-full bg-[#dfeaf5] text-sm font-semibold">C</span><strong className="text-base font-semibold tracking-[-0.03em] sm:text-lg">Clearline Services</strong></Link>

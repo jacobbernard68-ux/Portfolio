@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+const portfolioUrl = "https://portfolio-git-main-jacob159.vercel.app";
+
 const festivalSections = [
   { id: "opening-pulse", day: "Day One", title: "Opening Pulse", description: "The Lumen Stage begins in quiet preparation. Sound checks, lighting rigs, and open air before the first pulse of Neon Current.", image: "/images/portfolio/festival-pulse.png", imageAlt: "Festival stage prepared in daylight before performances begin", reverse: false, featured: false },
   { id: "neon-current", day: "Day Two", title: "Neon Current", description: "As night falls, Neon Current ignites the festival. Performances, synchronized lighting, and immersive stage visuals transform the Lumen Stage.", image: "/images/portfolio/festival-current.png", imageAlt: "Nighttime festival performance with stage lighting and a large crowd", reverse: true, featured: true },
@@ -17,6 +19,7 @@ export default function LumenStagePage() {
   const [ticketNote, setTicketNote] = useState(false);
 
   return <main className="min-h-screen bg-[#11171b] text-[#e8eef0] selection:bg-[#aacbd5] selection:text-[#12161b]">
+    <a href={`${portfolioUrl}/work`} aria-label="Close project and return to selected work" title="Back to selected work" className="fixed right-5 top-5 z-[1000] grid size-11 place-items-center rounded-full border border-white/30 bg-[#182331]/85 text-2xl font-light text-white shadow-xl backdrop-blur-md transition hover:scale-105 hover:bg-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#aacbd5]">×</a>
     <header className="sticky top-0 z-50 border-b border-[#839195] bg-[#475c61]">
       <div className="mx-auto flex min-h-[72px] max-w-[1250px] items-center justify-between pl-6 pr-20 sm:pr-24">
         <Link href="#overview" className="text-xl font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f5f7f8]">Lumen Stage</Link>
