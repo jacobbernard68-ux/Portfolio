@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bean's Place — Brand Story Shape Options</title>
+  <style>
+    :root { color-scheme: light; --cream: rgba(245,223,195,.35); --ink:#2e1d14; --accent:#c98722; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#eee5d9; color:var(--ink); font-family:Arial,sans-serif; }
+    main { width:min(1180px,calc(100% - 32px)); margin:0 auto; padding:48px 0 64px; }
+    header { margin-bottom:28px; }
+    h1 { margin:0; font:600 clamp(28px,4vw,48px)/1.05 Georgia,serif; }
+    header p { max-width:660px; margin:12px 0 0; color:#6b5748; line-height:1.6; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+    .option { overflow:hidden; border:1px solid rgba(70,45,28,.12); border-radius:18px; background:#fffaf2; box-shadow:0 12px 35px rgba(55,35,22,.08); }
+    .label { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; }
+    .label strong { font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
+    .label span { color:#8a7462; font-size:12px; }
+    .photo { position:relative; min-height:330px; overflow:hidden; background:url('/beans-place/assets/store_barista-CXpfH14n.jpeg') center/cover; }
+    .photo::before { content:""; position:absolute; inset:0; background:linear-gradient(135deg,rgba(36,23,16,.35),transparent 58%); }
+    .copy { position:absolute; left:22px; top:22px; max-width:62%; padding:20px; color:var(--ink); background:var(--cream); border:1px solid rgba(255,240,218,.55); box-shadow:0 10px 30px rgba(30,18,11,.14); backdrop-filter:blur(1px); }
+    .copy small { display:block; color:#62442f; font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+    .copy h2 { margin:9px 0 0; font:600 26px/1.06 Georgia,serif; }
+    .copy h2 span { display:block; }
+    .coffee-label { border-radius:16px 4px 16px 4px; }
+    .coffee-label::after { content:""; position:absolute; left:20px; bottom:12px; width:38px; height:2px; background:var(--accent); opacity:.75; }
+    .soft-arch { border-radius:34px 34px 10px 10px; padding-top:26px; }
+    .editorial-tab { border-radius:6px 14px 14px 6px; border-left:5px solid rgba(201,135,34,.8); }
+    .bean-curve { border-radius:46% 18px 46% 18px / 28% 18px 28% 18px; padding:24px 28px; }
+    .ticket { border-radius:12px; clip-path:polygon(0 0,100% 0,100% 38%,94% 50%,100% 62%,100% 100%,0 100%,0 62%,6% 50%,0 38%); padding-inline:28px; }
+    .wide { grid-column:1/-1; }
+    .wide .photo { min-height:390px; }
+    @media (max-width:760px) { .grid { grid-template-columns:1fr; } .wide { grid-column:auto; } .copy { max-width:78%; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header><h1>Brand Story Shape Study</h1><p>Five treatments using the current 35% warm-cream fill and the real café image. This page is only a comparison preview; it does not change the portfolio.</p></header>
+    <section class="grid">
+      <article class="option"><div class="label"><strong>01 · Coffee label</strong><span>Recommended</span></div><div class="photo"><div class="copy coffee-label"><small>Brand story · In store</small><h2><span>A warm experience</span><span>beyond the</span><span>catalog.</span></h2></div></div></article>
+      <article class="option"><div class="label"><strong>02 · Soft arch</strong><span>Café signage</span></div><div class="photo"><div class="copy soft-arch"><small>Brand story · In store</small><h2><span>A warm experience</span><span>beyond the</span><span>catalog.</span></h2></div></div></article>
+      <article class="option"><div class="label"><strong>03 · Editorial tab</strong><span>Quietest</span></div><div class="photo"><div class="copy editorial-tab"><small>Brand story · In store</small><h2><span>A warm experience</span><span>beyond the</span><span>catalog.</span></h2></div></div></article>
+      <article class="option"><div class="label"><strong>04 · Bean curve</strong><span>Most branded</span></div><div class="photo"><div class="copy bean-curve"><small>Brand story · In store</small><h2><span>A warm experience</span><span>beyond the</span><span>catalog.</span></h2></div></div></article>
+      <article class="option wide"><div class="label"><strong>05 · Ticket</strong><span>Packaging inspired</span></div><div class="photo"><div class="copy ticket"><small>Brand story · In store</small><h2><span>A warm experience</span><span>beyond the</span><span>catalog.</span></h2></div></div></article>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import PortfolioWorkPage from "@/components/Portfolio/WorkPage";
+import PortfolioWorkFanPage from "@/components/Portfolio/WorkFanPage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <PortfolioWorkPage />
+    <PortfolioWorkFanPage />
   );
 }

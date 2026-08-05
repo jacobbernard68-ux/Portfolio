@@ -18,6 +18,7 @@ const CursorBubble = () => {
     let currentX = targetX;
     let currentY = targetY;
     let activeCard: HTMLElement | null = null;
+    let activePage: HTMLElement | null = null;
 
     const render = () => {
       currentX += (targetX - currentX) * 0.12;
@@ -32,7 +33,10 @@ const CursorBubble = () => {
       bubble.dataset.visible = "true";
 
       const card = event.target instanceof Element
-        ? event.target.closest<HTMLElement>("[data-cursor-reactive]")
+        ? event.target.closest<HTMLElement>("[data-cursor-reactive], [data-glow-card], main article:not([data-internal-scroll]), main form")
+        : null;
+      const page = event.target instanceof Element
+        ? event.target.closest<HTMLElement>("main:not([data-disable-page-glow])")
         : null;
 
       if (activeCard && activeCard !== card) {
@@ -46,7 +50,20 @@ const CursorBubble = () => {
         card.setAttribute("data-cursor-active", "true");
       }
 
+      if (activePage && activePage !== page) {
+        activePage.removeAttribute("data-cursor-active");
+      }
+
+      if (page) {
+        const pageBounds = page.getBoundingClientRect();
+        page.setAttribute("data-page-glow", "true");
+        page.style.setProperty("--card-cursor-x", `${event.clientX - pageBounds.left}px`);
+        page.style.setProperty("--card-cursor-y", `${event.clientY - pageBounds.top}px`);
+        page.setAttribute("data-cursor-active", "true");
+      }
+
       activeCard = card;
+      activePage = page;
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
@@ -56,6 +73,7 @@ const CursorBubble = () => {
       window.removeEventListener("pointermove", handlePointerMove);
       window.cancelAnimationFrame(frame);
       activeCard?.removeAttribute("data-cursor-active");
+      activePage?.removeAttribute("data-cursor-active");
     };
   }, []);
 
