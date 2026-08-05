@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <main class="auth-wrap">
+        <section class="card" aria-labelledby="register-title">
+            <div class="header">
+                <div class="logo" aria-hidden="true">EA</div>
+                <div class="title">
+                    <h1 id="register-title">Create Your Account</h1>
+                    <p>Start Your Journey in Minutes</p>
+                </div>
+            </div>
+            <form action="/register" method="post" class="form" novalidate>
+                <div class="row two">
+                    <div>
+                        <label for="firstName" class="label">First Name</label>
+                        <input type="text" class="input" id="firstName" name="firstName" placeholder="Jane" autocomplete="given-name" required />
+                    </div>
+                    <div>
+                        <label for="lastName" class="label">Last Name</label>
+                        <input type="text" class="input" id="lastName" name="lastName" placeholder="Doe" autocomplete="family-name" required />
+                    </div>
+                </div>
+                <div>
+                    <label for="email" class="label">Email</label>
+                    <input type="email" class="input" id="email" name="email" placeholder="you@example.com" autocomplete="email" required />
+                </div>
+                <div>
+                    <label class="label" for="password">Password</label>
+                    <input class="input" id="password" name="password" type="password" placeholder="At least 8 characters" minlength="8" autocomplete="new-password" required />
+                    <p class="hint xsmall">Use 8+ characters. Mix letters and numbers for better securtiy.</p>
+                </div>
+                <div>
+                    <label class="label" for="confirm">Confirm Password</label>
+                    <input class="input" id="confirm" name="confirm" type="password" placeholder="Re-enter your password" minlength="8" required />
+                    <p class="hint xsmall">Make sure this matches the password above.</p>
+                </div>
+                <label class="remember">
+                    <input class="checkbox" type="checkbox" name="terms" required>
+                    I aree to the
+                    <a href="/terms" class="xsmall" style="margin-left: 6px;">terms</a>
+                </label>
+                <button class="btn" type="submit">Create Account</button>
+                <div class="divider"></div>
+                <p class="alt">
+                    Already have an account? <a href="login.html">Login</a>
+                </p>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>

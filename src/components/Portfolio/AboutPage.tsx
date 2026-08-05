@@ -28,13 +28,13 @@ export default function PortfolioAboutPage() {
   };
 
   return (
-    <main className="mt-[88px] min-h-[calc(100svh-176px)] bg-[#e2e8f2]/80 px-4 py-5 md:mt-[120px] md:h-[calc(100svh-208px)] md:min-h-0 md:overflow-y-auto md:[scrollbar-gutter:stable] lg:overflow-hidden lg:px-[60px]">
-      <section className="mx-auto grid w-full max-w-[1320px] gap-4 md:min-h-full lg:h-full lg:min-h-0 lg:grid-cols-[0.92fr_1.08fr] lg:gap-[22px]">
-        <header data-cursor-reactive data-scrollable-card onPointerMove={trackGlow} onPointerLeave={hideGlow} className="flex max-h-[max(280px,calc(100svh-216px))] flex-col justify-between gap-8 overflow-y-scroll rounded-xl bg-[#c5d0dd] p-6 shadow-[0_10px_26px_rgba(15,23,42,0.10)] ring-1 ring-[#1f2937]/10 [scrollbar-gutter:stable] sm:p-8 md:max-h-[max(280px,calc(100svh-248px))] lg:relative lg:-top-[7px] lg:h-full lg:max-h-none lg:min-h-0 lg:p-10">
+    <main className="mt-[88px] h-[calc(100svh-88px)] overflow-hidden bg-[#e2e8f2]/80 px-4 py-4 md:mt-[120px] md:h-[calc(100svh-120px)] lg:px-[60px]">
+      <section className="mx-auto grid h-full w-full grid-rows-[0.9fr_1.1fr] gap-4 lg:grid-cols-[0.92fr_1.08fr] lg:grid-rows-1 lg:gap-[22px]">
+        <header data-cursor-reactive data-scrollable-card onPointerMove={trackGlow} onPointerLeave={hideGlow} className="no-scrollbar flex min-h-0 flex-col justify-between gap-8 overflow-y-auto rounded-xl bg-[#c5d0dd] p-6 shadow-[0_10px_26px_rgba(15,23,42,0.10)] ring-1 ring-[#1f2937]/10 sm:p-8 lg:p-10">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#607795]">Frontend developer · UI designer</p>
             <h1 className="mt-4 max-w-[650px] text-4xl font-bold leading-[1.08] tracking-[-0.045em] text-[#111] sm:text-5xl">Designing intuitive interfaces backed by enterprise-level experience.</h1>
-            <p className="mt-6 max-w-[570px] text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">I bring structure to complex problems, combining frontend development, UI design, and 15 years of technical experience to create clear, usable digital products.</p>
+            <p className="mt-6 max-w-[570px] text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">I bring structure to complex problems, combining frontend development, UI design, and 16 years of technical experience to create clear, usable digital products.</p>
           </div>
           <nav aria-label="Professional profiles" className="flex flex-wrap gap-2 border-t border-slate-200 pt-5 text-sm">
             <button type="button" disabled aria-disabled="true" title="Email contact coming soon" className="cursor-not-allowed rounded-lg bg-[#e2e8f2] px-4 py-2 font-medium text-[#1f2937] opacity-55">Email · Soon</button>
@@ -42,7 +42,7 @@ export default function PortfolioAboutPage() {
             <a href="https://linkedin.com/in/jacobbernard159" target="_blank" rel="noreferrer" className="rounded-lg bg-[#e2e8f2] px-4 py-2 font-medium text-[#1f2937] transition hover:bg-[#b8cadc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795]">LinkedIn ↗</a>
           </nav>
         </header>
-        <div className="min-h-0 lg:h-full lg:-translate-y-[7px] lg:overflow-y-auto lg:pr-2 lg:[scrollbar-gutter:stable]">
+        <div data-internal-scroll className="no-scrollbar min-h-0 overflow-y-auto">
           <ResumeSections />
         </div>
       </section>

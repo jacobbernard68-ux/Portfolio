@@ -3,7 +3,6 @@ import '@/styles/prism-vsc-dark-plus.css';
 import '@/styles/star.css';
 import '@/styles/tailwind.css';
 
-import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import CursorBubble from '@/components/CursorBubble';
 import ScrollToTop from '@/components/ScrollToTop';
@@ -37,7 +36,6 @@ export default function RootLayout({
           <AuthProvider>
             <Header />
             {children}
-            <Footer />
 
             <ToasterContext />
           </AuthProvider>

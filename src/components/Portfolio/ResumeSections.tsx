@@ -22,7 +22,7 @@ const sections: Section[] = [
   {
     id: "experience",
     title: "Experience",
-    label: "15 years",
+    label: "16 years",
     preview: "Enterprise systems, web platforms, Linux operations, automation, and technical support across five progressive roles.",
     content: [
       { heading: "Defense Intelligence Agency", meta: "Data Systems & IT Operations Manager · May 2021–July 2026", body: "Supported high-availability enterprise systems, improved workflows, managed hardware lifecycle processes, and translated complex technical issues across multidisciplinary teams." },

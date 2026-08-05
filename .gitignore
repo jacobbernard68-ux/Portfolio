@@ -7,6 +7,9 @@
 
 # testing
 /coverage
+/tmp/
+.dev-server.log
+.dev-server-error.log
 
 # next.js
 /.next/

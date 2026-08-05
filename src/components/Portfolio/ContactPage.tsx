@@ -39,8 +39,8 @@ export default function PortfolioContactPage() {
   };
 
   return (
-    <main data-page-glow onPointerMove={trackPanelGlow} onPointerLeave={hidePanelGlow} className="mt-[88px] flex min-h-[calc(100svh-176px)] items-start bg-[#e2e8f2]/80 px-4 py-5 md:mt-[120px] md:h-[calc(100svh-208px)] md:min-h-0 md:overflow-y-auto md:[scrollbar-gutter:stable] lg:px-[60px] [@media(min-height:850px)]:items-center">
-      <section data-cursor-reactive onPointerMove={trackPanelGlow} onPointerLeave={hidePanelGlow} className="mx-auto w-full max-w-[1320px] rounded-xl bg-[#f2f4f7]/92 p-5 shadow-[0_8px_24px_rgba(15,23,42,0.08)] backdrop-blur-[2px] sm:p-8 lg:p-10">
+    <main data-page-glow onPointerMove={trackPanelGlow} onPointerLeave={hidePanelGlow} className="mt-[88px] h-[calc(100svh-88px)] overflow-hidden bg-[#e2e8f2]/80 px-4 py-4 md:mt-[120px] md:h-[calc(100svh-120px)] lg:px-[60px]">
+      <section data-internal-scroll data-cursor-reactive onPointerMove={trackPanelGlow} onPointerLeave={hidePanelGlow} className="no-scrollbar mx-auto h-full w-full overflow-y-auto rounded-xl bg-[#f2f4f7]/92 p-5 shadow-[0_8px_24px_rgba(15,23,42,0.08)] backdrop-blur-[2px] sm:p-8 lg:p-10">
         <div className="mb-6 grid gap-3 border-b border-slate-200 pb-5 md:grid-cols-2 md:items-end">
           <h1 className="text-4xl font-semibold tracking-[-0.035em] text-[#111] sm:text-5xl">Let’s Connect</h1>
           <p className="max-w-[480px] text-sm leading-6 text-slate-600 md:justify-self-end md:text-right">Have a project, opportunity, or knotty design problem? Tell me what you’re working through.</p>
