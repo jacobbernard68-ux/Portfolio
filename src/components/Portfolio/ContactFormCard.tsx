@@ -53,9 +53,9 @@ export default function ContactFormCard({ compact = false }: { compact?: boolean
   };
 
   return (
-    <form data-cursor-reactive={compact ? undefined : "form"} onPointerMove={compact ? undefined : tiltForm} onPointerLeave={compact ? undefined : resetForm} onSubmit={submitContactForm} aria-describedby="contact-status contact-notice" className={`grid min-w-0 gap-3 bg-[#c7d2de] ${compact ? "max-h-[92svh] overflow-y-auto p-5 pt-16 sm:p-7 sm:pt-16" : "self-start rounded-xl p-4 sm:grid-cols-2 sm:gap-4 sm:p-6"}`}>
+    <form data-cursor-reactive={compact ? undefined : "form"} onPointerMove={compact ? undefined : tiltForm} onPointerLeave={compact ? undefined : resetForm} onSubmit={submitContactForm} aria-describedby="contact-status contact-notice" className={`relative grid min-w-0 gap-3 bg-[#c7d2de] ${compact ? "max-h-[92svh] overflow-y-auto p-5 pt-16 sm:p-7 sm:pt-16" : "self-start rounded-xl p-4 sm:grid-cols-2 sm:gap-4 sm:p-6"}`}>
       {compact && <div className="sm:col-span-2"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">Direct contact</p><h2 className="mt-2 text-3xl font-semibold text-[#111]">Send me a message</h2></div>}
-      <div className="sr-only" aria-hidden="true"><label htmlFor={compact ? "modal-website" : "website"}>Website</label><input id={compact ? "modal-website" : "website"} name="website" type="text" tabIndex={-1} autoComplete="off" /></div>
+      <div className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" aria-hidden="true"><label htmlFor={compact ? "modal-website" : "website"}>Website</label><input id={compact ? "modal-website" : "website"} name="website" type="text" tabIndex={-1} autoComplete="off" /></div>
       <div>
         <label htmlFor={compact ? "modal-name" : "name"} className="mb-2 block text-sm font-medium text-[#111]">Name</label>
         <input id={compact ? "modal-name" : "name"} name="name" required minLength={2} maxLength={80} autoComplete="name" className="w-full rounded-lg border border-slate-500/20 bg-white/85 px-4 py-3 text-[#111] outline-none transition focus:border-[#607795] focus:ring-2 focus:ring-[#607795]/25" />
