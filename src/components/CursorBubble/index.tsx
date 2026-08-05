@@ -36,7 +36,7 @@ const CursorBubble = () => {
         ? event.target.closest<HTMLElement>("[data-cursor-reactive], [data-glow-card], main article:not([data-internal-scroll]), main form")
         : null;
       const page = event.target instanceof Element
-        ? event.target.closest<HTMLElement>("main")
+        ? event.target.closest<HTMLElement>("main:not([data-disable-page-glow])")
         : null;
 
       if (activeCard && activeCard !== card) {

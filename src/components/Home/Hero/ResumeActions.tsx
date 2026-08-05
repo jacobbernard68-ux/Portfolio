@@ -31,7 +31,7 @@ export default function ResumeActions() {
 
   return (
     <>
-      <div className="mt-4 flex items-center gap-2 border-y border-white/12 bg-white/[0.025] py-3 lg:mt-0">
+      <div className="mt-4 flex flex-col items-stretch gap-2 border-y border-white/12 bg-white/[0.025] py-3 sm:flex-row sm:items-center">
         <button type="button" onClick={() => setOpen(true)} aria-haspopup="dialog" className={actionClass}>
           Preview résumé <span aria-hidden="true">↗</span>
         </button>

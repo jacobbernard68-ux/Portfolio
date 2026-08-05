@@ -1,0 +1,42 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import type { ReactNode } from "react";
+import { createPortal } from "react-dom";
+
+type ModalProps = {
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  children: ReactNode;
+  wide?: boolean;
+};
+
+export default function Modal({ open, onClose, title, children, wide = false }: ModalProps) {
+  const closeButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => event.key === "Escape" && onClose();
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    closeButton.current?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-[#111827]/75 p-3 backdrop-blur-sm sm:p-6" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
+      <section role="dialog" aria-modal="true" aria-label={title} className={`relative max-h-[92svh] w-full overflow-hidden rounded-2xl border border-white/20 bg-[#e2e8f2] shadow-2xl ${wide ? "max-w-[980px]" : "max-w-[720px]"}`}>
+        <button ref={closeButton} type="button" onClick={onClose} aria-label={`Close ${title}`} className="absolute right-3 top-3 z-20 grid size-10 place-items-center rounded-full bg-[#1f2937] text-xl text-white shadow-lg transition hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2">×</button>
+        {children}
+      </section>
+    </div>,
+    document.body,
+  );
+}

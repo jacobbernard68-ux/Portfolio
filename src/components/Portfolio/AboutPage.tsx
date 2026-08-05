@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
+import ContactFormCard from "./ContactFormCard";
+import Modal from "./Modal";
 import ResumeSections from "./ResumeSections";
 
 export default function PortfolioAboutPage() {
+  const [contactOpen, setContactOpen] = useState(false);
   const trackGlow = (event: ReactPointerEvent<HTMLElement>) => {
     const card = event.currentTarget;
     const bounds = card.getBoundingClientRect();
@@ -37,7 +41,7 @@ export default function PortfolioAboutPage() {
             <p className="mt-6 max-w-[570px] text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">I bring structure to complex problems, combining frontend development, UI design, and 16 years of technical experience to create clear, usable digital products.</p>
           </div>
           <nav aria-label="Professional profiles" className="flex flex-wrap gap-2 border-t border-slate-200 pt-5 text-sm">
-            <button type="button" disabled aria-disabled="true" title="Email contact coming soon" className="cursor-not-allowed rounded-lg bg-[#e2e8f2] px-4 py-2 font-medium text-[#1f2937] opacity-55">Email · Soon</button>
+            <button type="button" onClick={() => setContactOpen(true)} className="rounded-lg bg-[#1f2937] px-4 py-2 font-medium text-white transition hover:bg-[#34445c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795]">Contact me</button>
             <a href="https://github.com/jacobbernard68-ux" target="_blank" rel="noreferrer" className="rounded-lg bg-[#e2e8f2] px-4 py-2 font-medium text-[#1f2937] transition hover:bg-[#b8cadc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795]">GitHub ↗</a>
             <a href="https://linkedin.com/in/jacobbernard159" target="_blank" rel="noreferrer" className="rounded-lg bg-[#e2e8f2] px-4 py-2 font-medium text-[#1f2937] transition hover:bg-[#b8cadc] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795]">LinkedIn ↗</a>
           </nav>
@@ -46,6 +50,9 @@ export default function PortfolioAboutPage() {
           <ResumeSections />
         </div>
       </section>
+      <Modal open={contactOpen} onClose={() => setContactOpen(false)} title="Contact Jacob Bernard">
+        <ContactFormCard compact />
+      </Modal>
     </main>
   );
 }
