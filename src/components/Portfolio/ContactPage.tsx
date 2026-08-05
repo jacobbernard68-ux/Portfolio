@@ -39,8 +39,8 @@ export default function PortfolioContactPage() {
           <p className="max-w-[480px] text-sm leading-6 text-slate-600 md:justify-self-end md:text-right">Have a project, opportunity, or knotty design problem? Tell me what you’re working through.</p>
         </div>
 
-        <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(16rem,0.72fr)_minmax(0,1.28fr)]">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+        <div className="grid min-w-0 items-stretch gap-4 lg:grid-cols-[minmax(16rem,0.72fr)_minmax(0,1.28fr)]">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
             <article data-cursor-reactive onPointerMove={trackCard} onPointerLeave={resetCard} className="rounded-xl bg-[#afc2d5] p-5 sm:p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">Direct contact</p>
               <h2 className="mt-3 text-2xl font-semibold text-[#111]">Jacob Bernard</h2>

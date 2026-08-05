@@ -53,7 +53,7 @@ export default function ContactFormCard({ compact = false }: { compact?: boolean
   };
 
   return (
-    <form data-cursor-reactive={compact ? undefined : "form"} onPointerMove={compact ? undefined : tiltForm} onPointerLeave={compact ? undefined : resetForm} onSubmit={submitContactForm} aria-describedby="contact-status contact-notice" className={`relative grid min-w-0 gap-3 bg-[#c7d2de] ${compact ? "max-h-[92svh] overflow-y-auto p-5 pt-16 sm:p-7 sm:pt-16" : "self-start rounded-xl p-4 sm:grid-cols-2 sm:gap-4 sm:p-6"}`}>
+    <form data-cursor-reactive={compact ? undefined : "form"} onPointerMove={compact ? undefined : tiltForm} onPointerLeave={compact ? undefined : resetForm} onSubmit={submitContactForm} aria-describedby="contact-status contact-notice" className={`relative grid min-w-0 content-start gap-3 bg-[#c7d2de] ${compact ? "max-h-[92svh] overflow-y-auto p-5 pt-16 sm:p-7 sm:pt-16" : "h-full rounded-xl p-4 sm:grid-cols-2 sm:gap-4 sm:p-6"}`}>
       {compact && <div className="sm:col-span-2"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">Direct contact</p><h2 className="mt-2 text-3xl font-semibold text-[#111]">Send me a message</h2></div>}
       <div>
         <div className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0" aria-hidden="true"><label htmlFor={compact ? "modal-website" : "website"}>Website</label><input id={compact ? "modal-website" : "website"} name="website" type="text" tabIndex={-1} autoComplete="off" /></div>
