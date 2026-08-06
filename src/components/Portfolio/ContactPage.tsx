@@ -5,10 +5,33 @@ import type { PointerEvent as ReactPointerEvent } from "react";
 import ContactFormCard from "./ContactFormCard";
 import Modal from "./Modal";
 
-const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
+const schedulingUrl = process.env.NEXT_PUBLIC_CALCOM_URL ?? process.env.NEXT_PUBLIC_CALENDLY_URL;
 
 export default function PortfolioContactPage() {
+  const [calendarError, setCalendarError] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
+
+  const openScheduler = () => {
+    if (!schedulingUrl) return;
+
+    setCalendarError(false);
+    const width = Math.min(1080, window.screen.availWidth);
+    const height = Math.min(820, window.screen.availHeight);
+    const left = Math.max(0, window.screenX + (window.outerWidth - width) / 2);
+    const top = Math.max(0, window.screenY + (window.outerHeight - height) / 2);
+    const scheduler = window.open(
+      schedulingUrl,
+      "calcom-scheduler",
+      `popup=yes,width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`,
+    );
+
+    if (!scheduler) {
+      setCalendarError(true);
+      return;
+    }
+
+    scheduler.focus();
+  };
 
   const trackCard = (event: ReactPointerEvent<HTMLElement>) => {
     const card = event.currentTarget;
@@ -51,7 +74,15 @@ export default function PortfolioContactPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">30-minute consultation</p>
               <h2 className="mt-3 text-2xl font-semibold text-[#111]">Start with a conversation.</h2>
               <p className="mt-2 text-sm leading-6 text-slate-700">Available Monday–Friday, 9:00 AM–5:00 PM in 30-minute appointment blocks.</p>
-              <button type="button" onClick={() => setCalendarOpen(true)} disabled={!calendlyUrl} className="mt-4 rounded-lg bg-[#26354a] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#34445c] disabled:cursor-not-allowed disabled:opacity-50">{calendlyUrl ? "View available times" : "Scheduling link coming soon"}</button>
+              <button type="button" onClick={openScheduler} disabled={!schedulingUrl} className="mt-4 rounded-lg bg-[#26354a] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#34445c] disabled:cursor-not-allowed disabled:opacity-50">{schedulingUrl ? "View available times" : "Scheduling link coming soon"}</button>
+              {calendarError && (
+                <p className="mt-3 text-sm text-slate-700">
+                  Your browser blocked the scheduling window.{' '}
+                  <a href={schedulingUrl} target="_blank" rel="noreferrer" className="font-semibold underline underline-offset-2">
+                    Open the calendar here.
+                  </a>
+                </p>
+              )}
             </article>
           </div>
 
@@ -64,7 +95,7 @@ export default function PortfolioContactPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#607795]">30-minute consultation</p>
           <p className="mt-1 text-sm text-slate-600">Monday–Friday · 9:00 AM–5:00 PM</p>
         </div>
-        {calendlyUrl && <iframe src={calendlyUrl} title="Calendly appointment scheduler" className="h-[min(75svh,720px)] w-full bg-white" />}
+        {schedulingUrl && <iframe src={schedulingUrl} title="Cal.com appointment scheduler" className="h-[min(75svh,720px)] w-full bg-white" />}
       </Modal>
     </main>
   );
