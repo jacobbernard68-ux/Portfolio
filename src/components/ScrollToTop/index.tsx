@@ -10,14 +10,24 @@ function subscribe(callback: () => void) {
   return () => query.removeEventListener('change', callback);
 }
 
+function subscribeToScroll(callback: () => void) {
+  window.addEventListener('scroll', callback, { passive: true });
+  return () => window.removeEventListener('scroll', callback);
+}
+
 export default function ScrollToTop() {
   const isMobile = useSyncExternalStore(
     subscribe,
     () => window.matchMedia(mobileQuery).matches,
     () => false,
   );
+  const canReturnToTop = useSyncExternalStore(
+    subscribeToScroll,
+    () => window.scrollY > 8,
+    () => false,
+  );
 
-  if (!isMobile) return null;
+  if (!isMobile || !canReturnToTop) return null;
 
   const scrollToTop = () => {
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)')

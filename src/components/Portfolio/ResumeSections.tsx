@@ -196,22 +196,27 @@ export default function ResumeSections({ compact = false }: { compact?: boolean 
   return (
     <>
       <div className='grid h-full min-h-0 gap-3 sm:grid-cols-2'>
-        {sections.map((section, index) => (
-          <button
+        {sections.map((section, index) => {
+          const cardIsDark = compact
+            ? [1, 3, 5].includes(index)
+            : [1, 2, 5].includes(index);
+
+          return (
+            <button
             key={section.id}
             data-mobile-theme={index % 2 === 0 ? 'dark' : 'light'}
-            data-cursor-reactive={[1, 2, 5].includes(index) ? 'dark' : 'light'}
+            data-cursor-reactive={cardIsDark ? 'dark' : 'light'}
             onPointerMove={trackGlow}
             onPointerLeave={hideGlow}
             type='button'
             onClick={() => setActive(section)}
             aria-haspopup='dialog'
             style={compact ? { minHeight: 0, padding: '0.6rem' } : undefined}
-            className={`resume-card group relative min-h-[clamp(8rem,18svh,10rem)] overflow-hidden rounded-[var(--fluid-radius)] p-[clamp(0.875rem,min(1.75vw,2svh),1.35rem)] text-left transition hover:shadow-[0_10px_24px_rgba(15,23,42,0.13)] focus-visible:ring-2 focus-visible:ring-[#1f2937] focus-visible:ring-offset-2 focus-visible:outline-none ${[1, 2, 5].includes(index) ? 'bg-[#1f2937] text-white' : 'bg-[#b8cadc] text-[#111]'}`}
+            className={`resume-card group relative min-h-[clamp(8rem,18svh,10rem)] overflow-hidden rounded-[var(--fluid-radius)] p-[clamp(0.875rem,min(1.75vw,2svh),1.35rem)] text-left transition hover:shadow-[0_10px_24px_rgba(15,23,42,0.13)] focus-visible:ring-2 focus-visible:ring-[#1f2937] focus-visible:ring-offset-2 focus-visible:outline-none ${cardIsDark ? 'bg-[#1f2937] text-white' : 'bg-[#b8cadc] text-[#111]'}`}
           >
             <div className='flex items-center justify-between gap-3'>
               <span
-                className={`text-[10px] font-semibold tracking-[0.18em] uppercase ${[1, 2, 5].includes(index) ? 'text-white/55' : 'text-slate-600'}`}
+                className={`text-[10px] font-semibold tracking-[0.18em] uppercase ${cardIsDark ? 'text-white/55' : 'text-slate-600'}`}
               >
                 {section.label}
               </span>
@@ -223,7 +228,7 @@ export default function ResumeSections({ compact = false }: { compact?: boolean 
                   ? { marginTop: '0.3rem', fontSize: '0.9rem', lineHeight: 1.15 }
                   : undefined
               }
-              className={`mt-3 text-xl font-semibold tracking-[-0.025em] ${[1, 2, 5].includes(index) ? 'text-[#b8cadc]' : ''}`}
+              className={`mt-3 text-xl font-semibold tracking-[-0.025em] ${cardIsDark ? 'text-[#b8cadc]' : ''}`}
             >
               {section.title}
             </h2>
@@ -233,12 +238,13 @@ export default function ResumeSections({ compact = false }: { compact?: boolean 
                   ? { marginTop: '0.25rem', fontSize: '0.64rem', lineHeight: 1.3 }
                   : undefined
               }
-              className={`mt-2 text-xs leading-5 ${[1, 2, 5].includes(index) ? 'text-white/65' : 'text-slate-700'}`}
+              className={`mt-2 text-xs leading-5 ${cardIsDark ? 'text-white/65' : 'text-slate-700'}`}
             >
               {section.preview}
             </p>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
 
       {active &&
