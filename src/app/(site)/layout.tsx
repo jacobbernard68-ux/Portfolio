@@ -6,6 +6,7 @@ import '@/styles/tailwind.css';
 import Header from '@/components/Header';
 import CursorBubble from '@/components/CursorBubble';
 import ScrollToTop from '@/components/ScrollToTop';
+import SiteFooter from '@/components/SiteFooter';
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 import NextTopLoader from 'nextjs-toploader';
@@ -33,7 +34,7 @@ export default function RootLayout({
     <html lang='en' className={inter.className}>
       <body>
         <CursorBubble />
-        <div className='relative z-10 isolate'>
+        <div className='relative isolate z-10 flex min-h-screen flex-col supports-[height:100dvh]:min-h-dvh'>
           <NextTopLoader
             color='#2F3E5C'
             crawlSpeed={300}
@@ -43,7 +44,10 @@ export default function RootLayout({
 
           <AuthProvider>
             <Header />
-            {children}
+            <div className='site-content flex min-h-0 flex-1 flex-col'>
+              {children}
+            </div>
+            <SiteFooter />
 
             <ToasterContext />
           </AuthProvider>

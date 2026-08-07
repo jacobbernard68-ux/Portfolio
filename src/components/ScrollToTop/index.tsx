@@ -1,40 +1,65 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
+
+const mobileQuery = '(max-width: 59.999rem)';
+
+function subscribe(callback: () => void) {
+  const query = window.matchMedia(mobileQuery);
+  query.addEventListener('change', callback);
+  return () => query.removeEventListener('change', callback);
+}
+
+function subscribeToScroll(callback: () => void) {
+  window.addEventListener('scroll', callback, { passive: true });
+  return () => window.removeEventListener('scroll', callback);
+}
 
 export default function ScrollToTop() {
-  const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(mobileQuery).matches,
+    () => false,
+  );
+  const canReturnToTop = useSyncExternalStore(
+    subscribeToScroll,
+    () => window.scrollY > 8,
+    () => false,
+  );
+
+  if (!isMobile || !canReturnToTop) return null;
 
   const scrollToTop = () => {
-    window.scrollTo({
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)')
+      .matches
+      ? 'auto'
+      : 'smooth';
+    document.scrollingElement?.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      left: 0,
+      behavior,
     });
   };
 
-  useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility);
-
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
-
   return (
     <button
+      type='button'
       onClick={scrollToTop}
-      className='bg-purple fixed right-8 bottom-8 size-10 place-items-center rounded-sm text-white shadow-md transition-opacity duration-300 hover:opacity-70'
+      aria-label='Scroll to top of site'
+      className='scroll-to-top grid place-items-center rounded-full border border-white/60 bg-[#405671] text-white shadow-[0_8px_22px_rgba(31,41,55,0.32)] transition hover:bg-[#2f3e5c] focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:ring-offset-2 focus-visible:outline-none'
       style={{
-        display: isVisible ? 'grid' : 'none',
+        position: 'fixed',
+        right: 'max(12px, env(safe-area-inset-right))',
+        left: 'auto',
+        bottom:
+          'calc(var(--site-footer-height) + max(12px, env(safe-area-inset-bottom)))',
+        zIndex: 2147483647,
+        width: 38,
+        height: 38,
+        display: 'grid',
       }}
     >
-      <span className='sr-only'>Scroll to top</span>
+      <span className='sr-only'>Scroll to top of site</span>
 
       <svg
         className='size-5 fill-white'
