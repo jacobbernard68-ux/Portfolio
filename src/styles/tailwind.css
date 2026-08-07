@@ -245,6 +245,74 @@
   }
 }
 
+/* Let About content grow with tall desktop cards instead of collecting at the top. */
+@media (min-width: 90rem) and (min-height: 50rem) {
+  .about-viewport-page .about-layout {
+    gap: clamp(0.875rem, 1vw, 1.25rem);
+  }
+
+  .about-viewport-page header {
+    padding: clamp(1.5rem, min(2.25vw, 3svh), 2.75rem);
+  }
+
+  .about-viewport-page .about-intro {
+    margin-block: auto;
+  }
+
+  .about-viewport-page header h1 {
+    max-width: 46rem;
+    font-size: clamp(3.15rem, 3.25vw, 3.9rem) !important;
+    line-height: 1.04 !important;
+  }
+
+  .about-viewport-page .about-description {
+    max-width: 42rem;
+    font-size: clamp(1rem, 1vw, 1.125rem) !important;
+    line-height: 1.65 !important;
+  }
+
+  .about-viewport-page [data-internal-scroll] > div {
+    gap: clamp(0.875rem, 1vw, 1.25rem);
+  }
+
+  .about-viewport-page .resume-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(1.25rem, min(1.75vw, 2.5svh), 2rem);
+  }
+
+  .about-viewport-page .resume-card > div:first-child {
+    position: absolute;
+    inset-inline: clamp(1.25rem, min(1.75vw, 2.5svh), 2rem);
+    top: clamp(1.25rem, min(1.75vw, 2.5svh), 2rem);
+  }
+
+  .about-viewport-page .resume-card h2 {
+    margin-top: 0 !important;
+    font-size: clamp(1.25rem, 1.3vw, 1.5rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  .about-viewport-page .resume-card > p {
+    margin-top: clamp(0.55rem, 0.8vh, 0.75rem) !important;
+    max-width: 44rem;
+    font-size: clamp(0.875rem, 0.82vw, 1rem) !important;
+    line-height: 1.55 !important;
+  }
+}
+
+@media (min-width: 120rem) and (min-height: 60rem) {
+  .about-viewport-page .about-layout {
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  }
+
+  .about-viewport-page header h1 {
+    max-width: 52rem;
+    font-size: clamp(3.75rem, 3vw, 4.5rem) !important;
+  }
+}
+
 @utility fluid-card-space {
   padding: var(--fluid-card-padding);
 }
