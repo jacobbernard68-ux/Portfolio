@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang='en' className={inter.className}>
       <body>
         <CursorBubble />
-        <div className='relative isolate z-10'>
+        <div className='relative isolate z-10 flex min-h-screen flex-col supports-[height:100dvh]:min-h-dvh'>
           <NextTopLoader
             color='#2F3E5C'
             crawlSpeed={300}
@@ -44,7 +44,9 @@ export default function RootLayout({
 
           <AuthProvider>
             <Header />
-            <div className='site-content'>{children}</div>
+            <div className='site-content flex min-h-0 flex-1 flex-col'>
+              {children}
+            </div>
             <SiteFooter />
 
             <ToasterContext />

@@ -274,8 +274,8 @@ export default function CardFanCarousel({ cards }: Props) {
   const arrow =
     'grid size-11 place-items-center rounded-full border border-black/10 bg-white/65 text-[#405671] shadow-lg backdrop-blur-xl transition hover:border-black/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#405671]';
   return (
-    <section className='relative z-20 flex w-full flex-col items-center px-4 pb-2'>
-      <div className='flex w-full max-w-[90rem] justify-center'>
+    <section className='pointer-events-none relative z-60 flex h-full w-full flex-col items-center px-4 pb-2'>
+      <div className='flex h-full w-full max-w-[90rem] justify-center'>
         <div
           ref={containerRef}
           className='fan-layout relative flex w-full max-w-[80rem] items-center justify-center'
@@ -307,9 +307,11 @@ export default function CardFanCarousel({ cards }: Props) {
                   </div>
                 )}
                 {card.description && (
-                  <p className='absolute inset-x-0 bottom-0 z-20 line-clamp-2 border-t border-white/20 bg-[#172334]/88 px-4 py-3 text-[9px] leading-4 text-[#b8cadc] backdrop-blur-md'>
-                    {card.description}
-                  </p>
+                  <div className='absolute inset-x-0 bottom-0 z-20 border-t border-white/20 bg-[#172334]/88 px-4 py-2.5 text-[#b8cadc] backdrop-blur-md'>
+                    <p className='line-clamp-2 text-[9px] leading-4'>
+                      {card.description}
+                    </p>
+                  </div>
                 )}
               </div>
             );
@@ -320,12 +322,15 @@ export default function CardFanCarousel({ cards }: Props) {
                 target={card.linkUrl.startsWith('http') ? '_blank' : '_self'}
                 rel='noopener noreferrer'
                 id={`project-${card.linkUrl?.match(/project=([^&]+)/)?.[1] ?? index}`}
-                className='fan-card block cursor-pointer'
+                className='fan-card pointer-events-auto block cursor-pointer'
               >
                 {image}
               </a>
             ) : (
-              <div key={`${card.imgUrl}-${index}`} className='fan-card'>
+              <div
+                key={`${card.imgUrl}-${index}`}
+                className='fan-card pointer-events-auto'
+              >
                 {image}
               </div>
             );
@@ -333,7 +338,7 @@ export default function CardFanCarousel({ cards }: Props) {
         </div>
       </div>
       {paginated && (
-        <div className='z-30 mt-4 flex items-center gap-4'>
+        <div className='pointer-events-auto z-30 mt-4 flex items-center gap-4'>
           <button
             className={arrow}
             onClick={() => cycle('left')}

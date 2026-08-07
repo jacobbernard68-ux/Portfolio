@@ -39,7 +39,7 @@ export default function CarouselDemoPage() {
         <p className='text-[10px] font-bold tracking-[0.2em] text-[#607795] uppercase'>
           Interaction study
         </p>
-        <h1 className='mt-2 text-3xl font-semibold tracking-[-0.045em] text-[#111] sm:text-4xl'>
+        <h1 className='mt-2 text-[clamp(1.05rem,5.25vw,1.5rem)] font-semibold tracking-[-0.045em] whitespace-nowrap text-[#111] sm:text-4xl sm:whitespace-normal'>
           From Concept to Experience
         </h1>
         <p className='mx-auto mt-2 max-w-xl text-sm leading-6 text-slate-600'>

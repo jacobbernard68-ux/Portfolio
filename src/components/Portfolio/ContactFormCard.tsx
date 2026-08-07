@@ -77,7 +77,7 @@ export default function ContactFormCard({
       onPointerLeave={compact ? undefined : resetForm}
       onSubmit={submitContactForm}
       aria-describedby='contact-status contact-notice'
-      className={`relative grid min-w-0 content-start gap-[clamp(0.75rem,1.5vw,1rem)] bg-[#c7d2de] ${compact ? 'max-h-[calc(100svh-clamp(1.5rem,6vh,4rem))] overflow-y-auto p-[clamp(1.25rem,3vw,1.75rem)] pt-[clamp(3.5rem,8vh,4rem)]' : 'h-full rounded-[var(--fluid-radius)] p-[clamp(1rem,2vw,1.5rem)] sm:grid-cols-2'}`}
+      className={`relative grid min-w-0 content-start gap-[clamp(0.55rem,min(1.1vw,1.25svh),0.8rem)] bg-[#c7d2de] ${compact ? 'max-h-[calc(100svh-clamp(1.5rem,6vh,4rem))] overflow-y-auto p-[clamp(1.25rem,3vw,1.75rem)] pt-[clamp(3.5rem,8vh,4rem)]' : 'rounded-[var(--fluid-radius)] p-[clamp(0.75rem,min(1.4vw,1.7svh),1.15rem)] sm:grid-cols-2 lg:h-full lg:grid-rows-[auto_minmax(0,1fr)_auto]'}`}
     >
       {compact && (
         <div className='sm:col-span-2'>
@@ -116,7 +116,7 @@ export default function ContactFormCard({
           minLength={2}
           maxLength={80}
           autoComplete='name'
-          className='w-full rounded-lg border border-slate-500/20 bg-white/85 px-4 py-3 text-[#111] transition outline-none focus:border-[#607795] focus:ring-2 focus:ring-[#607795]/25'
+          className='w-full rounded-lg border border-slate-500/20 bg-white/85 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.55rem,1.1svh,0.75rem)] text-[#111] transition outline-none focus:border-[#607795] focus:ring-2 focus:ring-[#607795]/25'
         />
       </div>
       <div>
@@ -133,10 +133,12 @@ export default function ContactFormCard({
           required
           maxLength={254}
           autoComplete='email'
-          className='w-full rounded-lg border border-slate-500/20 bg-white/85 px-4 py-3 text-[#111] transition outline-none focus:border-[#607795] focus:ring-2 focus:ring-[#607795]/25'
+          className='w-full rounded-lg border border-slate-500/20 bg-white/85 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.55rem,1.1svh,0.75rem)] text-[#111] transition outline-none focus:border-[#607795] focus:ring-2 focus:ring-[#607795]/25'
         />
       </div>
-      <div className='sm:col-span-2'>
+      <div
+        className={`sm:col-span-2 ${compact ? '' : 'flex min-h-0 flex-col'}`}
+      >
         <label
           htmlFor={compact ? 'modal-message' : 'message'}
           className='mb-2 block text-sm font-medium text-[#111]'
@@ -150,7 +152,7 @@ export default function ContactFormCard({
           required
           minLength={10}
           maxLength={3000}
-          className='w-full resize-none rounded-lg border border-slate-500/20 bg-white/85 px-4 py-3 text-[#111] transition outline-none focus:border-[#607795] focus:ring-2 focus:ring-[#607795]/25 sm:min-h-28'
+          className={`w-full resize-none rounded-lg border border-slate-500/20 bg-white/85 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.55rem,1.1svh,0.75rem)] text-[#111] transition outline-none focus:border-[#607795] focus:ring-2 focus:ring-[#607795]/25 ${compact ? 'min-h-[clamp(8rem,22vh,11rem)]' : 'min-h-[clamp(4.75rem,12svh,6.5rem)] flex-1'}`}
         />
       </div>
       <div className='flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-end sm:justify-between'>

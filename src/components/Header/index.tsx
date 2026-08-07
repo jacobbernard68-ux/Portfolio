@@ -6,12 +6,17 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import menuData from './menuData';
 import ResumePreviewModal from '@/components/Home/Hero/ResumePreviewModal';
+import {
+  getWorkLayoutPreference,
+  subscribeToWorkLayoutPreference,
+} from '@/components/Portfolio/workLayoutPreference';
 
 const Header = () => {
   const pathname = usePathname();
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [workLayout, setWorkLayout] = useState<'fan' | 'classic' | null>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
 
   const closeNavigation = useCallback((restoreFocus = false) => {
@@ -30,6 +35,12 @@ const Header = () => {
   }, []);
 
   useEffect(() => setNavigationOpen(false), [pathname]);
+
+  useEffect(() => {
+    const updatePreference = () => setWorkLayout(getWorkLayoutPreference());
+    updatePreference();
+    return subscribeToWorkLayoutPreference(updatePreference);
+  }, []);
 
   useEffect(() => {
     if (!navigationOpen) return;
@@ -79,7 +90,7 @@ const Header = () => {
           onClick={() => setResumeOpen(true)}
           aria-label='Preview Jacob Bernard résumé'
           aria-haspopup='dialog'
-          className='relative ml-auto size-11 shrink-0 overflow-hidden rounded-full ring-1 ring-[#2f3e5c]/15 transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:ring-offset-2 focus-visible:outline-none lg:hidden'
+          className='relative ml-auto size-11 shrink-0 overflow-hidden rounded-full ring-1 ring-[#2f3e5c]/15 transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:ring-offset-2 focus-visible:outline-none min-[60rem]:hidden'
         >
           <Image
             src='/images/jacob-bernard-headshot.png'
@@ -97,7 +108,7 @@ const Header = () => {
           aria-label={navigationOpen ? 'Close navigation' : 'Open navigation'}
           aria-expanded={navigationOpen}
           aria-controls='site-navigation'
-          className='ml-3 grid size-11 shrink-0 place-items-center rounded-xl border border-[#2f3e5c]/15 bg-white/45 text-[#1f2937] transition hover:bg-white/70 focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:outline-none lg:hidden'
+          className='ml-3 grid size-11 shrink-0 place-items-center rounded-xl border border-[#2f3e5c]/15 bg-white/45 text-[#1f2937] transition hover:bg-white/70 focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:outline-none min-[60rem]:hidden'
         >
           <span className='sr-only'>Menu</span>
           <span className='relative block h-4 w-5'>
@@ -118,16 +129,16 @@ const Header = () => {
             type='button'
             aria-label='Close navigation'
             onClick={() => closeNavigation(true)}
-            className='fixed inset-0 top-[var(--site-header-height)] z-[-1] bg-[#1f2937]/20 backdrop-blur-[2px] md:top-[var(--site-header-height-wide)] lg:hidden'
+            className='fixed inset-0 top-[var(--site-header-height)] z-[-1] bg-[#1f2937]/20 backdrop-blur-[2px] md:top-[var(--site-header-height-wide)] min-[60rem]:hidden'
           />
         )}
-        <div className='contents min-w-0 lg:ml-auto lg:flex lg:items-center lg:gap-3 xl:gap-4'>
+        <div className='contents min-w-0 min-[60rem]:ml-auto min-[60rem]:flex min-[60rem]:items-center min-[60rem]:gap-3 xl:gap-4'>
           <button
             type='button'
             onClick={() => setResumeOpen(true)}
             aria-label='Preview Jacob Bernard résumé'
             aria-haspopup='dialog'
-            className='relative hidden size-11 shrink-0 overflow-hidden rounded-full ring-1 ring-[#2f3e5c]/15 transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:ring-offset-2 focus-visible:outline-none lg:block'
+            className='relative hidden size-11 shrink-0 overflow-hidden rounded-full ring-1 ring-[#2f3e5c]/15 transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:ring-offset-2 focus-visible:outline-none min-[60rem]:block'
             title='Jacob Bernard'
           >
             <Image
@@ -141,11 +152,18 @@ const Header = () => {
           <nav
             id='site-navigation'
             aria-label='Primary navigation'
-            className={`${navigationOpen ? 'flex' : 'hidden'} absolute top-[65px] right-4 left-4 max-h-[calc(100svh-81px)] flex-col gap-2 overflow-y-auto rounded-2xl border border-[#2f3e5c]/10 bg-[#edf2f7]/96 p-3 shadow-[0_22px_60px_rgba(31,41,55,0.18)] backdrop-blur-xl sm:right-8 sm:left-8 md:top-[89px] md:max-h-[calc(100svh-105px)] lg:static lg:flex lg:max-h-none lg:flex-row lg:flex-nowrap lg:items-center lg:gap-1 lg:overflow-visible lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-none`}
+            className={`${navigationOpen ? 'flex' : 'hidden'} absolute top-[65px] right-4 left-4 max-h-[calc(100svh-81px)] flex-col gap-2 overflow-y-auto rounded-2xl border border-[#2f3e5c]/10 bg-[#edf2f7]/96 p-3 shadow-[0_22px_60px_rgba(31,41,55,0.18)] backdrop-blur-xl sm:right-8 sm:left-8 md:top-[89px] md:max-h-[calc(100svh-105px)] min-[60rem]:static min-[60rem]:flex min-[60rem]:max-h-none min-[60rem]:flex-row min-[60rem]:flex-nowrap min-[60rem]:items-center min-[60rem]:gap-1 min-[60rem]:overflow-visible min-[60rem]:border-0 min-[60rem]:bg-transparent min-[60rem]:p-0 min-[60rem]:shadow-none min-[60rem]:backdrop-blur-none`}
           >
             {menuData.map((item) => {
               if (!item.path) return null;
-              const active = pathname === item.path;
+              const active =
+                item.path === '/work'
+                  ? pathname === '/work' || pathname.startsWith('/work/')
+                  : pathname === item.path;
+              const desktopHref =
+                item.path === '/work' && workLayout === 'classic'
+                  ? '/work/classic'
+                  : item.path;
               const mobileHref =
                 item.path === '/' ? '/#home' : `/#${item.path.slice(1)}`;
               const mobileTargetId = mobileHref.slice(2);
@@ -153,6 +171,7 @@ const Header = () => {
                 <span key={item.id} className='contents'>
                   <Link
                     href={mobileHref}
+                    aria-current={active ? 'page' : undefined}
                     onClick={(event) => {
                       const target = document.getElementById(mobileTargetId);
                       if (!target) {
@@ -167,14 +186,14 @@ const Header = () => {
                         menuButton.current?.focus({ preventScroll: true }),
                       );
                     }}
-                    className='relative rounded-xl px-3 py-3 text-xs font-bold tracking-[0.12em] whitespace-nowrap text-[#34445c] transition hover:bg-white/45 hover:text-[#111] focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:outline-none lg:hidden'
+                    className={`relative rounded-xl px-3 py-3 text-xs font-bold tracking-[0.12em] whitespace-nowrap transition hover:bg-white/45 hover:text-[#111] focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:outline-none min-[60rem]:hidden ${active ? 'bg-[#1f2937] text-white shadow-[0_8px_20px_rgba(31,41,55,0.16)] hover:bg-[#1f2937] hover:text-white' : 'text-[#34445c]'}`}
                   >
                     {item.title}
                   </Link>
                   <Link
-                    href={item.path}
+                    href={desktopHref}
                     aria-current={active ? 'page' : undefined}
-                    className={`relative hidden rounded-xl px-3 py-3 text-xs font-bold tracking-[0.12em] whitespace-nowrap transition focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:outline-none lg:block lg:py-2.5 xl:px-4 ${active ? 'bg-[#1f2937] text-white shadow-[0_8px_20px_rgba(31,41,55,0.16)]' : 'text-[#34445c] hover:bg-white/45 hover:text-[#111]'}`}
+                    className={`relative hidden rounded-xl px-3 py-3 text-xs font-bold tracking-[0.12em] whitespace-nowrap transition focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:outline-none min-[60rem]:block min-[60rem]:py-2.5 xl:px-4 ${active ? 'bg-[#1f2937] text-white shadow-[0_8px_20px_rgba(31,41,55,0.16)]' : 'text-[#34445c] hover:bg-white/45 hover:text-[#111]'}`}
                   >
                     {item.title}
                   </Link>

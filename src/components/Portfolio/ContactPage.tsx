@@ -44,11 +44,11 @@ export default function PortfolioContactPage({
   return (
     <main
       id={embedded ? 'contact' : undefined}
-      className={`${embedded ? 'scroll-mt-[var(--site-header-height)] md:scroll-mt-[var(--site-header-height-wide)]' : 'viewport-page'} page-gutters bg-[#e2e8f2]/80`}
+      className={`${embedded ? 'scroll-mt-[var(--site-header-height)] md:scroll-mt-[var(--site-header-height-wide)]' : 'viewport-page'} page-gutters flex flex-col bg-[#e2e8f2]/80`}
     >
-      <section className='fluid-card-space mx-auto w-full max-w-[var(--content-max)] rounded-[var(--fluid-radius)] bg-[#f2f4f7]/92 shadow-[0_8px_24px_rgba(15,23,42,0.08)]'>
-        <div className='mb-4 grid gap-2 border-b border-slate-200 pb-4 sm:mb-6 sm:gap-3 sm:pb-5 md:grid-cols-2 md:items-end'>
-          <h1 className='text-[clamp(1.875rem,4vw,3rem)] font-semibold tracking-[-0.035em] text-[#111]'>
+      <section className='mx-auto flex w-full max-w-[var(--content-max)] flex-1 flex-col rounded-[var(--fluid-radius)] bg-[#f2f4f7]/92 p-[clamp(0.625rem,min(1.25vw,1.4svh),1rem)] shadow-[0_8px_24px_rgba(15,23,42,0.08)]'>
+        <div className='mb-[clamp(0.45rem,1svh,0.7rem)] grid gap-2 border-b border-slate-200 pb-[clamp(0.45rem,1svh,0.7rem)] md:grid-cols-2 md:items-end'>
+          <h1 className='text-[clamp(1.65rem,min(3.25vw,4.5svh),2.4rem)] font-semibold tracking-[-0.035em] text-[#111]'>
             Let’s Connect
           </h1>
           <p className='max-w-[480px] text-sm leading-6 text-slate-600 md:justify-self-end md:text-right'>
@@ -57,21 +57,21 @@ export default function PortfolioContactPage({
           </p>
         </div>
 
-        <div className='grid min-w-0 items-stretch gap-4 lg:grid-cols-[minmax(16rem,0.72fr)_minmax(0,1.28fr)]'>
-          <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2'>
+        <div className='contact-layout grid min-w-0 flex-1 gap-[clamp(0.625rem,min(1.5vw,1.5svh),1.25rem)] lg:grid-cols-[minmax(16rem,0.72fr)_minmax(0,1.28fr)]'>
+          <div className='grid content-start gap-[clamp(0.625rem,min(1.5vw,1.5svh),1.25rem)] sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2'>
             <article
               data-cursor-reactive
               onPointerMove={trackCard}
               onPointerLeave={resetCard}
-              className='rounded-xl bg-[#afc2d5] p-5 sm:p-6'
+              className='flex min-h-0 flex-col justify-center rounded-[var(--fluid-radius)] bg-[#afc2d5] p-[clamp(0.75rem,min(1.5vw,1.8svh),1.35rem)]'
             >
-              <p className='text-xs font-semibold tracking-[0.18em] text-slate-600 uppercase'>
+              <p className='text-[clamp(0.65rem,0.8vw,0.78rem)] font-semibold tracking-[0.18em] text-slate-600 uppercase'>
                 Direct contact
               </p>
-              <h2 className='mt-3 text-2xl font-semibold text-[#111]'>
+              <h2 className='mt-[clamp(0.4rem,1vh,0.65rem)] text-[clamp(1.3rem,1.9vw,1.65rem)] leading-[1.1] font-semibold text-[#111]'>
                 Jacob Bernard
               </h2>
-              <p className='mt-2 text-sm leading-6 text-slate-700'>
+              <p className='mt-[clamp(0.35rem,0.9vh,0.55rem)] text-[clamp(0.78rem,0.9vw,0.9rem)] leading-[1.5] text-slate-700'>
                 Send a note with the form and it will go directly to my inbox. I
                 respond within five business days.
               </p>
@@ -81,15 +81,15 @@ export default function PortfolioContactPage({
               data-cursor-reactive
               onPointerMove={trackCard}
               onPointerLeave={resetCard}
-              className='rounded-xl bg-[#1f2937] p-5 text-[#b8cadc] sm:p-6 lg:bg-[#afc2d5] lg:text-[#111]'
+              className='flex min-h-0 flex-col justify-center rounded-[var(--fluid-radius)] bg-[#1f2937] p-[clamp(0.75rem,min(1.5vw,1.8svh),1.35rem)] text-[#b8cadc] lg:bg-[#afc2d5] lg:text-[#111]'
             >
-              <p className='text-xs font-semibold tracking-[0.18em] text-[#b8cadc] uppercase lg:text-slate-600'>
+              <p className='text-[clamp(0.65rem,0.8vw,0.78rem)] font-semibold tracking-[0.18em] text-[#b8cadc] uppercase lg:text-slate-600'>
                 15 or 30-minute consultation
               </p>
-              <h2 className='mt-3 text-2xl font-semibold text-[#b8cadc] lg:text-[#111]'>
+              <h2 className='mt-[clamp(0.4rem,1vh,0.65rem)] text-[clamp(1.3rem,1.9vw,1.65rem)] leading-[1.1] font-semibold text-[#b8cadc] lg:text-[#111]'>
                 Start with a conversation.
               </h2>
-              <p className='mt-2 text-sm leading-6 text-[#b8cadc] lg:text-slate-700'>
+              <p className='mt-[clamp(0.35rem,0.9vh,0.55rem)] text-[clamp(0.78rem,0.9vw,0.9rem)] leading-[1.5] text-[#b8cadc] lg:text-slate-700'>
                 Available Monday–Friday, 9:00 AM–5:00 PM with both 15 and
                 30-minute appointment options.
               </p>
@@ -97,7 +97,7 @@ export default function PortfolioContactPage({
                 type='button'
                 onClick={openScheduler}
                 disabled={!schedulingUrl}
-                className='mt-4 rounded-lg bg-[#b8cadc] px-4 py-2.5 text-sm font-semibold text-[#1f2937] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 lg:bg-[#26354a] lg:text-white lg:hover:bg-[#34445c]'
+                className='mt-[clamp(0.55rem,1.2vh,0.8rem)] self-start rounded-lg bg-[#b8cadc] px-[clamp(0.75rem,1.3vw,0.9rem)] py-[clamp(0.5rem,0.9vh,0.625rem)] text-[clamp(0.72rem,0.85vw,0.82rem)] font-semibold whitespace-nowrap text-[#1f2937] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 lg:bg-[#26354a] lg:text-white lg:hover:bg-[#34445c]'
               >
                 {schedulingUrl
                   ? 'View available times'

@@ -1,7 +1,4 @@
-import Hero from '@/components/Home/Hero';
-import PortfolioWorkPage from '@/components/Portfolio/WorkPage';
-import PortfolioAboutPage from '@/components/Portfolio/AboutPage';
-import PortfolioContactPage from '@/components/Portfolio/ContactPage';
+import ResponsiveHomePage from '@/components/Home/ResponsiveHomePage';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,17 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return (
-    <>
-      <div className='lg:hidden'>
-        <Hero embedded />
-        <PortfolioWorkPage embedded />
-        <PortfolioAboutPage embedded />
-        <PortfolioContactPage embedded />
-      </div>
-      <div className='hidden lg:block'>
-        <Hero />
-      </div>
-    </>
-  );
+  return <ResponsiveHomePage />;
 }

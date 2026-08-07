@@ -151,7 +151,7 @@ const sections: Section[] = [
   },
 ];
 
-export default function ResumeSections() {
+export default function ResumeSections({ compact = false }: { compact?: boolean }) {
   const [active, setActive] = useState<Section | null>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
   const modalScroll = useRef<HTMLDivElement>(null);
@@ -206,7 +206,8 @@ export default function ResumeSections() {
             type='button'
             onClick={() => setActive(section)}
             aria-haspopup='dialog'
-            className={`resume-card group relative min-h-[clamp(8.5rem,18vh,10rem)] overflow-hidden rounded-[var(--fluid-radius)] p-[clamp(1rem,2vw,1.35rem)] text-left transition hover:shadow-[0_10px_24px_rgba(15,23,42,0.13)] focus-visible:ring-2 focus-visible:ring-[#1f2937] focus-visible:ring-offset-2 focus-visible:outline-none ${[1, 2, 5].includes(index) ? 'bg-[#1f2937] text-white' : 'bg-[#b8cadc] text-[#111]'}`}
+            style={compact ? { minHeight: 0, padding: '0.6rem' } : undefined}
+            className={`resume-card group relative min-h-[clamp(8rem,18svh,10rem)] overflow-hidden rounded-[var(--fluid-radius)] p-[clamp(0.875rem,min(1.75vw,2svh),1.35rem)] text-left transition hover:shadow-[0_10px_24px_rgba(15,23,42,0.13)] focus-visible:ring-2 focus-visible:ring-[#1f2937] focus-visible:ring-offset-2 focus-visible:outline-none ${[1, 2, 5].includes(index) ? 'bg-[#1f2937] text-white' : 'bg-[#b8cadc] text-[#111]'}`}
           >
             <div className='flex items-center justify-between gap-3'>
               <span
@@ -217,11 +218,21 @@ export default function ResumeSections() {
               <span className='text-xs font-semibold opacity-65'>Open ↗</span>
             </div>
             <h2
+              style={
+                compact
+                  ? { marginTop: '0.3rem', fontSize: '0.9rem', lineHeight: 1.15 }
+                  : undefined
+              }
               className={`mt-3 text-xl font-semibold tracking-[-0.025em] ${[1, 2, 5].includes(index) ? 'text-[#b8cadc]' : ''}`}
             >
               {section.title}
             </h2>
             <p
+              style={
+                compact
+                  ? { marginTop: '0.25rem', fontSize: '0.64rem', lineHeight: 1.3 }
+                  : undefined
+              }
               className={`mt-2 text-xs leading-5 ${[1, 2, 5].includes(index) ? 'text-white/65' : 'text-slate-700'}`}
             >
               {section.preview}
@@ -250,9 +261,21 @@ export default function ResumeSections() {
                 type='button'
                 onClick={() => setActive(null)}
                 aria-label={`Close ${active.title}`}
-                className='absolute top-3 right-3 z-30 grid size-11 place-items-center rounded-full bg-[#1f2937] text-2xl text-white shadow-lg transition hover:bg-black focus-visible:ring-2 focus-visible:ring-[#1f2937] focus-visible:ring-offset-2 focus-visible:outline-none'
+                className='absolute top-3 right-3 z-30 grid size-11 place-items-center rounded-full bg-[#1f2937] text-[0] text-white shadow-lg transition hover:bg-black focus-visible:ring-2 focus-visible:ring-[#1f2937] focus-visible:ring-offset-2 focus-visible:outline-none'
               >
-                ×
+                <svg
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  className='size-5'
+                  aria-hidden='true'
+                >
+                  <path
+                    d='m7 7 10 10M17 7 7 17'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                  />
+                </svg>
               </button>
               <div
                 ref={modalScroll}
