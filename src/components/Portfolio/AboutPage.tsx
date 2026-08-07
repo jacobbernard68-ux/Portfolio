@@ -7,7 +7,7 @@ import Modal from './Modal';
 import ResumeSections from './ResumeSections';
 
 const profileAction =
-  'inline-flex min-w-0 items-center justify-center whitespace-nowrap rounded-lg px-[clamp(0.45rem,1.3vw,1rem)] py-[clamp(0.5rem,1.2vh,0.625rem)] text-[clamp(0.65rem,1.6vw,0.875rem)] font-medium transition focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:outline-none';
+  'inline-flex min-h-11 min-w-0 items-center justify-center whitespace-nowrap rounded-lg px-[clamp(0.65rem,1.3vw,1rem)] py-[clamp(0.625rem,1.2vh,0.75rem)] text-[clamp(0.75rem,1.6vw,0.875rem)] font-medium transition focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:outline-none';
 
 const midSizeQuery =
   '(min-width: 60rem) and (max-width: 79.999rem) and (min-height: 35rem)';
@@ -92,7 +92,7 @@ export default function PortfolioAboutPage({
                   isMidSize
                     ? {
                         maxWidth: '34rem',
-                        fontSize: 'clamp(1.35rem, 2.35vw, 1.65rem)',
+                        fontSize: 'clamp(1.65rem, 2.35vw, 2rem)',
                         lineHeight: 1.05,
                       }
                     : undefined
@@ -108,8 +108,8 @@ export default function PortfolioAboutPage({
                 isMidSize
                   ? {
                       maxWidth: '31rem',
-                      fontSize: 'clamp(0.75rem, 1.1vw, 0.86rem)',
-                      lineHeight: 1.45,
+                      fontSize: 'clamp(0.875rem, 1.1vw, 1rem)',
+                      lineHeight: 1.55,
                     }
                   : undefined
               }

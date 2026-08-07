@@ -97,7 +97,7 @@ export default function PortfolioContactPage({
                 type='button'
                 onClick={openScheduler}
                 disabled={!schedulingUrl}
-                className='mt-[clamp(0.55rem,1.2vh,0.8rem)] self-start rounded-lg bg-[#b8cadc] px-[clamp(0.75rem,1.3vw,0.9rem)] py-[clamp(0.5rem,0.9vh,0.625rem)] text-[clamp(0.72rem,0.85vw,0.82rem)] font-semibold whitespace-nowrap text-[#1f2937] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 lg:bg-[#26354a] lg:text-white lg:hover:bg-[#34445c]'
+                className='mt-[clamp(0.55rem,1.2vh,0.8rem)] min-h-11 self-start rounded-lg bg-[#b8cadc] px-[clamp(0.875rem,1.3vw,1rem)] py-[clamp(0.625rem,0.9vh,0.75rem)] text-[clamp(0.8125rem,0.85vw,0.875rem)] font-semibold whitespace-nowrap text-[#1f2937] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 lg:bg-[#26354a] lg:text-white lg:hover:bg-[#34445c]'
               >
                 {schedulingUrl
                   ? 'View available times'

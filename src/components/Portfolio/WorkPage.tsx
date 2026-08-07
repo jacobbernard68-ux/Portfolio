@@ -345,7 +345,7 @@ export default function PortfolioWorkPage({
                 </div>
               </div>
               <div
-                className={`pointer-events-none relative z-20 mt-auto grid shrink-0 grid-cols-[auto_auto] items-center justify-between gap-3 border-t px-4 py-3 ${project.dark ? 'border-white/10 bg-[#1f2937]' : 'border-[#405671]/10 bg-[#f2f4f7]'}`}
+                className={`pointer-events-none relative z-20 mt-auto grid shrink-0 grid-cols-1 items-center gap-1.5 border-t px-4 py-3 2xl:grid-cols-[auto_auto] 2xl:justify-between 2xl:gap-3 ${project.dark ? 'border-white/10 bg-[#1f2937]' : 'border-[#405671]/10 bg-[#f2f4f7]'}`}
               >
                 <Link
                   href={`/work/${project.slug}?from=${embedded ? 'mobile' : 'classic'}&project=${project.slug}`}
@@ -356,7 +356,7 @@ export default function PortfolioWorkPage({
                 {project.liveHref && (
                   <Link
                     href={project.liveHref}
-                    className={`pointer-events-auto inline-flex items-center gap-1.5 justify-self-end text-right text-[9px] font-bold tracking-[0.12em] whitespace-nowrap uppercase ${project.dark ? 'text-white hover:text-[#b8cadc]' : 'text-[#111] hover:text-[#405671]'}`}
+                    className={`pointer-events-auto inline-flex items-center gap-1.5 justify-self-start text-left text-[9px] font-bold tracking-[0.12em] whitespace-nowrap uppercase 2xl:justify-self-end 2xl:text-right ${project.dark ? 'text-white hover:text-[#b8cadc]' : 'text-[#111] hover:text-[#405671]'}`}
                   >
                     {project.liveLabel ?? 'Open project'}{' '}
                     <span aria-hidden='true'>↗</span>

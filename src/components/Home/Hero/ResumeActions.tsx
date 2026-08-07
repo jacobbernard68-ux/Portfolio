@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ResumePreviewModal, { resumePath } from './ResumePreviewModal';
 
 const actionClass =
-  'resume-action inline-flex min-w-0 flex-1 items-center justify-center gap-[0.15em] overflow-hidden whitespace-nowrap rounded-[0.4rem] border border-[#b8cadc]/30 bg-white/5 px-[clamp(0.15rem,0.4vw,0.3rem)] py-[clamp(0.3rem,0.7vh,0.45rem)] text-center leading-none font-bold uppercase tracking-normal text-[#b8cadc] transition hover:border-[#b8cadc]/60 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b8cadc] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1f2937]';
+  'resume-action inline-flex min-w-0 flex-1 items-center justify-center gap-1 whitespace-nowrap rounded-lg border border-[#b8cadc]/30 bg-white/5 px-[clamp(0.65rem,1.2vw,1rem)] py-[clamp(0.6rem,1vh,0.75rem)] text-center font-bold text-[#b8cadc] transition hover:border-[#b8cadc]/60 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b8cadc] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1f2937]';
 
 export default function ResumeActions({
   compact = false,

@@ -33,13 +33,13 @@ const Hero = ({ embedded = false }: { embedded?: boolean }) => {
             <div className='mt-[clamp(1rem,3vh,2rem)] grid w-full max-w-[31rem] grid-cols-2 gap-[clamp(0.4rem,1vw,0.75rem)]'>
               <Link
                 href={embedded ? '#work' : '/work'}
-                className='inline-flex w-full min-w-0 items-center justify-center gap-[clamp(0.15rem,0.8vw,0.5rem)] overflow-hidden rounded-lg border border-[#526985]/20 bg-[#607795] px-[clamp(0.25rem,1.5vw,1rem)] py-[clamp(0.65rem,1.5vh,0.8rem)] text-[clamp(0.56rem,2.1vw,0.8rem)] font-semibold whitespace-nowrap text-white shadow-[0_7px_18px_rgba(64,86,113,0.14)] transition hover:-translate-y-0.5 hover:bg-[#526985] focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
+                className='inline-flex min-h-11 w-full min-w-0 items-center justify-center gap-[clamp(0.15rem,0.8vw,0.5rem)] overflow-hidden rounded-lg border border-[#526985]/20 bg-[#607795] px-[clamp(0.5rem,1.5vw,1rem)] py-[clamp(0.65rem,1.5vh,0.8rem)] text-[clamp(0.75rem,2.1vw,0.875rem)] font-semibold whitespace-nowrap text-white shadow-[0_7px_18px_rgba(64,86,113,0.14)] transition hover:-translate-y-0.5 hover:bg-[#526985] focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
               >
                 Explore Featured Work <span aria-hidden='true'>↗</span>
               </Link>
               <Link
                 href={embedded ? '#about' : '/about'}
-                className='inline-flex w-full min-w-0 items-center justify-center overflow-hidden rounded-lg border border-[#405671]/25 bg-[#c7d2de] px-[clamp(0.25rem,1.5vw,1rem)] py-[clamp(0.65rem,1.5vh,0.8rem)] text-[clamp(0.56rem,2.1vw,0.8rem)] font-semibold whitespace-nowrap text-[#2f3e5c] shadow-[0_7px_18px_rgba(64,86,113,0.08)] transition hover:-translate-y-0.5 hover:bg-[#b8cadc] focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
+                className='inline-flex min-h-11 w-full min-w-0 items-center justify-center overflow-hidden rounded-lg border border-[#405671]/25 bg-[#c7d2de] px-[clamp(0.5rem,1.5vw,1rem)] py-[clamp(0.65rem,1.5vh,0.8rem)] text-[clamp(0.75rem,2.1vw,0.875rem)] font-semibold whitespace-nowrap text-[#2f3e5c] shadow-[0_7px_18px_rgba(64,86,113,0.08)] transition hover:-translate-y-0.5 hover:bg-[#b8cadc] focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
               >
                 How I work
               </Link>

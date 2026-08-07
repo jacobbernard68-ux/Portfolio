@@ -11,6 +11,8 @@
   --fluid-section-gap: clamp(0.75rem, 1.8vw, 1.5rem);
   --fluid-page-section-gap: clamp(1.5rem, 3.6vw, 3rem);
   --fluid-radius: clamp(0.75rem, 1.3vw, 1rem);
+  --text-supporting: clamp(0.75rem, 0.72vw, 0.875rem);
+  --text-body: clamp(0.875rem, 0.9vw, 1rem);
 }
 .continuous-page-stack {
   display: flex;
@@ -24,9 +26,9 @@
 }
 
 .resume-action {
-  -webkit-text-size-adjust: none;
-  text-size-adjust: none;
-  font-size: clamp(0.34rem, 0.5vw, 0.4rem) !important;
+  min-height: 2.75rem;
+  font-size: clamp(0.75rem, 0.78vw, 0.875rem) !important;
+  line-height: 1.2 !important;
 }
 
 @media (min-width: 40rem) and (max-width: 59.999rem) {
@@ -36,14 +38,14 @@
   }
 
   .continuous-page-stack #about header h1 {
-    font-size: clamp(1.05rem, 2vw, 1.35rem) !important;
+    font-size: clamp(1.65rem, 3vw, 2.1rem) !important;
     line-height: 1.08;
     margin-top: clamp(0.45rem, 1vh, 0.65rem);
   }
 
   .continuous-page-stack #about .about-description {
-    font-size: clamp(0.72rem, 1.25vw, 0.82rem);
-    line-height: 1.45;
+    font-size: clamp(0.875rem, 1.4vw, 1rem);
+    line-height: 1.6;
   }
 }
 
@@ -197,8 +199,8 @@
 
   .about-viewport-page .about-description {
     max-width: 31rem;
-    font-size: clamp(0.78rem, 1.2vw, 0.9rem) !important;
-    line-height: 1.45 !important;
+    font-size: clamp(0.875rem, 1.2vw, 1rem) !important;
+    line-height: 1.55 !important;
   }
 
   .about-viewport-page [data-internal-scroll] > div {
@@ -213,18 +215,18 @@
 
   .about-viewport-page .resume-card h2 {
     margin-top: clamp(0.25rem, 0.55svh, 0.4rem) !important;
-    font-size: clamp(0.82rem, 1.3vw, 0.98rem) !important;
+    font-size: clamp(1rem, 1.3vw, 1.125rem) !important;
     line-height: 1.15 !important;
   }
 
   .about-viewport-page .resume-card p {
     margin-top: clamp(0.2rem, 0.45svh, 0.3rem) !important;
-    font-size: clamp(0.58rem, 0.82vw, 0.68rem) !important;
-    line-height: 1.25 !important;
+    font-size: clamp(0.75rem, 0.82vw, 0.8125rem) !important;
+    line-height: 1.4 !important;
   }
 
   .about-viewport-page .resume-card > div span {
-    font-size: clamp(0.52rem, 0.75vw, 0.62rem) !important;
+    font-size: clamp(0.6875rem, 0.75vw, 0.75rem) !important;
   }
 }
 
@@ -256,12 +258,12 @@
   .site-content .text-\[6px\],
   .site-content .text-\[7px\],
   .site-content .text-\[8px\] {
-    font-size: clamp(0.55rem, 0.62vw, 0.65rem) !important;
+    font-size: clamp(0.625rem, 0.62vw, 0.6875rem) !important;
   }
   .site-content .text-\[9px\],
   .site-content .text-\[10px\],
   .site-content .text-\[11px\] {
-    font-size: clamp(0.625rem, 0.72vw, 0.75rem) !important;
+    font-size: var(--text-supporting) !important;
   }
   .site-content .text-\[24px\],
   .site-content .text-\[26px\] {
@@ -373,6 +375,27 @@
     max-height: 52%;
     flex: 0 1 auto;
     overflow-y: auto !important;
+  }
+}
+
+/* Readable card copy takes priority over a forced one-screen fit on short laptops. */
+@media (min-width: 60rem) and (max-width: 79.999rem) and (max-height: 47.499rem) {
+  .about-viewport-page {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .about-viewport-page > section,
+  .about-viewport-page [data-internal-scroll] {
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+
+@media (min-width: 96rem) {
+  :root {
+    --content-max: min(92rem, calc(100vw - (var(--page-gutter) * 2)));
+    --fluid-card-padding: clamp(1.25rem, 2vw, 3rem);
   }
 }
 

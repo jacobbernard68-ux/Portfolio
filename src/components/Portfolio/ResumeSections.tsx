@@ -211,7 +211,7 @@ export default function ResumeSections({ compact = false }: { compact?: boolean 
             type='button'
             onClick={() => setActive(section)}
             aria-haspopup='dialog'
-            style={compact ? { minHeight: 0, padding: '0.6rem' } : undefined}
+            style={compact ? { minHeight: 0, padding: '0.75rem' } : undefined}
             className={`resume-card group relative min-h-[clamp(8rem,18svh,10rem)] overflow-hidden rounded-[var(--fluid-radius)] p-[clamp(0.875rem,min(1.75vw,2svh),1.35rem)] text-left transition hover:shadow-[0_10px_24px_rgba(15,23,42,0.13)] focus-visible:ring-2 focus-visible:ring-[#1f2937] focus-visible:ring-offset-2 focus-visible:outline-none ${cardIsDark ? 'bg-[#1f2937] text-white' : 'bg-[#b8cadc] text-[#111]'}`}
           >
             <div className='flex items-center justify-between gap-3'>
@@ -225,7 +225,7 @@ export default function ResumeSections({ compact = false }: { compact?: boolean 
             <h2
               style={
                 compact
-                  ? { marginTop: '0.3rem', fontSize: '0.9rem', lineHeight: 1.15 }
+                  ? { marginTop: '0.35rem', fontSize: '1rem', lineHeight: 1.2 }
                   : undefined
               }
               className={`mt-3 text-xl font-semibold tracking-[-0.025em] ${cardIsDark ? 'text-[#b8cadc]' : ''}`}
@@ -235,7 +235,7 @@ export default function ResumeSections({ compact = false }: { compact?: boolean 
             <p
               style={
                 compact
-                  ? { marginTop: '0.25rem', fontSize: '0.64rem', lineHeight: 1.3 }
+                  ? { marginTop: '0.3rem', fontSize: '0.75rem', lineHeight: 1.4 }
                   : undefined
               }
               className={`mt-2 text-xs leading-5 ${cardIsDark ? 'text-white/65' : 'text-slate-700'}`}
