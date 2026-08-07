@@ -10,7 +10,7 @@ const profileAction =
   'inline-flex min-h-11 min-w-0 items-center justify-center whitespace-nowrap rounded-lg px-[clamp(0.65rem,1.3vw,1rem)] py-[clamp(0.625rem,1.2vh,0.75rem)] text-[clamp(0.75rem,1.6vw,0.875rem)] font-medium transition focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:outline-none';
 
 const midSizeQuery =
-  '(min-width: 60rem) and (max-width: 79.999rem) and (min-height: 35rem)';
+  '(min-width: 60rem) and (max-width: 74.999rem) and (min-height: 35rem)';
 
 function subscribeMidSize(callback: () => void) {
   const query = window.matchMedia(midSizeQuery);
@@ -57,7 +57,7 @@ export default function PortfolioAboutPage({
       id={embedded ? 'about' : undefined}
       className={`${embedded ? 'scroll-mt-[var(--site-header-height)] md:scroll-mt-[var(--site-header-height-wide)] min-[60rem]:h-auto' : 'about-viewport-page viewport-page'} page-gutters flex flex-col bg-[#e2e8f2]/80 min-[60rem]:overflow-hidden`}
     >
-      <section className='about-layout mx-auto grid w-full flex-1 gap-[clamp(0.625rem,min(1.5vw,1.5svh),1.25rem)] min-[60rem]:min-h-0 min-[60rem]:grid-rows-[auto_minmax(0,1fr)] xl:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] xl:grid-rows-1'>
+      <section className='about-layout mx-auto grid w-full flex-1 gap-[clamp(0.625rem,min(1.5vw,1.5svh),1.25rem)] min-[60rem]:min-h-0 min-[60rem]:grid-rows-[auto_minmax(0,1fr)] min-[75rem]:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] min-[75rem]:grid-rows-1'>
         <header
           data-cursor-reactive
           data-scrollable-card
@@ -67,19 +67,10 @@ export default function PortfolioAboutPage({
         >
           <div
             data-about-intro
-            style={
-              isMidSize
-                ? {
-                    alignItems: 'center',
-                    gridTemplateColumns:
-                      'minmax(0, 1fr) minmax(17rem, 0.9fr)',
-                  }
-                : undefined
-            }
             className={
               embedded
                 ? 'sm:grid sm:grid-cols-[minmax(0,1.08fr)_minmax(15rem,0.92fr)] sm:items-end sm:gap-[var(--fluid-section-gap)]'
-                : 'about-intro min-[60rem]:grid min-[60rem]:grid-cols-[minmax(0,1.08fr)_minmax(15rem,0.92fr)] min-[60rem]:items-end min-[60rem]:gap-[var(--fluid-section-gap)] xl:block'
+                : 'about-intro min-[60rem]:grid min-[60rem]:grid-cols-[minmax(0,1.08fr)_minmax(15rem,0.92fr)] min-[60rem]:items-end min-[60rem]:gap-[var(--fluid-section-gap)] min-[75rem]:block'
             }
           >
             <div>
@@ -88,31 +79,13 @@ export default function PortfolioAboutPage({
               </p>
               <h1
                 className='mt-[clamp(0.75rem,2vh,1rem)] max-w-[40.625rem] text-[clamp(2rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.045em] text-[#111]'
-                style={
-                  isMidSize
-                    ? {
-                        maxWidth: '34rem',
-                        fontSize: 'clamp(1.65rem, 2.35vw, 2rem)',
-                        lineHeight: 1.05,
-                      }
-                    : undefined
-                }
               >
                 Designing intuitive interfaces backed by enterprise-level
                 experience.
               </h1>
             </div>
             <p
-              className={`about-description ${embedded ? 'sm:mt-0' : 'min-[60rem]:mt-0 xl:mt-[clamp(1rem,2.5vh,1.5rem)]'} mt-[clamp(1rem,2.5vh,1.5rem)] max-w-[35.625rem] text-[clamp(0.875rem,1.1vw,1rem)] leading-[1.65] text-slate-600`}
-              style={
-                isMidSize
-                  ? {
-                      maxWidth: '31rem',
-                      fontSize: 'clamp(0.875rem, 1.1vw, 1rem)',
-                      lineHeight: 1.55,
-                    }
-                  : undefined
-              }
+              className={`about-description ${embedded ? 'sm:mt-0' : 'min-[60rem]:mt-0 min-[75rem]:mt-[clamp(1rem,2.5vh,1.5rem)]'} mt-[clamp(1rem,2.5vh,1.5rem)] max-w-[35.625rem] text-[clamp(0.875rem,1.1vw,1rem)] leading-[1.65] text-slate-600`}
             >
               I bring structure to complex problems, combining frontend
               development, UI design, and 16 years of technical experience to

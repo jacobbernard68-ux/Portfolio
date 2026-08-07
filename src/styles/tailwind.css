@@ -166,7 +166,7 @@
 }
 
 /* About uses the Contact-style compact header on laptop-sized viewports. */
-@media (min-width: 60rem) and (max-width: 79.999rem) and (min-height: 35rem) {
+@media (min-width: 60rem) and (max-width: 74.999rem) and (min-height: 35rem) {
   .about-viewport-page {
     height: calc(
       100svh - var(--site-header-height-wide) - var(--site-footer-height)
@@ -230,7 +230,7 @@
   }
 }
 
-@media (min-width: 80rem) and (min-height: 47.5rem) {
+@media (min-width: 75rem) and (min-height: 47.5rem) {
   .about-viewport-page .about-layout {
     grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
     grid-template-rows: minmax(0, 1fr);
@@ -242,6 +242,29 @@
 
   .about-viewport-page .about-description {
     margin-top: clamp(1rem, 2.5vh, 1.5rem);
+  }
+
+  .about-viewport-page header h1 {
+    max-width: 48rem;
+    font-size: clamp(2.35rem, min(3.35vw, 6svh), 4.5rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.045em;
+  }
+
+  .about-viewport-page .about-description {
+    max-width: 42rem;
+    font-size: clamp(0.9375rem, min(1vw, 1.8svh), 1.125rem) !important;
+    line-height: 1.62 !important;
+  }
+
+  .about-viewport-page .resume-card h2 {
+    font-size: clamp(1.125rem, min(1.3vw, 2.6svh), 1.5rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  .about-viewport-page .resume-card > p {
+    font-size: clamp(0.8125rem, min(0.82vw, 1.7svh), 1rem) !important;
+    line-height: 1.5 !important;
   }
 }
 
@@ -257,12 +280,6 @@
 
   .about-viewport-page .about-intro {
     margin-block: auto;
-  }
-
-  .about-viewport-page header h1 {
-    max-width: 46rem;
-    font-size: clamp(3.15rem, 3.25vw, 3.9rem) !important;
-    line-height: 1.04 !important;
   }
 
   .about-viewport-page .about-description {
@@ -290,15 +307,11 @@
 
   .about-viewport-page .resume-card h2 {
     margin-top: 0 !important;
-    font-size: clamp(1.25rem, 1.3vw, 1.5rem) !important;
-    line-height: 1.15 !important;
   }
 
   .about-viewport-page .resume-card > p {
     margin-top: clamp(0.55rem, 0.8vh, 0.75rem) !important;
     max-width: 44rem;
-    font-size: clamp(0.875rem, 0.82vw, 1rem) !important;
-    line-height: 1.55 !important;
   }
 }
 
@@ -307,10 +320,6 @@
     grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
   }
 
-  .about-viewport-page header h1 {
-    max-width: 52rem;
-    font-size: clamp(3.75rem, 3vw, 4.5rem) !important;
-  }
 }
 
 @utility fluid-card-space {
@@ -447,7 +456,7 @@
 }
 
 /* Readable card copy takes priority over a forced one-screen fit on short laptops. */
-@media (min-width: 60rem) and (max-width: 79.999rem) and (max-height: 47.499rem) {
+@media (min-width: 60rem) and (max-width: 74.999rem) and (max-height: 47.499rem) {
   .about-viewport-page {
     height: auto !important;
     overflow: visible !important;
