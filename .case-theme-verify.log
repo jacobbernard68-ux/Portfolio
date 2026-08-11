@@ -1,0 +1,10 @@
+
+> ai-tool-nextjs@2.2.1 start
+> next start -p 3122
+
+   ▲ Next.js 16.0.10
+   - Local:         http://localhost:3122
+   - Network:       http://192.168.4.51:3122
+
+ ✓ Starting...
+ ✓ Ready in 359ms

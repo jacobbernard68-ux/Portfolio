@@ -7,6 +7,9 @@
 
 # testing
 /coverage
+/tmp/
+.dev-server.log
+.dev-server-error.log
 
 # next.js
 /.next/
@@ -14,6 +17,9 @@
 
 # production
 /build
+
+# independently versioned deployment repositories
+/standalone-projects/
 
 # misc
 .DS_Store
@@ -34,3 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*
+!.env.example

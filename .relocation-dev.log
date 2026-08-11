@@ -1,0 +1,28 @@
+
+> ai-tool-nextjs@2.2.1 dev
+> next dev --turbopack -p 3100
+
+   ▲ Next.js 16.0.10 (Turbopack)
+   - Local:         http://localhost:3100
+   - Network:       http://192.168.4.51:3100
+   - Environments: .env.local
+
+ ✓ Starting...
+Creating turbopack project {
+  dir: 'C:\\Users\\jacob\\Desktop\\Programming Class\\Portfolio Site',
+  testMode: true
+}
+ ✓ Ready in 4s
+ GET / 200 in 2.7s (compile: 2.5s, render: 153ms)
+ GET /work 200 in 496ms (compile: 440ms, render: 56ms)
+ GET /work/classic 200 in 400ms (compile: 355ms, render: 44ms)
+ GET /work/beans-place 200 in 937ms (compile: 770ms, render: 168ms)
+ GET /about 200 in 310ms (compile: 275ms, render: 35ms)
+ GET /contact 200 in 274ms (compile: 242ms, render: 32ms)
+ GET /concepts/professional-cleaning 200 in 485ms (compile: 434ms, render: 51ms)
+ GET /concepts/lumen-festival 200 in 337ms (compile: 298ms, render: 38ms)
+ GET / 200 in 45ms (compile: 4ms, render: 41ms)
+ POST /api/contact 400 in 481ms (compile: 461ms, render: 20ms)
+ GET / 200 in 46ms (compile: 3ms, render: 43ms)
+ POST /api/portfolio-chat 503 in 336ms (compile: 331ms, render: 5ms)
+[?25h

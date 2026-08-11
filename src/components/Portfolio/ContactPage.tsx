@@ -1,8 +1,63 @@
-"use client";
+'use client';
 
-import type { PointerEvent as ReactPointerEvent } from "react";
+import { useState, useSyncExternalStore } from 'react';
+import type { PointerEvent as ReactPointerEvent } from 'react';
+import ContactFormCard from './ContactFormCard';
+import Modal from './Modal';
 
-export default function PortfolioContactPage() {
+const schedulingUrl =
+  process.env.NEXT_PUBLIC_CALCOM_URL ?? process.env.NEXT_PUBLIC_CALENDLY_URL;
+
+const subscribeToTheme = (onChange: () => void) => {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
+  return () => observer.disconnect();
+};
+
+const getDarkTheme = () =>
+  document.documentElement.dataset.theme === 'dark';
+
+const getServerDarkTheme = () => false;
+
+const getThemedSchedulerUrl = (url: string | undefined, dark: boolean) => {
+  if (!url) return undefined;
+
+  try {
+    const themedUrl = new URL(url);
+    if (themedUrl.hostname.endsWith('calendly.com')) {
+      themedUrl.searchParams.set('background_color', dark ? '172330' : 'ffffff');
+      themedUrl.searchParams.set('text_color', dark ? 'eef4fa' : '1f2937');
+      themedUrl.searchParams.set('primary_color', dark ? '91b5d8' : '607795');
+    } else if (themedUrl.hostname.endsWith('cal.com')) {
+      themedUrl.searchParams.set('theme', dark ? 'dark' : 'light');
+    }
+    return themedUrl.toString();
+  } catch {
+    return url;
+  }
+};
+
+export default function PortfolioContactPage({
+  embedded = false,
+}: {
+  embedded?: boolean;
+}) {
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const darkTheme = useSyncExternalStore(
+    subscribeToTheme,
+    getDarkTheme,
+    getServerDarkTheme,
+  );
+  const themedSchedulingUrl = getThemedSchedulerUrl(schedulingUrl, darkTheme);
+
+  const openScheduler = () => {
+    if (!schedulingUrl) return;
+    setCalendarOpen(true);
+  };
+
   const trackCard = (event: ReactPointerEvent<HTMLElement>) => {
     const card = event.currentTarget;
     const bounds = card.getBoundingClientRect();
@@ -10,79 +65,112 @@ export default function PortfolioContactPage() {
     const localY = event.clientY - bounds.top;
     const horizontal = (localX / bounds.width) * 2 - 1;
     const vertical = (localY / bounds.height) * 2 - 1;
-    card.style.setProperty("--card-cursor-x", `${localX}px`);
-    card.style.setProperty("--card-cursor-y", `${localY}px`);
+    card.style.setProperty('--card-cursor-x', `${localX}px`);
+    card.style.setProperty('--card-cursor-y', `${localY}px`);
     card.style.transform = `perspective(1000px) rotateX(${-vertical * 1.25}deg) rotateY(${horizontal * 1.25}deg)`;
-    card.style.scale = "1.001";
     card.style.boxShadow = `${-horizontal * 3}px ${-vertical * 3 + 7}px 22px rgba(15, 23, 42, 0.14)`;
-    card.setAttribute("data-cursor-active", "true");
+    card.setAttribute('data-cursor-active', 'true');
   };
 
   const resetCard = (event: ReactPointerEvent<HTMLElement>) => {
     const card = event.currentTarget;
-    card.removeAttribute("data-cursor-active");
-    card.style.removeProperty("transform");
-    card.style.removeProperty("scale");
-    card.style.removeProperty("box-shadow");
-  };
-
-  const trackPanelGlow = (event: ReactPointerEvent<HTMLElement>) => {
-    const panel = event.currentTarget;
-    const bounds = panel.getBoundingClientRect();
-    panel.style.setProperty("--card-cursor-x", `${event.clientX - bounds.left}px`);
-    panel.style.setProperty("--card-cursor-y", `${event.clientY - bounds.top}px`);
-    panel.setAttribute("data-cursor-active", "true");
-  };
-
-  const hidePanelGlow = (event: ReactPointerEvent<HTMLElement>) => {
-    event.currentTarget.removeAttribute("data-cursor-active");
+    card.removeAttribute('data-cursor-active');
+    card.style.removeProperty('transform');
+    card.style.removeProperty('box-shadow');
   };
 
   return (
-    <main data-page-glow onPointerMove={trackPanelGlow} onPointerLeave={hidePanelGlow} className="mt-[88px] flex min-h-[calc(100svh-176px)] items-start bg-[#e2e8f2]/80 px-4 py-5 md:mt-[120px] md:h-[calc(100svh-208px)] md:min-h-0 md:overflow-y-auto md:[scrollbar-gutter:stable] lg:px-[60px] [@media(min-height:850px)]:items-center">
-      <section data-cursor-reactive onPointerMove={trackPanelGlow} onPointerLeave={hidePanelGlow} className="mx-auto w-full max-w-[1320px] rounded-xl bg-[#f2f4f7]/92 p-5 shadow-[0_8px_24px_rgba(15,23,42,0.08)] backdrop-blur-[2px] sm:p-8 lg:p-10">
-        <div className="mb-6 grid gap-3 border-b border-slate-200 pb-5 md:grid-cols-2 md:items-end">
-          <h1 className="text-4xl font-semibold tracking-[-0.035em] text-[#111] sm:text-5xl">Let’s Connect</h1>
-          <p className="max-w-[480px] text-sm leading-6 text-slate-600 md:justify-self-end md:text-right">Have a project, opportunity, or knotty design problem? Tell me what you’re working through.</p>
+    <main
+      id={embedded ? 'contact' : undefined}
+      className={`${embedded ? 'scroll-mt-[var(--site-header-height)] md:scroll-mt-[var(--site-header-height-wide)]' : 'viewport-page'} page-gutters flex flex-col bg-[#e2e8f2]/80`}
+    >
+      <section className='contact-shell mx-auto flex w-full max-w-[var(--content-max)] flex-1 flex-col rounded-[var(--fluid-radius)] bg-[#f2f4f7]/92 p-[clamp(0.625rem,min(1.25vw,1.4svh),1rem)] shadow-[0_8px_24px_rgba(15,23,42,0.08)]'>
+        <div className='mb-[clamp(0.45rem,1svh,0.7rem)] grid gap-2 border-b border-slate-200 pb-[clamp(0.45rem,1svh,0.7rem)] md:grid-cols-2 md:items-end'>
+          <h1 className='text-[clamp(1.65rem,min(3.25vw,4.5svh),2.4rem)] font-semibold tracking-[-0.035em] text-[#111]'>
+            Let’s Connect
+          </h1>
+          <p className='max-w-[480px] text-sm leading-6 text-slate-600 md:justify-self-end md:text-right'>
+            Have a project, opportunity, or knotty design problem? Tell me what
+            you’re working through.
+          </p>
         </div>
-        <div className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-            <article data-cursor-reactive onPointerMove={trackCard} onPointerLeave={resetCard} className="rounded-xl bg-[#afc2d5] p-5 sm:p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">Direct contact</p>
-              <h2 className="mt-3 text-2xl font-semibold text-[#111]">Jacob Bernard</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-700">Email address available here once you confirm the preferred inbox.</p>
+
+        <div className='contact-layout grid min-w-0 flex-1 gap-[clamp(0.625rem,min(1.5vw,1.5svh),1.25rem)] lg:grid-cols-[minmax(16rem,0.72fr)_minmax(0,1.28fr)]'>
+          <div className='grid content-start gap-[clamp(0.625rem,min(1.5vw,1.5svh),1.25rem)] sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2'>
+            <article
+              data-cursor-reactive
+              onPointerMove={trackCard}
+              onPointerLeave={resetCard}
+              className='contact-info-card contact-info-primary flex min-h-0 flex-col justify-center rounded-[var(--fluid-radius)] bg-[#afc2d5] p-[clamp(0.75rem,min(1.5vw,1.8svh),1.35rem)]'
+            >
+              <p className='text-[clamp(0.65rem,0.8vw,0.78rem)] font-semibold tracking-[0.18em] text-slate-600 uppercase'>
+                Direct contact
+              </p>
+              <h2 className='mt-[clamp(0.4rem,1vh,0.65rem)] text-[clamp(1.3rem,1.9vw,1.65rem)] leading-[1.1] font-semibold text-[#111]'>
+                Jacob Bernard
+              </h2>
+              <p className='mt-[clamp(0.35rem,0.9vh,0.55rem)] text-[clamp(0.78rem,0.9vw,0.9rem)] leading-[1.5] text-slate-700'>
+                Send a note with the form and it will go directly to my inbox. I
+                respond within five business days.
+              </p>
             </article>
-            <article data-cursor-reactive onPointerMove={trackCard} onPointerLeave={resetCard} className="rounded-xl bg-[#afc2d5] p-5 sm:p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">Consultation</p>
-              <h2 className="mt-3 text-2xl font-semibold text-[#111]">Start with a conversation.</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-700">Share the challenge, timeline, and what a strong outcome would look like.</p>
+
+            <article
+              data-cursor-reactive
+              onPointerMove={trackCard}
+              onPointerLeave={resetCard}
+              className='contact-info-card contact-info-primary flex min-h-0 flex-col justify-center rounded-[var(--fluid-radius)] bg-[#afc2d5] p-[clamp(0.75rem,min(1.5vw,1.8svh),1.35rem)] text-[#111]'
+            >
+              <p className='text-[clamp(0.65rem,0.8vw,0.78rem)] font-semibold tracking-[0.18em] text-slate-600 uppercase'>
+                30-minute or 1-hour consultation
+              </p>
+              <h2 className='mt-[clamp(0.4rem,1vh,0.65rem)] text-[clamp(1.3rem,1.9vw,1.65rem)] leading-[1.1] font-semibold text-[#111]'>
+                Start with a conversation.
+              </h2>
+              <p className='mt-[clamp(0.35rem,0.9vh,0.55rem)] text-[clamp(0.78rem,0.9vw,0.9rem)] leading-[1.5] text-slate-700'>
+                Available Monday–Friday, 9:00 AM–4:00 PM with both 30-minute
+                and 1-hour appointment options.
+              </p>
+              <button
+                type='button'
+                onClick={openScheduler}
+                disabled={!schedulingUrl}
+                className='mt-[clamp(0.55rem,1.2vh,0.8rem)] min-h-11 self-start rounded-lg bg-[#26354a] px-[clamp(0.875rem,1.3vw,1rem)] py-[clamp(0.625rem,0.9vh,0.75rem)] text-[clamp(0.8125rem,0.85vw,0.875rem)] font-semibold whitespace-nowrap text-white transition hover:bg-[#34445c] disabled:cursor-not-allowed disabled:opacity-50'
+              >
+                {schedulingUrl
+                  ? 'View available times'
+                  : 'Scheduling link coming soon'}
+              </button>
             </article>
           </div>
-          <form data-cursor-reactive onPointerMove={trackCard} onPointerLeave={resetCard} onSubmit={(event) => event.preventDefault()} aria-describedby="contact-status contact-notice" className="grid gap-4 rounded-xl bg-[#c7d2de] p-5 sm:grid-cols-2 sm:p-6">
-            <div>
-              <label htmlFor="name" className="mb-2 block text-sm font-medium text-[#111]">Name</label>
-              <input id="name" name="name" disabled autoComplete="name" className="w-full cursor-not-allowed rounded-lg border border-slate-500/20 bg-white/70 px-4 py-3 text-[#111] opacity-70 outline-none" />
-            </div>
-            <div>
-              <label htmlFor="email" className="mb-2 block text-sm font-medium text-[#111]">Email</label>
-              <input id="email" name="email" type="email" disabled autoComplete="email" className="w-full cursor-not-allowed rounded-lg border border-slate-500/20 bg-white/70 px-4 py-3 text-[#111] opacity-70 outline-none" />
-            </div>
-            <div className="sm:col-span-2">
-              <label htmlFor="message" className="mb-2 block text-sm font-medium text-[#111]">Message</label>
-              <textarea id="message" name="message" rows={4} disabled className="w-full cursor-not-allowed resize-none rounded-lg border border-slate-500/20 bg-white/70 px-4 py-3 text-[#111] opacity-70 outline-none" />
-            </div>
-            <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-end sm:justify-between">
-              <div className="max-w-[520px]">
-                <p id="contact-status" className="mb-1 text-xs font-semibold text-[#26354a]">Contact form coming soon — submissions are currently disabled.</p>
-                <p id="contact-notice" className="text-[11px] leading-[1.55] text-slate-600">
-                  For general inquiries only. Do not submit passwords, financial, medical, classified, or other sensitive information. Submitting this form does not create a client, employment, advisory, or confidential relationship and does not guarantee a response.
-                </p>
-              </div>
-              <button type="submit" disabled aria-disabled="true" className="shrink-0 cursor-not-allowed rounded-lg bg-[#26354a] px-6 py-3 font-medium text-white opacity-55">Send message</button>
-            </div>
-          </form>
+
+          <ContactFormCard />
         </div>
       </section>
+
+      <Modal
+        open={calendarOpen}
+        onClose={() => setCalendarOpen(false)}
+        title='Schedule a 30-minute or 1-hour consultation'
+        wide
+        themeScope='scheduler'
+      >
+        <div className='scheduler-modal-header border-b border-slate-200 bg-[#f2f4f7] px-5 py-4 pr-16 sm:px-7'>
+          <p className='text-xs font-bold tracking-[0.16em] text-[#405671] uppercase'>
+            30-minute or 1-hour consultation
+          </p>
+          <p className='mt-1 text-sm font-medium text-slate-700'>
+            Monday–Friday · 9:00 AM–4:00 PM
+          </p>
+        </div>
+        {themedSchedulingUrl && (
+          <iframe
+            src={themedSchedulingUrl}
+            title='Appointment scheduler'
+            className='scheduler-frame min-h-0 w-full flex-1 bg-white'
+          />
+        )}
+      </Modal>
     </main>
   );
 }

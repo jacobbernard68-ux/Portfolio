@@ -1,0 +1,24 @@
+
+> ai-tool-nextjs@2.2.1 dev
+> next dev --turbopack --port 3100
+
+   ▲ Next.js 16.0.10 (Turbopack)
+   - Local:         http://localhost:3100
+   - Network:       http://192.168.4.51:3100
+   - Environments: .env.local
+
+ ✓ Starting...
+Creating turbopack project {
+  dir: 'C:\\Users\\jacob\\Desktop\\Programming Class\\ReactJS\\AI Tools\\AI_Tool_-_OpenAI_Next.js_SaaS_Starter_Kit\\ai-tool-nextjs-main',
+  testMode: true
+}
+ ✓ Ready in 1077ms
+ GET /about 200 in 3.0s (compile: 2.8s, render: 200ms)
+ GET /about 200 in 152ms (compile: 8ms, render: 144ms)
+ GET /about 200 in 69ms (compile: 10ms, render: 59ms)
+ GET /about 200 in 78ms (compile: 12ms, render: 66ms)
+ GET /about 200 in 67ms (compile: 6ms, render: 61ms)
+ GET /about 200 in 78ms (compile: 7ms, render: 71ms)
+ GET /about 200 in 69ms (compile: 5ms, render: 64ms)
+ GET /about 200 in 62ms (compile: 5ms, render: 57ms)
+ GET /about 200 in 74ms (compile: 6ms, render: 68ms)

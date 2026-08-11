@@ -1,159 +1,414 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import type { PointerEvent as ReactPointerEvent } from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import type {
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+  PointerEvent as ReactPointerEvent,
+} from 'react';
+import { portfolioProjects } from './projectData';
+import { setWorkLayoutPreference } from './workLayoutPreference';
 
-const cleaningImages = [
-  ["/images/portfolio/cleaning-a.png", "Professional cleaning website shown on desktop and mobile"],
-  ["/images/portfolio/cleaning-c.png", "Professional cleaning service page"],
-  ["/images/portfolio/cleaning-b.png", "Professional cleaning mobile interface"],
-  ["/images/portfolio/cleaning-d.png", "Professional cleaning booking experience"],
-] as const;
+const classicOrder = [
+  'furniture-landscapes',
+  'vintage-barbershop',
+  'beans-place',
+  'professional-cleaning',
+  'lumen-festival',
+];
+const classicProjects = classicOrder
+  .map((slug) => portfolioProjects.find((project) => project.slug === slug))
+  .filter((project): project is (typeof portfolioProjects)[number] =>
+    Boolean(project),
+  )
+  .map((project, index) => ({
+    ...project,
+    number: String(index + 1).padStart(2, '0'),
+    dark: index % 2 === 0,
+  }));
 
-const festivalModules = [
-  {
-    eyebrow: "Opening pulse",
-    title: "The first signal",
-    copy: "A bold introduction gives the festival an immediate visual rhythm and a clear place to begin.",
-    image: "/images/portfolio/festival-pulse.png",
-  },
-  {
-    eyebrow: "Neon current",
-    title: "Energy in motion",
-    copy: "Layered color, strong contrast, and modular content keep the experience expressive without losing structure.",
-    image: "/images/portfolio/festival-current.png",
-  },
-  {
-    eyebrow: "Lumen finale",
-    title: "A lasting impression",
-    copy: "The closing sequence carries the same system through to the final detail, creating one cohesive identity.",
-    image: "/images/portfolio/festival-finale.png",
-  },
-] as const;
+export default function PortfolioWorkPage({
+  embedded = false,
+  showFanOption = true,
+  rememberLayout = false,
+}: {
+  embedded?: boolean;
+  showFanOption?: boolean;
+  rememberLayout?: boolean;
+}) {
+  const carouselRef = useRef<HTMLElement>(null);
+  const carouselAnimationRef = useRef<number | null>(null);
+  const holdDelayRef = useRef<number | null>(null);
+  const holdAnimationRef = useRef<number | null>(null);
+  const pressWasHoldRef = useRef(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
-export default function PortfolioWorkPage() {
+  useEffect(() => {
+    if (rememberLayout) setWorkLayoutPreference('classic');
+  }, [rememberLayout]);
+
+  const updateCarouselControls = useCallback(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    const edgeTolerance = 2;
+    setCanScrollLeft(carousel.scrollLeft > edgeTolerance);
+    setCanScrollRight(
+      carousel.scrollLeft + carousel.clientWidth <
+        carousel.scrollWidth - edgeTolerance,
+    );
+  }, []);
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    const handleWheel = (event: WheelEvent) => {
+      const compactCarousel = window.matchMedia(
+        '(min-width: 48rem) and (max-width: 79.999rem)',
+      ).matches;
+      if (!compactCarousel || Math.abs(event.deltaX) >= Math.abs(event.deltaY))
+        return;
+
+      const movingRight = event.deltaY > 0;
+      const atLeft = carousel.scrollLeft <= 2;
+      const atRight =
+        carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 2;
+      if ((movingRight && atRight) || (!movingRight && atLeft)) return;
+
+      event.preventDefault();
+      if (carouselAnimationRef.current !== null) {
+        window.cancelAnimationFrame(carouselAnimationRef.current);
+        carouselAnimationRef.current = null;
+      }
+      const wheelAmount =
+        Math.abs(event.deltaY) < 40
+          ? event.deltaY * 0.9
+          : Math.sign(event.deltaY) *
+            Math.min(Math.abs(event.deltaY) * 0.65, 80);
+      const maximum = carousel.scrollWidth - carousel.clientWidth;
+      carousel.scrollLeft = Math.max(
+        0,
+        Math.min(carousel.scrollLeft + wheelAmount, maximum),
+      );
+    };
+
+    updateCarouselControls();
+    const layoutFrame = window.requestAnimationFrame(updateCarouselControls);
+    carousel.addEventListener('scroll', updateCarouselControls, {
+      passive: true,
+    });
+    carousel.addEventListener('wheel', handleWheel, { passive: false });
+    const observer = new ResizeObserver(updateCarouselControls);
+    observer.observe(carousel);
+    window.addEventListener('resize', updateCarouselControls, {
+      passive: true,
+    });
+    return () => {
+      window.cancelAnimationFrame(layoutFrame);
+      carousel.removeEventListener('scroll', updateCarouselControls);
+      carousel.removeEventListener('wheel', handleWheel);
+      observer.disconnect();
+      window.removeEventListener('resize', updateCarouselControls);
+      if (carouselAnimationRef.current !== null)
+        window.cancelAnimationFrame(carouselAnimationRef.current);
+      if (holdDelayRef.current !== null)
+        window.clearTimeout(holdDelayRef.current);
+      if (holdAnimationRef.current !== null)
+        window.cancelAnimationFrame(holdAnimationRef.current);
+    };
+  }, [embedded, updateCarouselControls]);
+
+  const scrollCarousel = (direction: -1 | 1) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    if (carouselAnimationRef.current !== null)
+      window.cancelAnimationFrame(carouselAnimationRef.current);
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    const start = carousel.scrollLeft;
+    const cards = carousel.querySelectorAll<HTMLElement>(':scope > article');
+    const cardStep =
+      cards.length > 1
+        ? Math.abs(cards[1].offsetLeft - cards[0].offsetLeft)
+        : carousel.clientWidth * 0.82;
+    const target = Math.max(
+      0,
+      Math.min(
+        start + direction * cardStep,
+        carousel.scrollWidth - carousel.clientWidth,
+      ),
+    );
+    if (reduceMotion) {
+      carousel.scrollLeft = target;
+      return;
+    }
+
+    const startedAt = performance.now();
+    const duration = 480;
+    const animate = (now: number) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      carousel.scrollLeft = start + (target - start) * eased;
+      if (progress < 1) {
+        carouselAnimationRef.current = window.requestAnimationFrame(animate);
+      } else {
+        carouselAnimationRef.current = null;
+      }
+    };
+    carouselAnimationRef.current = window.requestAnimationFrame(animate);
+  };
+
+  const startHoldingCarousel = (direction: -1 | 1) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    pressWasHoldRef.current = false;
+    holdDelayRef.current = window.setTimeout(() => {
+      pressWasHoldRef.current = true;
+      if (carouselAnimationRef.current !== null) {
+        window.cancelAnimationFrame(carouselAnimationRef.current);
+        carouselAnimationRef.current = null;
+      }
+      let previousTime = performance.now();
+      const moveContinuously = (now: number) => {
+        const elapsed = Math.min(now - previousTime, 32);
+        previousTime = now;
+        const nextPosition = Math.max(
+          0,
+          Math.min(
+            carousel.scrollLeft + direction * elapsed * 0.34,
+            carousel.scrollWidth - carousel.clientWidth,
+          ),
+        );
+        if (Math.abs(nextPosition - carousel.scrollLeft) < 0.1) {
+          holdAnimationRef.current = null;
+          return;
+        }
+        carousel.scrollLeft = nextPosition;
+        holdAnimationRef.current =
+          window.requestAnimationFrame(moveContinuously);
+      };
+      holdAnimationRef.current = window.requestAnimationFrame(moveContinuously);
+    }, 220);
+  };
+
+  const stopHoldingCarousel = () => {
+    if (holdDelayRef.current !== null) {
+      window.clearTimeout(holdDelayRef.current);
+      holdDelayRef.current = null;
+    }
+    if (holdAnimationRef.current !== null) {
+      window.cancelAnimationFrame(holdAnimationRef.current);
+      holdAnimationRef.current = null;
+    }
+  };
+
   const trackCard = (event: ReactPointerEvent<HTMLElement>) => {
     const card = event.currentTarget;
     const bounds = card.getBoundingClientRect();
-    const localX = event.clientX - bounds.left;
-    const localY = event.clientY - bounds.top;
-    const horizontal = (localX / bounds.width) * 2 - 1;
-    const vertical = (localY / bounds.height) * 2 - 1;
-    card.style.setProperty("--card-cursor-x", `${localX}px`);
-    card.style.setProperty("--card-cursor-y", `${localY}px`);
-    card.style.transform = `perspective(1100px) rotateX(${-vertical * 0.75}deg) rotateY(${horizontal * 0.75}deg)`;
-    card.style.scale = "1.001";
-    card.style.boxShadow = `${-horizontal * 2}px ${-vertical * 2 + 7}px 22px rgba(15, 23, 42, 0.14)`;
-    card.setAttribute("data-cursor-active", "true");
+    card.style.setProperty(
+      '--card-cursor-x',
+      `${event.clientX - bounds.left}px`,
+    );
+    card.style.setProperty(
+      '--card-cursor-y',
+      `${event.clientY - bounds.top}px`,
+    );
+    card.setAttribute('data-cursor-active', 'true');
   };
 
-  const resetCard = (event: ReactPointerEvent<HTMLElement>) => {
-    const card = event.currentTarget;
-    card.removeAttribute("data-cursor-active");
-    card.style.removeProperty("transform");
-    card.style.removeProperty("scale");
-    card.style.removeProperty("box-shadow");
+  const openConcept = (event: ReactMouseEvent<HTMLElement>, href?: string) => {
+    if (!href || (event.target as HTMLElement).closest('a')) return;
+    window.location.assign(href);
   };
 
-  const trackGlow = (event: ReactPointerEvent<HTMLElement>) => {
-    const card = event.currentTarget;
-    const bounds = card.getBoundingClientRect();
-    card.style.setProperty("--card-cursor-x", `${event.clientX - bounds.left}px`);
-    card.style.setProperty("--card-cursor-y", `${event.clientY - bounds.top}px`);
-    card.setAttribute("data-cursor-active", "true");
-  };
-
-  const resetGlow = (event: ReactPointerEvent<HTMLElement>) => {
-    event.currentTarget.removeAttribute("data-cursor-active");
+  const openConceptWithKeyboard = (
+    event: ReactKeyboardEvent<HTMLElement>,
+    href?: string,
+  ) => {
+    if (!href || (event.key !== 'Enter' && event.key !== ' ')) return;
+    event.preventDefault();
+    window.location.assign(href);
   };
 
   return (
-    <main className="mt-[88px] bg-[#e2e8f2]/80 px-4 py-5 sm:px-8 md:mt-[120px] lg:px-[60px]">
-      <section data-cursor-reactive onPointerMove={trackGlow} onPointerLeave={resetGlow} className="mx-auto max-w-[1320px] overflow-hidden rounded-xl bg-[#afc2d5] shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
-        <div className="flex flex-col gap-4 px-6 py-8 md:flex-row md:items-end md:justify-between md:px-12">
-          <h1 className="text-4xl font-semibold tracking-[-0.03em] text-[#111]">Selected Work</h1>
-          <p className="max-w-[420px] text-sm leading-6 text-slate-600 md:text-right">
-            Digital products shaped through clear systems, thoughtful interaction, and scalable visual direction.
+    <main
+      id={embedded ? 'work' : undefined}
+      className={`${embedded ? 'scroll-mt-[var(--site-header-height)] md:scroll-mt-[var(--site-header-height-wide)] lg:h-auto' : 'work-viewport-page work-classic-page viewport-page'} page-gutters flex flex-col bg-[#e2e8f2]/80 lg:overflow-hidden`}
+    >
+      <header className='relative z-[100] mx-auto mb-[clamp(0.625rem,1.5svh,1rem)] flex w-full max-w-[var(--content-max)] shrink-0 items-center justify-between gap-[var(--fluid-section-gap)] overflow-visible rounded-[var(--fluid-radius)] border border-[#405671]/10 bg-white/45 px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.65rem,1.4vh,0.75rem)]'>
+        <div>
+          <p className='text-[10px] font-bold tracking-[0.2em] text-[#607795] uppercase'>
+            Portfolio · 2026
           </p>
+          <h1 className='mt-1 text-[clamp(1.05rem,5.25vw,1.5rem)] font-semibold tracking-[-0.04em] whitespace-nowrap text-[#111] sm:text-[clamp(1.875rem,3.5vw,2.5rem)] sm:whitespace-normal md:text-[clamp(1.25rem,2.5vw,1.75rem)] md:whitespace-nowrap xl:text-[clamp(1.875rem,3.5vw,2.5rem)] xl:whitespace-normal'>
+            From Concept to Experience
+          </h1>
         </div>
-      </section>
-
-      <section data-cursor-reactive onPointerMove={trackCard} onPointerLeave={resetCard} className="mx-auto mt-5 max-w-[1128px] overflow-hidden rounded-xl bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
-        <div className="p-3 sm:p-6 md:p-10">
-          <div className="mb-8 md:flex md:items-end md:justify-between">
-            <div>
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Web design · Service platform</p>
-              <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111] md:text-5xl">Professional Cleaning</h2>
-            </div>
-            <p className="mt-3 max-w-[380px] text-sm leading-6 text-slate-600 md:mt-0 md:text-right">A trustworthy, conversion-focused experience that makes finding and booking help feel simple.</p>
+        {!embedded && showFanOption && (
+          <div className='flex items-center gap-4'>
+            <p className='hidden max-w-[360px] text-right text-sm leading-6 text-slate-600 md:block xl:max-w-[480px]'>
+              Review the project details here, or switch to the interactive
+              collection for a more visual experience.
+            </p>
+            <span className='relative hidden shrink-0 lg:inline-flex'>
+              <Link
+                href='/work?layout=fan'
+                onClick={() => setWorkLayoutPreference('fan')}
+                className='inline-flex rounded-full border border-[#405671]/25 bg-[#c7d2de] px-4 py-2 text-[10px] font-bold tracking-[0.14em] text-[#2f3e5c] uppercase transition hover:bg-[#b8cadc] focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
+              >
+                Fan layout
+              </Link>
+            </span>
           </div>
-          <div className="relative">
-            <div className="grid gap-3 md:max-h-[590px] md:grid-cols-2 md:overflow-hidden md:pr-4">
-              {cleaningImages.map(([src, alt]) => (
-                <div key={src} className="relative aspect-[1.35/1] overflow-hidden rounded-lg bg-slate-100">
-                  <Image src={src} alt={alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+        )}
+      </header>
+      <div
+        className={`work-classic-stage relative min-h-0 w-full flex-1 ${embedded ? 'work-classic-stage--embedded' : 'mx-auto max-w-[var(--content-max)]'}`}
+      >
+        <section
+          ref={carouselRef}
+          aria-label='Selected projects'
+          className={`${embedded ? 'grid-cols-1 sm:grid-cols-2' : 'h-full grid-cols-1 xl:grid-cols-5 xl:grid-rows-1'} work-classic-grid grid min-h-0 gap-[clamp(0.625rem,min(1.25vw,1.5svh),1rem)]`}
+        >
+          {classicProjects.map((project) => (
+            <article
+              id={`project-${project.slug}`}
+              key={project.title}
+              role='link'
+              tabIndex={0}
+              aria-label={`Open ${project.title} case study`}
+              data-cursor-reactive={project.dark ? 'dark' : 'light'}
+              onClick={(event) =>
+                openConcept(
+                  event,
+                  `/work/${project.slug}?from=${embedded ? 'mobile' : 'classic'}&project=${project.slug}`,
+                )
+              }
+              onKeyDown={(event) =>
+                openConceptWithKeyboard(
+                  event,
+                  `/work/${project.slug}?from=${embedded ? 'mobile' : 'classic'}&project=${project.slug}`,
+                )
+              }
+              onPointerMove={trackCard}
+              onPointerLeave={(event) =>
+                event.currentTarget.removeAttribute('data-cursor-active')
+              }
+              className={`group relative flex min-h-0 cursor-pointer snap-center flex-col overflow-hidden rounded-2xl shadow-[0_12px_35px_rgba(31,41,55,0.10)] ring-1 ring-[#2f3e5c]/8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#86a6c8] ${project.dark ? 'bg-[#1f2937] text-white' : 'bg-[#f2f4f7] text-[#111]'}`}
+            >
+              <div className='work-card-preview relative aspect-[16/10] min-h-[clamp(8.75rem,18vw,11.25rem)] shrink-0 overflow-hidden bg-[#afc2d5] xl:aspect-square'>
+                <Image
+                  src={project.image}
+                  alt={project.imageAlt}
+                  fill
+                  sizes='(max-width: 767px) 88vw, (max-width: 1279px) 50vw, 25vw'
+                  className='object-cover object-top transition duration-700 group-hover:scale-[1.025]'
+                />
+                <span
+                  className='absolute top-4 left-4 rounded-full border border-white/15 bg-[#1f2937]/90 px-3 py-1.5 text-[10px] font-bold tracking-[0.15em] text-white shadow-[0_5px_16px_rgba(15,23,42,0.22)] backdrop-blur-md'
+                >
+                  {project.number}
+                </span>
+              </div>
+              <div
+                data-internal-scroll
+                className='work-card-body no-scrollbar min-h-0 p-4'
+              >
+                <p
+                  className={`text-[8px] font-bold tracking-[0.15em] uppercase ${project.dark ? 'text-[#b8cadc]' : 'text-[#607795]'}`}
+                >
+                  {project.type}
+                </p>
+                <h2
+                  className={`mt-2 text-xl leading-[1.08] font-semibold tracking-[-0.035em] ${project.dark ? 'text-[#b8cadc]' : 'text-[#111]'}`}
+                >
+                  {project.title}
+                </h2>
+                <p
+                  className={`mt-2 text-[11px] leading-[1.55] ${project.dark ? 'text-white/65' : 'text-slate-600'}`}
+                >
+                  {project.summary}
+                </p>
+                <div className='mt-3 flex flex-wrap gap-1.5'>
+                  {project.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className={`rounded-full px-[clamp(0.45rem,1vw,0.625rem)] py-[clamp(0.2rem,0.6vh,0.25rem)] [font-size:clamp(0.5rem,1.5vw,0.625rem)]! leading-[1.25] font-semibold whitespace-nowrap ${project.dark ? 'bg-white/8 text-white/65' : 'bg-[#e2e8f2] text-[#405671]'}`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <div aria-hidden="true" className="absolute bottom-0 right-0 top-0 hidden w-2 rounded-full bg-[#e2e8f2] md:block">
-              <span className="absolute left-0 top-3 h-[34%] w-full rounded-full border-2 border-[#e2e8f2] bg-[#607795]" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section data-cursor-reactive="dark" onPointerMove={trackCard} onPointerLeave={resetCard} className="relative mx-auto mt-5 max-w-[1128px] overflow-hidden rounded-xl bg-[#3a2d28] text-white shadow-[0_8px_24px_rgba(15,23,42,0.14)]">
-        <div className="flex h-[76px] items-center justify-between border-b border-black/20 bg-[#3a2d28] px-6 md:px-12">
-          <Image src="/images/portfolio/barber/logo.png" alt="Vintage Barbershop" width={54} height={54} className="size-[54px] object-cover" />
-          <nav aria-label="Vintage Barbershop preview navigation" className="flex items-center gap-5 text-sm font-semibold text-[#d8c1a1] sm:gap-8">
-            <span>Home</span>
-            <span>Services</span>
-            <span>Book</span>
-            <span>Contact</span>
-          </nav>
-        </div>
-        <div className="relative">
-          <div className="relative aspect-[1.65/1] overflow-hidden md:mr-4 md:h-[900px] md:aspect-auto">
-            <Image src="/images/portfolio/barber/site-preview-tall.png" alt="Preview of the original Vintage Barbershop website" fill sizes="(min-width: 1024px) 1128px, 100vw" className="object-cover object-[center_56%]" />
-          </div>
-          <div aria-hidden="true" className="absolute bottom-3 right-1.5 top-3 hidden w-2 rounded-full bg-white/15 md:block">
-            <span className="absolute left-0 top-[38%] h-[34%] w-full rounded-full border-2 border-white/10 bg-[#d8c1a1]" />
-          </div>
-        </div>
-      </section>
-
-      <section data-cursor-reactive="dark" onPointerMove={trackCard} onPointerLeave={resetCard} className="relative mx-auto mt-5 max-w-[1128px] overflow-hidden rounded-xl bg-[linear-gradient(145deg,#475c61_0%,#3a4a50_30%,#12161b_70%,#263136_100%)] text-white shadow-[0_8px_24px_rgba(15,23,42,0.14)] md:max-h-[1720px]">
-        <div className="flex items-center justify-between border-b border-white/15 px-6 py-5 md:px-12">
-          <p className="font-semibold tracking-[0.08em]">LUMEN FESTIVAL</p>
-          <p className="text-xs uppercase tracking-[0.18em] text-white/60">Brand · Digital experience</p>
-        </div>
-        <div className="px-6 pb-8 pt-10 md:px-12 md:pb-16 md:pt-16">
-          <div className="mb-10 grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-end">
-            <h2 className="text-5xl font-semibold leading-[0.95] tracking-[-0.045em] sm:text-6xl lg:text-8xl">Light becomes language.</h2>
-            <p className="max-w-[480px] text-base leading-7 text-white/70 md:justify-self-end">A visual system for an immersive festival—designed to move between atmosphere, information, and live energy.</p>
-          </div>
-          <div className="relative aspect-[16/8.5] min-h-[260px] overflow-hidden rounded-lg bg-black/20">
-            <Image src="/images/portfolio/festival-hero.png" alt="Lumen Festival visual identity" fill sizes="(min-width: 1024px) 1200px, 100vw" className="object-cover" />
-          </div>
-          <div className="mt-16 space-y-16 md:mt-24 md:space-y-24">
-            {festivalModules.map((item, index) => (
-              <article key={item.title} className="grid items-center gap-8 md:grid-cols-2 md:gap-16">
-                <div className={index % 2 ? "md:order-2" : ""}>
-                  <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#b7c5dd]">{item.eyebrow}</p>
-                  <h3 className="text-4xl font-semibold tracking-[-0.035em] md:text-5xl">{item.title}</h3>
-                  <p className="mt-5 max-w-[460px] leading-7 text-white/65">{item.copy}</p>
-                </div>
-                <div className={`relative aspect-[4/3] overflow-hidden rounded-lg bg-black/20 ${index % 2 ? "md:order-1" : ""}`}>
-                  <Image src={item.image} alt={`${item.title} visual`} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-        <div aria-hidden="true" style={{ position: "absolute", zIndex: 30 }} className="bottom-4 right-1.5 top-[76px] hidden w-2.5 rounded-full bg-white/25 shadow-[0_0_0_1px_rgba(255,255,255,0.08)] md:block">
-          <span className="absolute left-0 top-3 h-[28%] w-full rounded-full border-2 border-white/20 bg-[#b8cadc] shadow-sm" />
-        </div>
-      </section>
+              </div>
+              <div
+                className={`pointer-events-none relative z-20 mt-auto grid shrink-0 grid-cols-1 items-center gap-1.5 border-t px-4 py-3 2xl:grid-cols-[auto_auto] 2xl:justify-between 2xl:gap-3 ${project.dark ? 'border-white/10 bg-[#1f2937]' : 'border-[#405671]/10 bg-[#f2f4f7]'}`}
+              >
+                <Link
+                  href={`/work/${project.slug}?from=${embedded ? 'mobile' : 'classic'}&project=${project.slug}`}
+                  className={`work-card-case-link pointer-events-auto inline-flex items-center gap-1.5 text-[9px] font-bold tracking-[0.12em] whitespace-nowrap uppercase ${project.dark ? 'text-[#b8cadc] hover:text-white' : 'text-[#405671] hover:text-[#111]'}`}
+                >
+                  Case study <span aria-hidden='true'>→</span>
+                </Link>
+                {project.liveHref && (
+                  <Link
+                    href={project.liveHref}
+                    className={`work-card-live-link pointer-events-auto inline-flex items-center gap-1.5 justify-self-start text-left text-[9px] font-bold tracking-[0.12em] whitespace-nowrap uppercase 2xl:justify-self-end 2xl:text-right ${project.dark ? 'text-white hover:text-[#b8cadc]' : 'text-[#111] hover:text-[#405671]'}`}
+                  >
+                    {project.liveLabel ?? 'Open project'}{' '}
+                    <span aria-hidden='true'>↗</span>
+                  </Link>
+                )}
+              </div>
+            </article>
+          ))}
+        </section>
+        {canScrollLeft && (
+          <button
+            type='button'
+            onClick={(event) => {
+              if (pressWasHoldRef.current && event.detail > 0) {
+                pressWasHoldRef.current = false;
+                return;
+              }
+              pressWasHoldRef.current = false;
+              scrollCarousel(-1);
+            }}
+            onPointerDown={() => startHoldingCarousel(-1)}
+            onPointerUp={stopHoldingCarousel}
+            onPointerCancel={stopHoldingCarousel}
+            onPointerLeave={stopHoldingCarousel}
+            aria-label='Scroll projects left'
+            className='work-carousel-control absolute top-1/2 left-2 z-[300] size-11 -translate-y-1/2 place-items-center rounded-full border border-[#405671]/15 bg-white text-xl text-[#2f3e5c] shadow-[0_12px_35px_rgba(31,41,55,0.28)] transition hover:scale-105 hover:bg-[#f2f4f7] focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
+          >
+            <span aria-hidden='true'>←</span>
+          </button>
+        )}
+        {canScrollRight && (
+          <button
+            type='button'
+            onClick={(event) => {
+              if (pressWasHoldRef.current && event.detail > 0) {
+                pressWasHoldRef.current = false;
+                return;
+              }
+              pressWasHoldRef.current = false;
+              scrollCarousel(1);
+            }}
+            onPointerDown={() => startHoldingCarousel(1)}
+            onPointerUp={stopHoldingCarousel}
+            onPointerCancel={stopHoldingCarousel}
+            onPointerLeave={stopHoldingCarousel}
+            aria-label='Scroll projects right'
+            className='work-carousel-control absolute top-1/2 right-2 z-[300] size-11 -translate-y-1/2 place-items-center rounded-full border border-[#405671]/15 bg-white text-xl text-[#2f3e5c] shadow-[0_12px_35px_rgba(31,41,55,0.28)] transition hover:scale-105 hover:bg-[#f2f4f7] focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
+          >
+            <span aria-hidden='true'>→</span>
+          </button>
+        )}
+      </div>
     </main>
   );
 }
