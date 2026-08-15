@@ -66,7 +66,7 @@ const Header = () => {
           href='/'
           className='group flex min-w-0 items-center gap-[clamp(0.625rem,1vw,0.75rem)] rounded-lg focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:ring-offset-4 focus-visible:ring-offset-[#b7c5dd] focus-visible:outline-none'
         >
-          <span className='grid size-[clamp(2.5rem,4vw,3rem)] shrink-0 place-items-center rounded-[clamp(0.65rem,1vw,0.75rem)] bg-white/45 p-[clamp(0.3rem,0.6vw,0.375rem)] shadow-[0_8px_20px_rgba(31,41,55,0.10)] ring-1 ring-[#2f3e5c]/10 transition duration-300 group-hover:scale-105 group-hover:-rotate-2'>
+          <span className='site-logo-mark grid size-[clamp(2.5rem,4vw,3rem)] shrink-0 place-items-center rounded-[clamp(0.65rem,1vw,0.75rem)] bg-white/45 p-[clamp(0.3rem,0.6vw,0.375rem)] shadow-[0_8px_20px_rgba(31,41,55,0.10)] ring-1 ring-[#2f3e5c]/10 transition duration-300 group-hover:scale-105 group-hover:-rotate-2'>
             <Image
               src='/images/logo-jb-parallel.svg'
               alt=''

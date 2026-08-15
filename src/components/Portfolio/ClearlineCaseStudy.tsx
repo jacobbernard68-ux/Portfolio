@@ -57,7 +57,7 @@ export default function ClearlineCaseStudy({
         data-case-theme='clearline'
         data-internal-scroll
         className='no-scrollbar relative mx-auto max-w-[min(90rem,100%)] overflow-hidden rounded-[var(--fluid-radius)] shadow-[0_12px_35px_rgba(31,41,55,0.1)] ring-1 ring-[#2f3e5c]/8 lg:h-full lg:overflow-y-auto'
-        style={{ backgroundColor: '#f6f8f9' }}
+        style={{ backgroundColor: '#c8d5e3' }}
       >
         <ReturnToWork originClassName='text-[#526777]' />
         <div className='grid lg:grid-cols-[0.9fr_1.1fr]'>

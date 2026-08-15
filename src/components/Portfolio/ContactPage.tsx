@@ -93,7 +93,9 @@ export default function PortfolioContactPage({
             Let’s Connect
           </h1>
           <p className='max-w-[480px] text-sm leading-6 text-slate-600 md:justify-self-end md:text-right'>
-            Have a project, opportunity, or knotty design problem? Tell me what
+            Have a project, opportunity, or knotty design problem?
+            <br />
+            Tell me what
             you’re working through.
           </p>
         </div>

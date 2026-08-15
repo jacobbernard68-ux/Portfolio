@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { FormEvent, PointerEvent as ReactPointerEvent } from 'react';
+import { openDisclosure } from '@/components/DisclosureDialog';
 
 type SubmissionState = 'idle' | 'sending' | 'success' | 'error';
 
@@ -36,6 +37,7 @@ export default function ContactFormCard({
       setStatusMessage(
         'Thanks — your message has been sent. I’ll respond within five business days.',
       );
+      openDisclosure();
     } catch (error) {
       setSubmissionState('error');
       setStatusMessage(

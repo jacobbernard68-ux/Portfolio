@@ -15,25 +15,32 @@
   --text-body: clamp(0.875rem, 0.9vw, 1rem);
   --work-card-preview-ratio: 16 / 10;
   --work-responsive-card-ratio: 2 / 3;
-  --theme-page: #e2e8f2;
-  --theme-page-soft: #edf2f7;
-  --theme-surface: #f2f4f7;
-  --theme-surface-strong: #c5d0dd;
-  --theme-surface-alternate: #b8cadc;
-  --theme-secondary-button: #c7d2de;
-  --theme-secondary-button-hover: #b8cadc;
-  --theme-header: #b7c5dd;
-  --theme-footer: #cfd9e5;
-  --theme-control: rgb(255 255 255 / 0.45);
-  --theme-control-hover: rgb(255 255 255 / 0.72);
-  --theme-popover: #f7f9fc;
-  --theme-selected: #1f2937;
+  --theme-page: #e4eaf1;
+  --theme-page-soft: #d1dce7;
+  --theme-surface: #f8fafc;
+  --theme-surface-strong: #d1dce7;
+  --theme-surface-alternate: #e8eef5;
+  --theme-surface-elevated: #ffffff;
+  --theme-surface-contrast: #b7c8da;
+  --theme-secondary-button: #c8d5e3;
+  --theme-secondary-button-hover: #b8c8d9;
+  --theme-header: #bdcce0;
+  --theme-footer: #cad6e2;
+  --theme-control: #f8fafc;
+  --theme-control-hover: #ffffff;
+  --theme-popover: #ffffff;
+  --theme-selected: #24364b;
   --theme-selected-text: #ffffff;
-  --theme-text: #111111;
-  --theme-muted: #526985;
-  --theme-border: rgb(47 62 92 / 0.16);
-  --theme-focus: #2f3e5c;
-  --theme-shadow: rgb(31 41 55 / 0.18);
+  --theme-text: #111827;
+  --theme-body: #334155;
+  --theme-muted: #52677a;
+  --theme-border: #9eafbf;
+  --theme-divider: #b8c5d2;
+  --theme-link: #355f86;
+  --theme-hover: #1c4d76;
+  --theme-focus: #2f6fa6;
+  --theme-field: #ffffff;
+  --theme-shadow: rgb(36 54 75 / 0.18);
 }
 
 :root[data-theme='dark'] {
@@ -188,6 +195,274 @@ body {
   color: var(--theme-text);
 }
 
+/* Approved light palette: cool, structured, and color-only. */
+html:not([data-theme='dark']) header.fixed.inset-x-0 {
+  border-color: var(--theme-divider) !important;
+  background-color: var(--theme-header) !important;
+}
+
+html:not([data-theme='dark'])
+  header.fixed.inset-x-0
+  :is(.text-\[\#111\], .text-\[\#34445c\], .text-\[\#526985\], .text-\[\#1f2937\]) {
+  color: var(--theme-text) !important;
+}
+
+html:not([data-theme='dark'])
+  header.fixed.inset-x-0
+  :is(.bg-white\/45, .hover\:bg-white\/45:hover, .hover\:bg-white\/70:hover) {
+  background-color: var(--theme-control) !important;
+}
+
+html:not([data-theme='dark']) header.fixed.inset-x-0 :is(button, a):focus-visible {
+  --tw-ring-color: var(--theme-focus) !important;
+}
+
+html:not([data-theme='dark']) #site-navigation {
+  border-color: var(--theme-border) !important;
+  background-color: var(--theme-popover) !important;
+}
+
+@media (min-width: 60rem) {
+  html:not([data-theme='dark']) #site-navigation {
+    background-color: transparent !important;
+  }
+}
+
+html:not([data-theme='dark']) .site-footer {
+  border-color: var(--theme-divider) !important;
+  background-color: var(--theme-footer) !important;
+}
+
+html:not([data-theme='dark']) .site-footer :is(a, button) {
+  color: var(--theme-link) !important;
+}
+
+html:not([data-theme='dark']) .site-footer :is(a, button):hover {
+  background-color: var(--theme-control-hover) !important;
+  color: var(--theme-hover) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme]):is(
+    .bg-\[\#e2e8f2\],
+    .bg-\[\#e2e8f2\]\/80,
+    .bg-\[\#edf2f7\],
+    .bg-\[\#edf2f7\]\/96
+  ),
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(
+    .bg-\[\#e2e8f2\],
+    .bg-\[\#e2e8f2\]\/80,
+    .bg-\[\#edf2f7\],
+    .bg-\[\#edf2f7\]\/96
+  ) {
+  background-color: var(--theme-page) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme]):is(
+    .bg-\[\#f2f4f7\],
+    .bg-\[\#f2f4f7\]\/92,
+    .bg-\[\#f7f9fc\]
+  ),
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(.bg-\[\#f2f4f7\], .bg-\[\#f2f4f7\]\/92, .bg-\[\#f7f9fc\]) {
+  background-color: var(--theme-surface) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(.bg-\[\#c5d0dd\], .bg-\[\#afc2d5\]) {
+  background-color: var(--theme-surface-strong) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  .bg-\[\#b8cadc\] {
+  background-color: var(--theme-surface-alternate) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  .bg-\[\#c7d2de\] {
+  background-color: var(--theme-secondary-button) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(.hover\:bg-\[\#b8cadc\], .hover\:bg-\[\#afc2d5\]):hover {
+  background-color: var(--theme-secondary-button-hover) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(.bg-white, .bg-white\/45, .bg-white\/85, .bg-white\/94) {
+  background-color: var(--theme-surface-elevated) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(
+    .text-\[\#111\],
+    .text-\[\#1f2937\],
+    .text-\[\#2f3e5c\],
+    .text-\[\#26354a\],
+    .text-slate-700
+  ) {
+  color: var(--theme-text) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(
+    .text-slate-600,
+    .text-\[\#405671\],
+    .text-\[\#526985\],
+    .text-\[\#607795\]
+  ) {
+  color: var(--theme-muted) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(
+    .border-slate-200,
+    .border-\[\#405671\]\/10,
+    .border-\[\#405671\]\/15,
+    .border-\[\#405671\]\/20,
+    .border-\[\#405671\]\/25
+  ) {
+  border-color: var(--theme-border) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(input, textarea, select) {
+  border-color: var(--theme-border) !important;
+  background-color: var(--theme-field) !important;
+  color: var(--theme-body) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(input, textarea)::placeholder {
+  color: var(--theme-muted) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(a, button).bg-\[\#26354a\],
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(a, button).bg-\[\#607795\] {
+  background-color: var(--theme-selected) !important;
+  color: var(--theme-selected-text) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  :is(a, button):focus-visible {
+  --tw-ring-color: var(--theme-focus) !important;
+}
+
+html:not([data-theme='dark']) .contact-shell {
+  border-color: var(--theme-divider) !important;
+  background-color: var(--theme-surface) !important;
+}
+
+html:not([data-theme='dark']) .contact-info-card {
+  border-color: var(--theme-border) !important;
+  background-color: var(--theme-surface-alternate) !important;
+}
+
+html:not([data-theme='dark']) .contact-form-card {
+  border-color: var(--theme-border) !important;
+  background-color: var(--theme-page-soft) !important;
+}
+
+html:not([data-theme='dark']) .contact-form-card :is(input, textarea) {
+  border-color: var(--theme-border) !important;
+  background-color: var(--theme-field) !important;
+  color: var(--theme-body) !important;
+}
+
+html:not([data-theme='dark']) .contact-form-card button[type='submit'],
+html:not([data-theme='dark']) .contact-info-card button {
+  background-color: var(--theme-selected) !important;
+  color: var(--theme-selected-text) !important;
+}
+
+html:not([data-theme='dark']) .contact-form-card button[type='submit']:hover,
+html:not([data-theme='dark']) .contact-info-card button:hover {
+  background-color: var(--theme-hover) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  main:not([data-project-theme])
+  .resume-card[data-mobile-theme='light'] {
+  background-color: var(--theme-surface-contrast) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  [data-card-theme='light'] {
+  background-color: var(--theme-surface-strong) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  [data-card-theme='light']
+  > div:last-child {
+  border-color: var(--theme-border) !important;
+  background-color: var(--theme-surface-strong) !important;
+}
+
+html:not([data-theme='dark'])
+  .site-content
+  :is(#project-professional-cleaning, #project-beans-place)
+  .work-card-body {
+  border-top: 1px solid var(--theme-border);
+}
+
+html:not([data-theme='dark']) [data-resume-modal-section] {
+  background-color: var(--theme-surface) !important;
+}
+
+html:not([data-theme='dark']) [data-resume-modal-section] > header {
+  border-color: var(--theme-divider) !important;
+  background-color: var(--theme-page-soft) !important;
+}
+
+html:not([data-theme='dark']) [data-resume-modal-section] article.bg-white\/40 {
+  border-color: var(--theme-border) !important;
+  background-color: var(--theme-surface-elevated) !important;
+}
+
+html:not([data-theme='dark']) .site-content .fixed.bg-\[\#f7f9fc\] {
+  border-color: var(--theme-border) !important;
+  background-color: var(--theme-surface-elevated) !important;
+}
+
 html[data-theme='dark'] .continuous-page-stack,
 html[data-theme='dark'] .site-content main:not([data-project-theme]) {
   background-color: var(--theme-page) !important;
@@ -213,6 +488,13 @@ html[data-theme='dark']
   header.fixed.inset-x-0
   :is(.bg-white\/45, .hover\:bg-white\/45:hover, .hover\:bg-white\/70:hover) {
   background-color: var(--theme-control) !important;
+}
+
+html[data-theme='dark'] header.fixed.inset-x-0 .site-logo-mark {
+  background-color: #c7d5e2 !important;
+  box-shadow:
+    0 8px 20px rgb(0 0 0 / 0.24),
+    0 0 0 1px rgb(159 197 244 / 0.28);
 }
 
 html[data-theme='dark'] header.fixed.inset-x-0 :is(button, a):focus-visible {
@@ -1268,7 +1550,7 @@ html[data-theme='dark'] [data-resume-modal-section] article.bg-\[\#1f2937\] p {
   display: flex;
   flex-direction: column;
   gap: clamp(0.375rem, 1vw, 0.75rem);
-  background: rgb(226 232 242 / 0.8);
+  background: var(--theme-page);
 }
 
 .work-card-preview {
@@ -1480,7 +1762,7 @@ html[data-theme='dark'] [data-resume-modal-section] article.bg-\[\#1f2937\] p {
   .site-footer {
     position: static !important;
     z-index: 9000;
-    background-color: #c3cfdd;
+    background-color: var(--theme-footer);
     opacity: 1;
   }
 

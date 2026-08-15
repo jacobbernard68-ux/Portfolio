@@ -3,6 +3,7 @@
 import { useState, useSyncExternalStore } from 'react';
 import ContactFormCard from '@/components/Portfolio/ContactFormCard';
 import Modal from '@/components/Portfolio/Modal';
+import { openDisclosure } from '@/components/DisclosureDialog';
 
 const profileLink =
   'rounded-md px-2 py-1 font-medium text-[#405671] transition hover:bg-white/55 hover:text-[#111] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#607795]';
@@ -67,6 +68,16 @@ export default function SiteFooter() {
             >
               LinkedIn ↗
             </a>
+            <span aria-hidden='true' className='text-[#607795]/45'>
+              ·
+            </span>
+            <button
+              type='button'
+              onClick={openDisclosure}
+              className={profileLink}
+            >
+              Disclosure
+            </button>
           </nav>
         </div>
       </footer>

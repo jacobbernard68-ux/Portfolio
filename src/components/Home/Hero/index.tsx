@@ -20,14 +20,14 @@ const Hero = ({ embedded = false }: { embedded?: boolean }) => {
         <div className='grid min-h-0 min-w-0 flex-1 grid-cols-[minmax(0,1fr)] min-[60rem]:grid-cols-[minmax(0,1fr)_minmax(19rem,0.42fr)]'>
           <div className='home-primary-panel relative flex min-w-0 flex-col items-center justify-center px-[clamp(1rem,3vw,2rem)] py-[clamp(1rem,4vh,3rem)] text-center'>
             <div className='flex w-full flex-col items-center'>
-              <p className='mb-[clamp(0.75rem,2vh,1.75rem)] flex items-center justify-center gap-[clamp(0.5rem,1vw,0.75rem)] text-center text-[clamp(0.6rem,0.75vw,0.7rem)] font-bold tracking-[0.2em] text-[#526985] uppercase min-[60rem]:absolute min-[60rem]:top-[clamp(6%,12vh,12%)] min-[60rem]:left-1/2 min-[60rem]:mb-0 min-[60rem]:w-max min-[60rem]:-translate-x-1/2'>
-                <span className='inline-block h-px w-[clamp(1.5rem,3vw,2.5rem)] bg-[#607795]' />
-                UX designer · Frontend developer
-              </p>
               <h1 className='mt-[clamp(0.5rem,2vh,1.25rem)] max-w-[56.25rem] text-[clamp(2.5rem,9vw,6.5rem)] leading-[0.91] font-bold tracking-[-0.065em] text-[#111] min-[60rem]:text-[clamp(3.25rem,5.8vw,6.5rem)]'>
-                Making complex products{' '}
-                <span className='text-[#607795]'>feel clear.</span>
+                Thoughtful design.{' '}
+                <span className='text-[#607795]'>Built to work.</span>
               </h1>
+              <p className='mt-[clamp(1rem,2.5vh,1.5rem)] max-w-[42rem] text-center text-[clamp(0.875rem,1.25vw,1.125rem)] leading-[1.65] text-[#526985]'>
+                I turn ideas into responsive digital experiences through
+                intentional UI design and practical front-end development.
+              </p>
             </div>
 
             <div className='mt-[clamp(1rem,3vh,2rem)] grid w-full max-w-[31rem] grid-cols-[repeat(2,minmax(0,1fr))] gap-[clamp(0.4rem,1vw,0.75rem)]'>

@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import CursorBubble from '@/components/CursorBubble';
 import ScrollToTop from '@/components/ScrollToTop';
 import SiteFooter from '@/components/SiteFooter';
+import DisclosureDialog from '@/components/DisclosureDialog';
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 import NextTopLoader from 'nextjs-toploader';
@@ -53,6 +54,7 @@ export default function RootLayout({
               {children}
             </div>
             <SiteFooter />
+            <DisclosureDialog />
 
             <ToasterContext />
           </AuthProvider>

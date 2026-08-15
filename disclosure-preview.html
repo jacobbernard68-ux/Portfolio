@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio Disclosure Preview</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --page: #e4eaf1;
+        --surface: #f8fafc;
+        --elevated: #ffffff;
+        --header: #bdcce0;
+        --footer: #cad6e2;
+        --text: #111827;
+        --body: #334155;
+        --muted: #52677a;
+        --border: #9eafbf;
+        --button: #24364b;
+        --button-text: #ffffff;
+        --focus: #2f6fa6;
+        --backdrop: rgb(17 24 39 / 0.55);
+      }
+
+      [data-theme='dark'] {
+        color-scheme: dark;
+        --page: #111923;
+        --surface: #1b2633;
+        --elevated: #202d3c;
+        --header: #182433;
+        --footer: #16212d;
+        --text: #f2f6fa;
+        --body: #d4dee8;
+        --muted: #afc0d2;
+        --border: rgb(184 202 220 / 0.35);
+        --button: #b8cadc;
+        --button-text: #15202c;
+        --focus: #9fc5f4;
+        --backdrop: rgb(5 11 18 / 0.8);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--page);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+      button { font: inherit; }
+      button:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 3px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 76px;
+        padding: 16px clamp(20px, 5vw, 64px);
+        border-bottom: 1px solid var(--border);
+        background: var(--header);
+      }
+      header strong { font-size: 20px; }
+      main {
+        display: grid;
+        place-items: center;
+        min-height: calc(100vh - 120px);
+        padding: 32px 20px 76px;
+      }
+      .demo-card {
+        width: min(720px, 100%);
+        padding: clamp(24px, 4vw, 44px);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: var(--surface);
+      }
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      h1 { margin: 0; font-size: clamp(28px, 5vw, 44px); }
+      .intro { color: var(--body); line-height: 1.65; }
+      .success {
+        margin: 24px 0;
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        color: var(--body);
+        background: var(--elevated);
+      }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+      .primary, .secondary, .close {
+        min-height: 44px;
+        border-radius: 10px;
+        padding: 10px 16px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .primary {
+        border: 1px solid var(--button);
+        background: var(--button);
+        color: var(--button-text);
+      }
+      .secondary {
+        border: 1px solid var(--border);
+        background: var(--elevated);
+        color: var(--text);
+      }
+      footer {
+        position: fixed;
+        inset: auto 0 0;
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        min-height: 44px;
+        padding: 10px 20px;
+        border-top: 1px solid var(--border);
+        background: var(--footer);
+      }
+      footer button {
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        background: var(--backdrop);
+      }
+      .backdrop[hidden] { display: none; }
+      .dialog {
+        width: min(540px, 100%);
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+        padding: clamp(22px, 4vw, 34px);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: var(--elevated);
+        box-shadow: 0 24px 80px rgb(15 23 42 / 0.3);
+      }
+      .dialog-head {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .dialog h2 { margin: 0; font-size: 26px; }
+      .dialog p { color: var(--body); line-height: 1.65; }
+      .dialog .note { color: var(--muted); font-size: 13px; }
+      .close {
+        width: 44px;
+        flex: 0 0 44px;
+        border: 1px solid var(--border);
+        padding: 0;
+        background: var(--surface);
+        color: var(--text);
+        font-size: 22px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>Jacob Bernard</strong>
+      <button class="secondary" id="theme">Preview dark mode</button>
+    </header>
+
+    <main>
+      <section class="demo-card" aria-labelledby="preview-title">
+        <p class="eyebrow">Successful contact submission</p>
+        <h1 id="preview-title">Thanks — your message has been sent.</h1>
+        <p class="intro">
+          The existing success message remains visible. The disclosure opens as
+          additional information and never replaces validation or error feedback.
+        </p>
+        <div class="success" role="status">
+          I’ll respond within five business days.
+        </div>
+        <div class="actions">
+          <button class="primary" data-open>Preview disclosure popup</button>
+          <button class="secondary" type="button">Return to portfolio</button>
+        </div>
+      </section>
+    </main>
+
+    <footer aria-label="Preview footer">
+      <button type="button">Contact me</button>
+      <button type="button">GitHub ↗</button>
+      <button type="button">LinkedIn ↗</button>
+      <button type="button" data-open>Disclosure</button>
+    </footer>
+
+    <div class="backdrop" id="backdrop" hidden>
+      <section
+        class="dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="disclosure-title"
+        aria-describedby="disclosure-copy"
+      >
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">Information disclosure</p>
+            <h2 id="disclosure-title">How submitted information is used</h2>
+          </div>
+          <button class="close" id="close" aria-label="Close disclosure">×</button>
+        </div>
+        <p id="disclosure-copy">
+          Information you submit is used to respond to your request or provide
+          the feature you selected. Contact-form details are sent through Resend
+          to Jacob’s email. Please do not submit sensitive, financial, or
+          confidential information. Submitted information is not intentionally
+          used for unrelated marketing.
+        </p>
+        <button class="primary" id="done">Done</button>
+      </section>
+    </div>
+
+    <script>
+      const root = document.documentElement;
+      const backdrop = document.querySelector('#backdrop');
+      const close = document.querySelector('#close');
+      const done = document.querySelector('#done');
+      const theme = document.querySelector('#theme');
+      let opener;
+
+      function openDisclosure(event) {
+        opener = event.currentTarget;
+        backdrop.hidden = false;
+        close.focus();
+      }
+
+      function closeDisclosure() {
+        backdrop.hidden = true;
+        opener?.focus();
+      }
+
+      document.querySelectorAll('[data-open]').forEach((button) =>
+        button.addEventListener('click', openDisclosure),
+      );
+      close.addEventListener('click', closeDisclosure);
+      done.addEventListener('click', closeDisclosure);
+      backdrop.addEventListener('mousedown', (event) => {
+        if (event.target === backdrop) closeDisclosure();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !backdrop.hidden) closeDisclosure();
+      });
+      theme.addEventListener('click', () => {
+        const dark = root.dataset.theme === 'dark';
+        root.dataset.theme = dark ? 'light' : 'dark';
+        theme.textContent = dark ? 'Preview dark mode' : 'Preview light mode';
+      });
+    </script>
+  </body>
+</html>
