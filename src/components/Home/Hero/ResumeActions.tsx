@@ -24,18 +24,18 @@ export default function ResumeActions({
           className={actionClass}
         >
           <span className='min-[60rem]:hidden'>Preview PDF</span>
-          <span className='hidden min-[60rem]:inline'>Preview résumé</span>{' '}
+          <span className='hidden min-[60rem]:inline'>Preview Resume</span>{' '}
           <span aria-hidden='true'>↗</span>
         </button>
         <a
           href={resumePath}
           download='Jacob_Bernard_Resume.pdf'
-          aria-label='Download résumé PDF'
+          aria-label='Download Resume PDF'
           className={actionClass}
         >
           <span className='min-[60rem]:hidden'>Download PDF</span>
           <span className='hidden min-[60rem]:inline'>
-            Download résumé
+            Download Resume
           </span>{' '}
           <span aria-hidden='true'>↓</span>
         </a>

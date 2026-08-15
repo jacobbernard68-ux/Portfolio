@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { PortfolioProject } from './projectData';
 import ReturnToWork from './ReturnToWork';
+import ProjectWebsiteLink from './ProjectWebsiteLink';
 
 const chapters = [
   {
@@ -41,6 +42,7 @@ export default function LumenCaseStudy({
   return (
     <main className='viewport-page page-gutters bg-[#dce4ed] lg:overflow-hidden'>
       <article
+        data-case-theme='lumen'
         data-internal-scroll
         className='no-scrollbar relative mx-auto max-w-[min(90rem,100%)] overflow-hidden rounded-[var(--fluid-radius)] bg-[#11171b] text-[#f5f7f8] shadow-[0_14px_42px_rgba(16,24,32,.22)] ring-1 ring-white/10 lg:h-full lg:overflow-y-auto'
       >
@@ -77,12 +79,13 @@ export default function LumenCaseStudy({
                 {project.status}
               </span>
               {project.liveHref && (
-                <Link
+                <ProjectWebsiteLink
                   href={project.liveHref}
+                  project={project.slug}
                   className='case-study-action case-study-action--primary rounded-full bg-[#f5f7f8] px-5 py-2.5 text-xs font-bold tracking-[0.12em] text-[#182126] uppercase transition hover:bg-[#d7e0e3]'
                 >
                   {project.liveLabel} ↗
-                </Link>
+                </ProjectWebsiteLink>
               )}
               {project.conceptHref && (
                 <Link

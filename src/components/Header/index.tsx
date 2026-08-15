@@ -89,7 +89,7 @@ const Header = () => {
         <button
           type='button'
           onClick={() => setResumeOpen(true)}
-          aria-label='Preview Jacob Bernard résumé'
+          aria-label='Preview Jacob Bernard Resume'
           aria-haspopup='dialog'
           className='relative ml-auto size-11 shrink-0 overflow-hidden rounded-full ring-1 ring-[#2f3e5c]/15 transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:ring-offset-2 focus-visible:outline-none min-[60rem]:hidden'
         >
@@ -137,7 +137,7 @@ const Header = () => {
           <button
             type='button'
             onClick={() => setResumeOpen(true)}
-            aria-label='Preview Jacob Bernard résumé'
+            aria-label='Preview Jacob Bernard Resume'
             aria-haspopup='dialog'
             className='relative hidden size-11 shrink-0 overflow-hidden rounded-full ring-1 ring-[#2f3e5c]/15 transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-[#2f3e5c] focus-visible:ring-offset-2 focus-visible:outline-none min-[60rem]:block'
             title='Jacob Bernard'

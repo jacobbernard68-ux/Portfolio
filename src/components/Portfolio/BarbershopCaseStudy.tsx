@@ -1,7 +1,7 @@
 import type { PortfolioProject } from './projectData';
 import Image from 'next/image';
-import Link from 'next/link';
 import ReturnToWork from './ReturnToWork';
+import ProjectWebsiteLink from './ProjectWebsiteLink';
 
 export default function BarbershopCaseStudy({
   project,
@@ -23,7 +23,10 @@ export default function BarbershopCaseStudy({
       >
         <ReturnToWork originClassName='text-[#8a2f2f]' />
         <div className='grid lg:grid-cols-[0.9fr_1.1fr]'>
-          <div data-case-intro className='fluid-card-space flex min-h-[clamp(24rem,55svh,35rem)] flex-col justify-between'>
+          <div
+            data-case-intro
+            className='fluid-card-space flex min-h-[clamp(24rem,55svh,35rem)] flex-col justify-between'
+          >
             <div>
               <p className='mt-10 text-xs font-bold tracking-[0.18em] text-[#8a2f2f] uppercase'>
                 {project.number} · {project.type}
@@ -54,12 +57,13 @@ export default function BarbershopCaseStudy({
                 {project.status}
               </span>
               {project.liveHref && (
-                <Link
+                <ProjectWebsiteLink
                   href={project.liveHref}
+                  project={project.slug}
                   className='case-study-action case-study-action--primary rounded-full bg-[#8f2228] px-5 py-2.5 text-xs font-bold tracking-[0.12em] text-white uppercase transition hover:bg-[#6f171c]'
                 >
                   {project.liveLabel} ↗
-                </Link>
+                </ProjectWebsiteLink>
               )}
             </div>
           </div>
@@ -88,9 +92,16 @@ export default function BarbershopCaseStudy({
           </div>
         </div>
 
-        <section data-case-story className='grid gap-px bg-[#cdbba5] md:grid-cols-3'>
+        <section
+          data-case-story
+          className='grid gap-px bg-[#cdbba5] md:grid-cols-3'
+        >
           {story.map(([label, copy]) => (
-            <div data-case-story-card key={label} className='bg-[#faf5ed] p-7 sm:p-9'>
+            <div
+              data-case-story-card
+              key={label}
+              className='bg-[#faf5ed] p-7 sm:p-9'
+            >
               <p className='text-[10px] font-bold tracking-[0.18em] text-[#8a2f2f] uppercase'>
                 {label}
               </p>
@@ -100,6 +111,7 @@ export default function BarbershopCaseStudy({
         </section>
 
         <section
+          data-barber-showcase
           className='grid gap-5 p-4 sm:grid-cols-2 sm:p-8'
           style={{ backgroundColor: '#f2ece4' }}
         >
@@ -195,6 +207,7 @@ export default function BarbershopCaseStudy({
           </article>
 
           <article
+            data-barber-light-preview='services'
             className='relative overflow-hidden rounded-xl p-5'
             style={{ alignSelf: 'start', backgroundColor: '#dcc8aa' }}
           >
@@ -279,6 +292,7 @@ export default function BarbershopCaseStudy({
                 ],
               ].map(([src, label, detail, price], index) => (
                 <div
+                  data-barber-preview-cell
                   key={`${label}-${index}`}
                   className='overflow-hidden rounded-lg border'
                   style={{
@@ -458,6 +472,7 @@ export default function BarbershopCaseStudy({
               </div>
             </article>
             <aside
+              data-barber-light-preview='visit'
               className='relative flex min-h-[clamp(10rem,22svh,12rem)] flex-1 flex-col justify-center overflow-hidden rounded-xl border p-[clamp(1rem,2vw,1.25rem)]'
               style={{
                 backgroundColor: '#f4e9da',
@@ -508,6 +523,7 @@ export default function BarbershopCaseStudy({
                   ['Payment', 'Cash + cards'],
                 ].map(([label, value]) => (
                   <div
+                    data-barber-preview-cell
                     key={label}
                     className='p-3'
                     style={{ backgroundColor: '#fffaf3' }}

@@ -11,7 +11,8 @@ import {
 
 // Height determines whether the fan has enough vertical room. The width clause
 // only preserves the established mobile layout on tall, narrow devices.
-const fanViewportQuery = '(min-width: 48rem) and (min-height: 45rem)';
+const fanViewportQuery =
+  '((min-width: 48rem) and (min-height: 45rem)), ((min-width: 75rem) and (min-height: 35rem))';
 const desktopFanControlsQuery = '(min-width: 64rem)';
 
 const subscribeTo = (query: string) => (onChange: () => void) => {

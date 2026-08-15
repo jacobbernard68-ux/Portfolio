@@ -169,8 +169,10 @@ const sections: Section[] = [
 
 export default function ResumeSections({
   compact = false,
+  alternating = false,
 }: {
   compact?: boolean;
+  alternating?: boolean;
 }) {
   const [active, setActive] = useState<Section | null>(null);
   const [visibleSectionId, setVisibleSectionId] = useState(sections[0].id);
@@ -264,14 +266,16 @@ export default function ResumeSections({
     <>
       <div className='grid h-full min-h-0 gap-3 sm:grid-cols-2'>
         {sections.map((section, index) => {
-          const cardIsDark = compact
-            ? [1, 3, 5].includes(index)
-            : [1, 2, 5].includes(index);
+          const cardIsDark = alternating
+            ? [0, 3, 4].includes(index)
+            : compact
+              ? [1, 3, 5].includes(index)
+              : [1, 2, 5].includes(index);
 
           return (
             <button
               key={section.id}
-              data-mobile-theme={index % 2 === 0 ? 'dark' : 'light'}
+              data-mobile-theme={cardIsDark ? 'dark' : 'light'}
               data-cursor-reactive={cardIsDark ? 'dark' : 'light'}
               onPointerMove={trackGlow}
               onPointerLeave={hideGlow}
@@ -339,7 +343,7 @@ export default function ResumeSections({
               data-resume-modal
               role='dialog'
               aria-modal='true'
-              aria-label='Professional résumé details'
+              aria-label='Professional Resume details'
               className='relative max-h-[calc(100svh-clamp(1.5rem,6vh,3rem))] w-full max-w-[min(52.5rem,100%)] overflow-hidden rounded-[var(--fluid-radius)] bg-[#e2e8f2] shadow-2xl'
             >
               <button

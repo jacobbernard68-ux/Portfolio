@@ -2,10 +2,11 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import Image from 'next/image';
+import ThemeAwareProjectImage from '@/components/Portfolio/ThemeAwareProjectImage';
 
 export interface CardItem {
   imgUrl: string;
+  darkImgUrl?: string;
   alt?: string;
   linkUrl?: string;
   label?: string;
@@ -38,7 +39,9 @@ const widthMultiplier = (width: number) =>
         ? 0.5
         : width < 1024
           ? 0.75
-          : 1;
+          : width < 1280
+            ? 0.9
+            : 1;
 const heightMultiplier = (width: number) => {
   const ideal =
     (width < 480
@@ -76,6 +79,19 @@ function slotPosition(total: number, slot: number) {
     zIndex: 10 - Math.abs(slot - center),
   };
 }
+
+const responsiveScale = (
+  scale: number,
+  width: number,
+  total: number,
+  slot: number,
+) =>
+  width >= 1200 &&
+  width < 1280 &&
+  total === 5 &&
+  (slot === 0 || slot === total - 1)
+    ? 0.86
+    : scale;
 
 export default function CardFanCarousel({ cards }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -143,7 +159,7 @@ export default function CardFanCarousel({ cards }: Props) {
           x: `${pos.x * wm}rem`,
           y: `${pos.y * hm}rem`,
           rotation: pos.rot,
-          scale: pos.scale,
+          scale: responsiveScale(pos.scale, window.innerWidth, count, slot),
           opacity: 1,
           zIndex: pos.zIndex,
         };
@@ -199,7 +215,7 @@ export default function CardFanCarousel({ cards }: Props) {
       const pos = slotPosition(count, slot);
       gsap.to(element, {
         y: `${pos.y * heightMultiplier(window.innerWidth)}rem`,
-        scale: pos.scale,
+        scale: responsiveScale(pos.scale, window.innerWidth, count, slot),
         zIndex: pos.zIndex,
         duration: 0.35,
         ease: 'power2.out',
@@ -215,7 +231,8 @@ export default function CardFanCarousel({ cards }: Props) {
         const pos = slotPosition(count, slot);
         gsap.to(element, {
           y: `${(pos.y - 2.5) * heightMultiplier(window.innerWidth)}rem`,
-          scale: pos.scale * 1.08,
+          scale:
+            responsiveScale(pos.scale, window.innerWidth, count, slot) * 1.08,
           zIndex: 100,
           duration: 0.45,
           ease: 'elastic.out(1,.75)',
@@ -237,7 +254,7 @@ export default function CardFanCarousel({ cards }: Props) {
           x: `${pos.x * widthMultiplier(window.innerWidth)}rem`,
           y: `${pos.y * heightMultiplier(window.innerWidth)}rem`,
           rotation: pos.rot,
-          scale: pos.scale,
+          scale: responsiveScale(pos.scale, window.innerWidth, count, slot),
           zIndex: pos.zIndex,
           duration: 0.4,
         });
@@ -286,8 +303,9 @@ export default function CardFanCarousel({ cards }: Props) {
                 className='relative size-full overflow-hidden'
                 style={{ backgroundColor: card.imageBackground }}
               >
-                <Image
-                  src={card.imgUrl}
+                <ThemeAwareProjectImage
+                  lightSrc={card.imgUrl}
+                  darkSrc={card.darkImgUrl}
                   alt={card.alt || `Card ${index + 1}`}
                   fill
                   sizes='(max-width: 639px) 136px, (max-width: 1023px) 192px, 240px'

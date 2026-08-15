@@ -27,14 +27,29 @@ export default function ReturnToWork({
   originClassName?: string;
 }) {
   const originRef = useRef<HTMLAnchorElement>(null);
+  const floatingRef = useRef<HTMLAnchorElement>(null);
   const [visible, setVisible] = useState(false);
   const [href, setHref] = useState('/work');
+  const [floatingLeft, setFloatingLeft] = useState<number>();
 
   useEffect(() => {
     const destination = getReturnHref();
     setHref(destination);
     const origin = originRef.current;
     if (!origin) return;
+    const alignFloatingControl = () => {
+      const floating = floatingRef.current;
+      if (!floating) return;
+      const floatingMarginLeft = Number.parseFloat(
+        getComputedStyle(floating).marginLeft,
+      );
+      setFloatingLeft(
+        origin.getBoundingClientRect().left -
+          (Number.isFinite(floatingMarginLeft) ? floatingMarginLeft : 0),
+      );
+    };
+    alignFloatingControl();
+    window.addEventListener('resize', alignFloatingControl);
     const scrollContainer = origin.closest<HTMLElement>(
       '[data-internal-scroll]',
     );
@@ -47,7 +62,10 @@ export default function ReturnToWork({
       { root: usesInternalScroll ? scrollContainer : null, threshold: 0 },
     );
     observer.observe(origin);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', alignFloatingControl);
+    };
   }, []);
 
   const inlineTone = tone === 'dark' ? 'text-[#d7e0e3]' : 'text-[#405671]';
@@ -61,17 +79,21 @@ export default function ReturnToWork({
           href={href}
           className={`case-return-link case-return-link--inline inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.18em] uppercase ${originClassName ?? inlineTone}`}
         >
-          <span aria-hidden='true'>&larr;</span> Back to From Concept to Experience
+          <span aria-hidden='true'>&larr;</span> Back to From Concept to
+          Experience
         </a>
       </div>
 
       <a
+        ref={floatingRef}
         href={href}
         aria-hidden={!visible}
         tabIndex={visible ? 0 : -1}
-        className={`case-return-link case-return-link--inline case-return-link--floating floating-gutter floating-return-top fixed z-50 inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.18em] uppercase transition-[opacity,transform] motion-reduce:transition-none ${visible ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'} ${tone === 'dark' ? 'text-[#d7e0e3]' : 'text-[#405671]'}`}
+        style={floatingLeft === undefined ? undefined : { left: floatingLeft }}
+        className={`case-return-link case-return-link--inline case-return-link--floating floating-return-top fixed left-6 z-50 inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.18em] uppercase transition-[opacity,transform] motion-reduce:transition-none sm:left-9 lg:left-12 ${visible ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'} ${tone === 'dark' ? 'text-[#d7e0e3]' : 'text-[#405671]'}`}
       >
-        <span aria-hidden='true'>&larr;</span> Back to From Concept to Experience
+        <span aria-hidden='true'>&larr;</span> Back to From Concept to
+        Experience
       </a>
     </>
   );

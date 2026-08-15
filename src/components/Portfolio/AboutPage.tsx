@@ -55,6 +55,7 @@ export default function PortfolioAboutPage({
   return (
     <main
       id={embedded ? 'about' : undefined}
+      data-mobile-section-theme={embedded ? 'dark' : undefined}
       className={`${embedded ? 'scroll-mt-[var(--site-header-height)] md:scroll-mt-[var(--site-header-height-wide)] min-[60rem]:h-auto' : 'about-viewport-page viewport-page'} page-gutters flex flex-col bg-[#e2e8f2]/80 min-[60rem]:overflow-hidden`}
     >
       <section className='about-layout mx-auto grid w-full flex-1 gap-[clamp(0.625rem,min(1.5vw,1.5svh),1.25rem)] min-[60rem]:min-h-0 min-[60rem]:grid-rows-[auto_minmax(0,1fr)] min-[75rem]:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] min-[75rem]:grid-rows-1'>
@@ -77,9 +78,7 @@ export default function PortfolioAboutPage({
               <p className='text-xs font-semibold tracking-[0.2em] text-[#607795] uppercase'>
                 Frontend developer · UI designer
               </p>
-              <h1
-                className='mt-[clamp(0.75rem,2vh,1rem)] max-w-[40.625rem] text-[clamp(2rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.045em] text-[#111]'
-              >
+              <h1 className='mt-[clamp(0.75rem,2vh,1rem)] max-w-[40.625rem] text-[clamp(2rem,4.2vw,3rem)] leading-[1.08] font-bold tracking-[-0.045em] text-[#111]'>
                 Designing intuitive interfaces backed by enterprise-level
                 experience.
               </h1>
@@ -125,7 +124,7 @@ export default function PortfolioAboutPage({
           data-internal-scroll
           className={`no-scrollbar min-h-0 ${embedded ? 'overflow-visible' : 'overflow-y-auto'}`}
         >
-          <ResumeSections compact={isMidSize} />
+          <ResumeSections compact={isMidSize} alternating={embedded} />
         </div>
       </section>
       <Modal

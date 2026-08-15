@@ -32,6 +32,7 @@ const fanCards = fanOrder
   )
   .map((project) => ({
     imgUrl: project.image,
+    darkImgUrl: project.darkImage,
     alt: project.imageAlt,
     label: project.title,
     linkUrl: `/work/${project.slug}?from=fan&project=${project.slug}`,
@@ -44,17 +45,17 @@ export default function PortfolioWorkFanPage() {
 
   return (
     <main className='work-viewport-page work-fan-page viewport-page page-gutters relative z-50 flex flex-col overflow-visible bg-[#e2e8f2]/80'>
-      <header className='mx-auto flex w-full max-w-[var(--content-max)] shrink-0 flex-wrap items-center justify-between gap-[var(--fluid-section-gap)] rounded-[var(--fluid-radius)] border border-[#405671]/10 bg-white/45 px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.65rem,1.4vh,0.75rem)]'>
+      <header className='relative z-[100] mx-auto mb-[clamp(0.625rem,1.5svh,1rem)] flex w-full max-w-[var(--content-max)] shrink-0 items-center justify-between gap-[var(--fluid-section-gap)] overflow-visible rounded-[var(--fluid-radius)] border border-[#405671]/10 bg-white/45 px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.65rem,1.4vh,0.75rem)]'>
         <div>
           <p className='text-[10px] font-bold tracking-[0.2em] text-[#607795] uppercase'>
             Portfolio · 2026
           </p>
-          <h1 className='mt-1 text-[clamp(1.05rem,5.25vw,1.5rem)] font-semibold tracking-[-0.04em] whitespace-nowrap text-[#111] sm:text-[clamp(1.7rem,3.5vw,2.5rem)] sm:whitespace-normal'>
+          <h1 className='mt-1 text-[clamp(1.05rem,5.25vw,1.5rem)] font-semibold tracking-[-0.04em] whitespace-nowrap text-[#111] sm:text-[clamp(1.875rem,3.5vw,2.5rem)] sm:whitespace-normal md:text-[clamp(1.25rem,2.5vw,1.75rem)] md:whitespace-nowrap xl:text-[clamp(1.875rem,3.5vw,2.5rem)] xl:whitespace-normal'>
             From Concept to Experience
           </h1>
         </div>
         <div className='flex items-center gap-4'>
-          <p className='hidden max-w-[480px] text-right text-sm leading-6 text-slate-600 md:block'>
+          <p className='hidden max-w-[360px] text-right text-sm leading-6 text-slate-600 md:block xl:max-w-[480px]'>
             This fan brings the portfolio into one visual collection: choose a
             card to see how each concept became a working experience.
           </p>

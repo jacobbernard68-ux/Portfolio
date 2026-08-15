@@ -1,52 +1,414 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import ClearlineThemeToggle from '@/components/ClearlineThemeToggle';
+
+const themeScript = `(function(){try{var q=new URLSearchParams(location.search).get('previewTheme');var s=q==='light'||q==='dark'?q:localStorage.getItem('clearline-color-theme');var d=s==='dark'||(!s&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.clearlineTheme=d?'dark':'light';if(q==='light'||q==='dark')document.documentElement.dataset.clearlinePreview='capture';document.documentElement.style.colorScheme=d?'dark':'light'}catch(e){}})();`;
 
 const services = [
-  { title: "Workspace Cleaning", copy: "Reliable cleaning for offices, studios, and small business environments." },
-  { title: "Residential Cleaning", copy: "Thoughtful care for everyday living spaces." },
-  { title: "Routine Maintenance", copy: "Flexible recurring service designed around your schedule." },
-  { title: "Detail Cleaning", copy: "Focused cleaning for high-touch surfaces and overlooked areas." },
+  {
+    title: 'Workspace Cleaning',
+    copy: 'Reliable cleaning for offices, studios, and small business environments.',
+  },
+  {
+    title: 'Residential Cleaning',
+    copy: 'Thoughtful care for everyday living spaces.',
+  },
+  {
+    title: 'Routine Maintenance',
+    copy: 'Flexible recurring service designed around your schedule.',
+  },
+  {
+    title: 'Detail Cleaning',
+    copy: 'Focused cleaning for high-touch surfaces and overlooked areas.',
+  },
 ];
 
 const values = [
-  { title: "Precision", image: "/images/portfolio/cleaning-a.png", alt: "A hand carefully wiping a surface", height: "h-[236px] sm:h-[260px]" },
-  { title: "Environment", image: "/images/portfolio/cleaning-c.png", alt: "A clean and quiet office interior", height: "h-[300px] sm:h-[340px]" },
-  { title: "Order", image: "/images/portfolio/cleaning-b.png", alt: "A clean and organized workspace", height: "h-[300px] sm:h-[340px]" },
-  { title: "Care", image: "/images/portfolio/cleaning-d.png", alt: "A gloved hand cleaning with care", height: "h-[236px] sm:h-[260px]" },
+  {
+    title: 'Precision',
+    image: '/images/portfolio/cleaning-a.png',
+    alt: 'A hand carefully wiping a surface',
+    height: 'h-[236px] sm:h-[260px]',
+  },
+  {
+    title: 'Environment',
+    image: '/images/portfolio/cleaning-c.png',
+    alt: 'A clean and quiet office interior',
+    height: 'h-[300px] sm:h-[340px]',
+  },
+  {
+    title: 'Order',
+    image: '/images/portfolio/cleaning-b.png',
+    alt: 'A clean and organized workspace',
+    height: 'h-[300px] sm:h-[340px]',
+  },
+  {
+    title: 'Care',
+    image: '/images/portfolio/cleaning-d.png',
+    alt: 'A gloved hand cleaning with care',
+    height: 'h-[236px] sm:h-[260px]',
+  },
 ];
 
 export default function ClearlineServicesPage() {
   const [service, setService] = useState(services[0].title);
   const [submitted, setSubmitted] = useState(false);
 
-  return <main className="min-h-screen bg-[#f4f5f5] text-[#1f1f1f]">
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between pl-5 pr-20 sm:pl-8 sm:pr-24 lg:pl-[60px]">
-        <Link href="#home" className="flex items-center gap-3"><span className="grid size-8 place-items-center rounded-full bg-[#dfeaf5] text-sm font-semibold">C</span><strong className="text-base font-semibold tracking-[-0.03em] sm:text-lg">Clearline Services</strong></Link>
-        <nav className="hidden items-center gap-8 text-xs font-semibold md:flex"><Link href="#home">Home</Link><Link href="#services">Services</Link><Link href="#about">About</Link><Link href="#contact">Contact</Link></nav>
-        <Link href="#contact" className="rounded-full bg-[#1f1f1f] px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.13em] text-white sm:px-5">Request a quote</Link>
-      </div>
-    </header>
+  return (
+    <main
+      data-clearline-site
+      className='min-h-screen bg-[#f4f5f5] text-[#1f1f1f]'
+    >
+      <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      <header className='sticky top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl'>
+        <div className='mx-auto flex h-[76px] max-w-[1440px] items-center justify-between pr-20 pl-5 sm:pr-24 sm:pl-8 lg:pl-[60px]'>
+          <Link href='#home' className='flex items-center gap-3'>
+            <span className='grid size-8 place-items-center rounded-full bg-[#dfeaf5] text-sm font-semibold'>
+              C
+            </span>
+            <strong className='text-base font-semibold tracking-[-0.03em] sm:text-lg'>
+              Clearline Services
+            </strong>
+          </Link>
+          <nav className='hidden items-center gap-8 text-xs font-semibold md:flex'>
+            <Link href='#home'>Home</Link>
+            <Link href='#services'>Services</Link>
+            <Link href='#about'>About</Link>
+            <Link href='#contact'>Contact</Link>
+          </nav>
+          <div className='flex items-center gap-2'>
+            <ClearlineThemeToggle />
+            <Link
+              href='#contact'
+              className='hidden rounded-full bg-[#1f1f1f] px-4 py-2.5 text-[10px] font-bold tracking-[0.13em] text-white uppercase sm:inline-flex sm:px-5'
+            >
+              Request a quote
+            </Link>
+          </div>
+        </div>
+      </header>
 
-    <section id="home" className="mx-auto grid min-h-[calc(100svh-76px)] max-w-[1440px] items-center gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:px-[60px] lg:py-16">
-      <div className="lg:pr-8"><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#5f7181]">Local care · Thoughtful service</p><h1 className="mt-5 max-w-3xl text-[clamp(3.25rem,6vw,6.5rem)] font-semibold leading-[0.94] tracking-[-0.065em]">Professional cleaning for the spaces that matter.</h1><p className="mt-7 max-w-xl text-base leading-7 text-[#5f6368] sm:text-lg">Reliable care for workspaces, studios, and everyday environments.</p><div className="mt-8 flex flex-wrap gap-3"><Link href="#contact" className="rounded-full bg-[#1f1f1f] px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em] text-white">Request a quote</Link><Link href="#services" className="rounded-full border border-black/15 bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.12em]">Explore services</Link></div><aside className="mt-8 max-w-xl border-l-2 border-[#9eb7ca] pl-4"><p className="text-sm leading-6 text-[#5f6368]"><strong className="font-semibold text-[#344753]">Portfolio prototype.</strong> Clearline Services is a demonstration concept; quote requests and contact details are not submitted or sent anywhere.</p></aside></div>
-      <div className="rounded-2xl bg-white p-4 shadow-[0_18px_60px_rgba(31,41,55,0.08)] sm:p-6"><div className="flex flex-col gap-3 pb-5 sm:flex-row sm:items-center sm:justify-between"><h2 className="text-2xl font-medium">Professional Cleaning</h2><p className="text-sm leading-6 text-[#5f6368] sm:text-right">Precision care for workspaces, studios,<br/>and everyday environments.</p></div><div className="grid grid-cols-2 gap-2"><div className="flex flex-col gap-2">{values.slice(0, 2).map((item) => <ValueTile key={item.title} {...item}/>)}</div><div className="flex flex-col gap-2">{values.slice(2).map((item) => <ValueTile key={item.title} {...item}/>)}</div></div></div>
-    </section>
+      <section
+        id='home'
+        className='mx-auto grid min-h-[calc(100svh-76px)] max-w-[1440px] items-center gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:px-[60px] lg:py-16'
+      >
+        <div className='lg:pr-8'>
+          <p className='text-[10px] font-bold tracking-[0.2em] text-[#5f7181] uppercase'>
+            Local care · Thoughtful service
+          </p>
+          <h1 className='mt-5 max-w-3xl text-[clamp(3.25rem,6vw,6.5rem)] leading-[0.94] font-semibold tracking-[-0.065em]'>
+            Professional cleaning for the spaces that matter.
+          </h1>
+          <p className='mt-7 max-w-xl text-base leading-7 text-[#5f6368] sm:text-lg'>
+            Reliable care for workspaces, studios, and everyday environments.
+          </p>
+          <div className='mt-8 flex flex-wrap gap-3'>
+            <Link
+              href='#contact'
+              className='rounded-full bg-[#1f1f1f] px-6 py-3.5 text-xs font-bold tracking-[0.12em] text-white uppercase'
+            >
+              Request a quote
+            </Link>
+            <Link
+              href='#services'
+              className='rounded-full border border-black/15 bg-white px-6 py-3.5 text-xs font-bold tracking-[0.12em] uppercase'
+            >
+              Explore services
+            </Link>
+          </div>
+          <aside className='mt-8 max-w-xl border-l-2 border-[#9eb7ca] pl-4'>
+            <p className='text-sm leading-6 text-[#5f6368]'>
+              <strong className='font-semibold text-[#344753]'>
+                Portfolio prototype.
+              </strong>{' '}
+              Clearline Services is a demonstration concept; quote requests and
+              contact details are not submitted or sent anywhere.
+            </p>
+          </aside>
+        </div>
+        <div className='rounded-2xl bg-white p-4 shadow-[0_18px_60px_rgba(31,41,55,0.08)] sm:p-6'>
+          <div className='flex flex-col gap-3 pb-5 sm:flex-row sm:items-center sm:justify-between'>
+            <h2 className='text-2xl font-medium'>Professional Cleaning</h2>
+            <p className='text-sm leading-6 text-[#5f6368] sm:text-right'>
+              Precision care for workspaces, studios,
+              <br />
+              and everyday environments.
+            </p>
+          </div>
+          <div className='grid grid-cols-2 gap-2'>
+            <div className='flex flex-col gap-2'>
+              {values.slice(0, 2).map((item) => (
+                <ValueTile key={item.title} {...item} />
+              ))}
+            </div>
+            <div className='flex flex-col gap-2'>
+              {values.slice(2).map((item) => (
+                <ValueTile key={item.title} {...item} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <section id="services" className="border-y border-black/10 bg-white px-5 py-20 sm:px-8 lg:px-[60px] lg:py-28"><div className="mx-auto max-w-[1320px]"><div className="grid gap-6 lg:grid-cols-2"><div><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#5f7181]">Services, kept simple</p><h2 className="mt-4 max-w-xl text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">The right care for the way you use your space.</h2></div><p className="max-w-lg self-end text-base leading-7 text-[#5f6368]">Clear choices and flexible schedules make it easy to begin without turning a straightforward service into a complicated process.</p></div><div className="mt-12 grid gap-px overflow-hidden rounded-2xl bg-black/10 md:grid-cols-2">{services.map((item, index) => <button key={item.title} onClick={() => { setService(item.title); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }} className="group bg-[#f8f9f9] p-7 text-left transition hover:bg-[#dfeaf5] sm:p-9"><span className="text-[10px] font-bold tracking-[0.18em] text-[#738493]">0{index + 1}</span><h3 className="mt-8 text-2xl font-semibold tracking-[-0.035em]">{item.title}</h3><p className="mt-3 max-w-md text-sm leading-6 text-[#5f6368]">{item.copy}</p><span className="mt-8 inline-block text-xs font-bold uppercase tracking-[0.12em]">Choose service →</span></button>)}</div></div></section>
+      <section
+        id='services'
+        className='border-y border-black/10 bg-white px-5 py-20 sm:px-8 lg:px-[60px] lg:py-28'
+      >
+        <div className='mx-auto max-w-[1320px]'>
+          <div className='grid gap-6 lg:grid-cols-2'>
+            <div>
+              <p className='text-[10px] font-bold tracking-[0.2em] text-[#5f7181] uppercase'>
+                Services, kept simple
+              </p>
+              <h2 className='mt-4 max-w-xl text-4xl font-semibold tracking-[-0.05em] sm:text-6xl'>
+                The right care for the way you use your space.
+              </h2>
+            </div>
+            <p className='max-w-lg self-end text-base leading-7 text-[#5f6368]'>
+              Clear choices and flexible schedules make it easy to begin without
+              turning a straightforward service into a complicated process.
+            </p>
+          </div>
+          <div className='mt-12 grid gap-px overflow-hidden rounded-2xl bg-black/10 md:grid-cols-2'>
+            {services.map((item, index) => (
+              <button
+                key={item.title}
+                onClick={() => {
+                  setService(item.title);
+                  document
+                    .querySelector('#contact')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className='group bg-[#f8f9f9] p-7 text-left transition hover:bg-[#dfeaf5] sm:p-9'
+              >
+                <span className='text-[10px] font-bold tracking-[0.18em] text-[#738493]'>
+                  0{index + 1}
+                </span>
+                <h3 className='mt-8 text-2xl font-semibold tracking-[-0.035em]'>
+                  {item.title}
+                </h3>
+                <p className='mt-3 max-w-md text-sm leading-6 text-[#5f6368]'>
+                  {item.copy}
+                </p>
+                <span className='mt-8 inline-block text-xs font-bold tracking-[0.12em] uppercase'>
+                  Choose service →
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
 
-    <section id="about" className="mx-auto grid max-w-[1320px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:px-0 lg:py-28"><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#5f7181]">About Clearline</p><div><h2 className="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-0.055em] sm:text-6xl">Remove clutter. Create order. Improve the environment. Handle every detail with care.</h2><p className="mt-8 max-w-2xl text-base leading-7 text-[#5f6368]">Clearline Services provides dependable cleaning for small businesses and individuals who value calm, organized spaces. Every visit is approached with precision, respect, and attention to the details that make an environment feel cared for.</p><div className="mt-10 flex flex-wrap gap-2">{["Small local team", "Flexible scheduling", "Consistent checklists", "Respectful care"].map((item) => <span key={item} className="rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold text-[#4f5d62]">{item}</span>)}</div></div></section>
+      <section
+        id='about'
+        className='mx-auto grid max-w-[1320px] gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:px-0 lg:py-28'
+      >
+        <p className='text-[10px] font-bold tracking-[0.2em] text-[#5f7181] uppercase'>
+          About Clearline
+        </p>
+        <div>
+          <h2 className='max-w-4xl text-4xl leading-[1.05] font-semibold tracking-[-0.055em] sm:text-6xl'>
+            Remove clutter. Create order. Improve the environment. Handle every
+            detail with care.
+          </h2>
+          <p className='mt-8 max-w-2xl text-base leading-7 text-[#5f6368]'>
+            Clearline Services provides dependable cleaning for small businesses
+            and individuals who value calm, organized spaces. Every visit is
+            approached with precision, respect, and attention to the details
+            that make an environment feel cared for.
+          </p>
+          <div className='mt-10 flex flex-wrap gap-2'>
+            {[
+              'Small local team',
+              'Flexible scheduling',
+              'Consistent checklists',
+              'Respectful care',
+            ].map((item) => (
+              <span
+                key={item}
+                className='rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold text-[#4f5d62]'
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
 
-    <section id="contact" className="bg-[#dfeaf5] px-5 py-20 sm:px-8 lg:px-[60px] lg:py-24"><div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[0.85fr_1.15fr]"><div><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#526777]">Start with a conversation</p><h2 className="mt-4 text-4xl font-semibold leading-[1.05] tracking-[-0.055em] sm:text-6xl">A cleaner space starts here.</h2><p className="mt-6 max-w-md text-base leading-7 text-[#5b6870]">Tell us about your space, schedule, and priorities. We’ll help you build a cleaning plan that fits.</p><Link href="/work/professional-cleaning" className="mt-8 inline-flex text-xs font-bold uppercase tracking-[0.12em]">View portfolio case study →</Link></div><form onSubmit={(event) => { event.preventDefault(); event.currentTarget.reset(); setSubmitted(true); }} className="rounded-2xl bg-white p-6 shadow-[0_18px_50px_rgba(31,41,55,0.08)] sm:p-8"><fieldset><legend className="text-xs font-bold uppercase tracking-[0.14em]">What can we help with?</legend><div className="mt-4 flex flex-wrap gap-2">{services.map((item) => <button type="button" key={item.title} onClick={() => setService(item.title)} className={`rounded-full px-4 py-2 text-xs font-semibold transition ${service === item.title ? "bg-[#1f1f1f] text-white" : "bg-[#eef1f2] text-[#4f5d62]"}`}>{item.title}</button>)}</div></fieldset><div className="mt-6 grid gap-4 sm:grid-cols-2"><label className="text-xs font-semibold">Name<input required className="mt-2 w-full rounded-xl border border-black/15 bg-white px-4 py-3 outline-none focus:border-[#526777]" placeholder="Your name"/></label><label className="text-xs font-semibold">Email<input required type="email" className="mt-2 w-full rounded-xl border border-black/15 bg-white px-4 py-3 outline-none focus:border-[#526777]" placeholder="you@example.com"/></label></div><label className="mt-4 block text-xs font-semibold">A little about your space<textarea className="mt-2 min-h-24 w-full resize-y rounded-xl border border-black/15 bg-white px-4 py-3 outline-none focus:border-[#526777]" placeholder="Home, office, preferred schedule…"/></label><button className="mt-5 w-full rounded-xl bg-[#1f1f1f] px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white">Request a quote</button></form></div></section>
+      <section
+        id='contact'
+        className='bg-[#dfeaf5] px-5 py-20 sm:px-8 lg:px-[60px] lg:py-24'
+      >
+        <div className='mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[0.85fr_1.15fr]'>
+          <div>
+            <p className='text-[10px] font-bold tracking-[0.2em] text-[#526777] uppercase'>
+              Start with a conversation
+            </p>
+            <h2 className='mt-4 text-4xl leading-[1.05] font-semibold tracking-[-0.055em] sm:text-6xl'>
+              A cleaner space starts here.
+            </h2>
+            <p className='mt-6 max-w-md text-base leading-7 text-[#5b6870]'>
+              Tell us about your space, schedule, and priorities. We’ll help you
+              build a cleaning plan that fits.
+            </p>
+            <Link
+              href='/work/professional-cleaning'
+              className='mt-8 inline-flex text-xs font-bold tracking-[0.12em] uppercase'
+            >
+              View portfolio case study →
+            </Link>
+          </div>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              event.currentTarget.reset();
+              setSubmitted(true);
+            }}
+            className='rounded-2xl bg-white p-6 shadow-[0_18px_50px_rgba(31,41,55,0.08)] sm:p-8'
+          >
+            <fieldset>
+              <legend className='text-xs font-bold tracking-[0.14em] uppercase'>
+                What can we help with?
+              </legend>
+              <div className='mt-4 flex flex-wrap gap-2'>
+                {services.map((item) => (
+                  <button
+                    type='button'
+                    key={item.title}
+                    onClick={() => setService(item.title)}
+                    className={`rounded-full px-4 py-2 text-xs font-semibold transition ${service === item.title ? 'bg-[#1f1f1f] text-white' : 'bg-[#eef1f2] text-[#4f5d62]'}`}
+                  >
+                    {item.title}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+            <div className='mt-6 grid gap-4 sm:grid-cols-2'>
+              <label className='text-xs font-semibold'>
+                Name
+                <input
+                  required
+                  className='mt-2 w-full rounded-xl border border-black/15 bg-white px-4 py-3 outline-none focus:border-[#526777]'
+                  placeholder='Your name'
+                />
+              </label>
+              <label className='text-xs font-semibold'>
+                Email
+                <input
+                  required
+                  type='email'
+                  className='mt-2 w-full rounded-xl border border-black/15 bg-white px-4 py-3 outline-none focus:border-[#526777]'
+                  placeholder='you@example.com'
+                />
+              </label>
+            </div>
+            <label className='mt-4 block text-xs font-semibold'>
+              A little about your space
+              <textarea
+                className='mt-2 min-h-24 w-full resize-y rounded-xl border border-black/15 bg-white px-4 py-3 outline-none focus:border-[#526777]'
+                placeholder='Home, office, preferred schedule…'
+              />
+            </label>
+            <button className='mt-5 w-full rounded-xl bg-[#1f1f1f] px-6 py-4 text-xs font-bold tracking-[0.14em] text-white uppercase'>
+              Request a quote
+            </button>
+          </form>
+        </div>
+      </section>
 
-    <footer className="bg-[#1f1f1f] px-5 py-8 text-white sm:px-8 lg:px-[60px]"><div className="mx-auto flex max-w-[1320px] flex-col justify-between gap-4 text-xs text-white/55 sm:flex-row"><strong className="text-white">Clearline Services</strong><p>Precision · Order · Environment · Care</p><p>Local portfolio prototype</p></div></footer>
-    {submitted && <div className="fixed inset-0 z-[2000] grid place-items-center bg-[#111820]/60 p-5 backdrop-blur-sm" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setSubmitted(false); }}><section role="dialog" aria-modal="true" aria-labelledby="prototype-dialog-title" aria-describedby="prototype-dialog-description" className="w-full max-w-md rounded-2xl bg-white p-7 text-[#1f1f1f] shadow-[0_24px_80px_rgba(0,0,0,0.3)] sm:p-9"><div className="flex items-start justify-between gap-6"><div><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#526777]">Prototype confirmation</p><h2 id="prototype-dialog-title" className="mt-3 text-3xl font-semibold tracking-[-0.045em]">Your information was not submitted.</h2></div><button type="button" onClick={() => setSubmitted(false)} aria-label="Close confirmation" className="grid size-10 shrink-0 place-items-center rounded-full border border-black/15 text-xl hover:bg-[#eef2f5]">×</button></div><p id="prototype-dialog-description" className="mt-5 text-sm leading-6 text-[#5f6368]">Clearline Services is a portfolio prototype. The information entered into this demonstration form was not collected, stored, transmitted, shared, or used. The form has been cleared.</p><button type="button" autoFocus onClick={() => setSubmitted(false)} className="mt-7 w-full rounded-xl bg-[#1f1f1f] px-5 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-white">Return to prototype</button></section></div>}
-  </main>;
+      <footer className='bg-[#1f1f1f] px-5 py-8 text-white sm:px-8 lg:px-[60px]'>
+        <div className='mx-auto flex max-w-[1320px] flex-col justify-between gap-4 text-xs text-white/55 sm:flex-row'>
+          <strong className='text-white'>Clearline Services</strong>
+          <p>Precision · Order · Environment · Care</p>
+          <p>Local portfolio prototype</p>
+        </div>
+      </footer>
+      {submitted && (
+        <div
+          className='fixed inset-0 z-[2000] grid place-items-center bg-[#111820]/60 p-5 backdrop-blur-sm'
+          role='presentation'
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setSubmitted(false);
+          }}
+        >
+          <section
+            role='dialog'
+            aria-modal='true'
+            aria-labelledby='prototype-dialog-title'
+            aria-describedby='prototype-dialog-description'
+            className='w-full max-w-md rounded-2xl bg-white p-7 text-[#1f1f1f] shadow-[0_24px_80px_rgba(0,0,0,0.3)] sm:p-9'
+          >
+            <div className='flex items-start justify-between gap-6'>
+              <div>
+                <p className='text-[10px] font-bold tracking-[0.18em] text-[#526777] uppercase'>
+                  Prototype confirmation
+                </p>
+                <h2
+                  id='prototype-dialog-title'
+                  className='mt-3 text-3xl font-semibold tracking-[-0.045em]'
+                >
+                  Your information was not submitted.
+                </h2>
+              </div>
+              <button
+                type='button'
+                onClick={() => setSubmitted(false)}
+                aria-label='Close confirmation'
+                className='grid size-10 shrink-0 place-items-center rounded-full border border-black/15 text-xl hover:bg-[#eef2f5]'
+              >
+                ×
+              </button>
+            </div>
+            <p
+              id='prototype-dialog-description'
+              className='mt-5 text-sm leading-6 text-[#5f6368]'
+            >
+              Clearline Services is a portfolio prototype. The information
+              entered into this demonstration form was not collected, stored,
+              transmitted, shared, or used. The form has been cleared.
+            </p>
+            <button
+              type='button'
+              autoFocus
+              onClick={() => setSubmitted(false)}
+              className='mt-7 w-full rounded-xl bg-[#1f1f1f] px-5 py-3.5 text-xs font-bold tracking-[0.14em] text-white uppercase'
+            >
+              Return to prototype
+            </button>
+          </section>
+        </div>
+      )}
+    </main>
+  );
 }
 
-function ValueTile({ title, image, alt, height }: { title: string; image: string; alt: string; height: string }) {
-  return <figure className={`group relative overflow-hidden rounded-xl ${height}`}><Image src={image} alt={alt} fill sizes="(max-width: 1023px) 50vw, 28vw" className="object-cover transition duration-700 group-hover:scale-[1.025]"/><div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/45 to-transparent"/><figcaption className="absolute bottom-4 left-4 text-base font-medium tracking-[0.04em] text-white">{title}</figcaption></figure>;
+function ValueTile({
+  title,
+  image,
+  alt,
+  height,
+}: {
+  title: string;
+  image: string;
+  alt: string;
+  height: string;
+}) {
+  return (
+    <figure className={`group relative overflow-hidden rounded-xl ${height}`}>
+      <Image
+        src={image}
+        alt={alt}
+        fill
+        sizes='(max-width: 1023px) 50vw, 28vw'
+        className='object-cover transition duration-700 group-hover:scale-[1.025]'
+      />
+      <div className='absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/45 to-transparent' />
+      <figcaption className='absolute bottom-4 left-4 text-base font-medium tracking-[0.04em] text-white'>
+        {title}
+      </figcaption>
+    </figure>
+  );
 }

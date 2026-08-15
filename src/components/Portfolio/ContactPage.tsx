@@ -17,8 +17,7 @@ const subscribeToTheme = (onChange: () => void) => {
   return () => observer.disconnect();
 };
 
-const getDarkTheme = () =>
-  document.documentElement.dataset.theme === 'dark';
+const getDarkTheme = () => document.documentElement.dataset.theme === 'dark';
 
 const getServerDarkTheme = () => false;
 
@@ -28,7 +27,10 @@ const getThemedSchedulerUrl = (url: string | undefined, dark: boolean) => {
   try {
     const themedUrl = new URL(url);
     if (themedUrl.hostname.endsWith('calendly.com')) {
-      themedUrl.searchParams.set('background_color', dark ? '172330' : 'ffffff');
+      themedUrl.searchParams.set(
+        'background_color',
+        dark ? '172330' : 'ffffff',
+      );
       themedUrl.searchParams.set('text_color', dark ? 'eef4fa' : '1f2937');
       themedUrl.searchParams.set('primary_color', dark ? '91b5d8' : '607795');
     } else if (themedUrl.hostname.endsWith('cal.com')) {
@@ -82,6 +84,7 @@ export default function PortfolioContactPage({
   return (
     <main
       id={embedded ? 'contact' : undefined}
+      data-mobile-section-theme={embedded ? 'light' : undefined}
       className={`${embedded ? 'scroll-mt-[var(--site-header-height)] md:scroll-mt-[var(--site-header-height-wide)]' : 'viewport-page'} page-gutters flex flex-col bg-[#e2e8f2]/80`}
     >
       <section className='contact-shell mx-auto flex w-full max-w-[var(--content-max)] flex-1 flex-col rounded-[var(--fluid-radius)] bg-[#f2f4f7]/92 p-[clamp(0.625rem,min(1.25vw,1.4svh),1rem)] shadow-[0_8px_24px_rgba(15,23,42,0.08)]'>
@@ -128,8 +131,8 @@ export default function PortfolioContactPage({
                 Start with a conversation.
               </h2>
               <p className='mt-[clamp(0.35rem,0.9vh,0.55rem)] text-[clamp(0.78rem,0.9vw,0.9rem)] leading-[1.5] text-slate-700'>
-                Available Monday–Friday, 9:00 AM–4:00 PM with both 30-minute
-                and 1-hour appointment options.
+                Available Monday–Friday, 9:00 AM–4:00 PM with both 30-minute and
+                1-hour appointment options.
               </p>
               <button
                 type='button'

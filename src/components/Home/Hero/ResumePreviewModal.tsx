@@ -50,7 +50,7 @@ export default function ResumePreviewModal({
               id='resume-preview-title'
               className='mt-1 truncate text-[clamp(1rem,2vw,1.125rem)] font-semibold text-[#111]'
             >
-              Jacob Bernard résumé
+              Jacob Bernard Resume
             </h2>
           </div>
           <a
@@ -63,7 +63,7 @@ export default function ResumePreviewModal({
         </header>
         <iframe
           src={`${resumePath}#view=FitH`}
-          title='Jacob Bernard résumé PDF preview'
+          title='Jacob Bernard Resume PDF preview'
           className='min-h-0 flex-1 bg-white'
         />
         <p className='sr-only'>
@@ -73,7 +73,7 @@ export default function ResumePreviewModal({
           ref={closeButton}
           type='button'
           onClick={onClose}
-          aria-label='Close résumé preview'
+          aria-label='Close Resume preview'
           className='absolute top-2.5 right-2.5 z-10 grid size-10 place-items-center rounded-full bg-[#1f2937] text-xl text-white shadow-lg transition hover:bg-black focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
         >
           ×

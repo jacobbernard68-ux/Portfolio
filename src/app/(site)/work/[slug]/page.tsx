@@ -10,6 +10,7 @@ import BarbershopCaseStudy from '@/components/Portfolio/BarbershopCaseStudy';
 import ClearlineCaseStudy from '@/components/Portfolio/ClearlineCaseStudy';
 import LumenCaseStudy from '@/components/Portfolio/LumenCaseStudy';
 import ReturnToWork from '@/components/Portfolio/ReturnToWork';
+import ProjectWebsiteLink from '@/components/Portfolio/ProjectWebsiteLink';
 
 type Props = { params: Promise<{ slug: string }> };
 export const generateStaticParams = () =>
@@ -50,7 +51,10 @@ export default async function ProjectPage({ params }: Props) {
           originClassName={isBeansPlace ? 'text-[#806648]' : 'text-[#607795]'}
         />
         <div className='grid lg:grid-cols-[0.9fr_1.1fr]'>
-          <div data-case-intro className='fluid-card-space flex min-h-[clamp(24rem,55svh,35rem)] flex-col justify-between'>
+          <div
+            data-case-intro
+            className='fluid-card-space flex min-h-[clamp(24rem,55svh,35rem)] flex-col justify-between'
+          >
             <div>
               <p
                 className={`mt-10 text-xs font-bold tracking-[0.18em] uppercase ${isBeansPlace ? 'text-[#806648]' : 'text-[#607795]'}`}
@@ -87,12 +91,13 @@ export default async function ProjectPage({ params }: Props) {
                 {project.status}
               </span>
               {project.liveHref && (
-                <Link
+                <ProjectWebsiteLink
                   href={project.liveHref}
+                  project={project.slug}
                   className={`case-study-action case-study-action--primary rounded-full px-5 py-2.5 text-xs font-bold tracking-[0.12em] text-white uppercase ${isBeansPlace ? 'bg-[#5b3d28] hover:bg-[#3e291b]' : 'bg-[#26364f] hover:bg-[#111a28]'}`}
                 >
                   {project.liveLabel} ↗
-                </Link>
+                </ProjectWebsiteLink>
               )}
               {project.conceptHref && (
                 <Link
@@ -179,7 +184,10 @@ export default async function ProjectPage({ params }: Props) {
                 </div>
               </div>
             </article>
-            <article className='overflow-hidden rounded-xl bg-[#f3e5ce] p-5'>
+            <article
+              data-beans-product-preview
+              className='overflow-hidden rounded-xl bg-[#f3e5ce] p-5'
+            >
               <p className='text-[9px] font-bold tracking-[0.18em] text-[#806648] uppercase'>
                 Shop · Product discovery
               </p>
@@ -298,6 +306,7 @@ export default async function ProjectPage({ params }: Props) {
               <div
                 data-glow-card
                 key={image}
+                data-furniture-gallery-fallback
                 className='relative aspect-[16/10] overflow-hidden rounded-xl bg-[#dce4ed]'
               >
                 <Image

@@ -26,7 +26,7 @@ export default function SiteFooter() {
   return (
     <>
       <footer
-        className='site-footer page-gutters fixed inset-x-0 bottom-0 z-40 h-[var(--site-footer-height)] shrink-0 border-t border-[#405671]/10 bg-[#cfd9e5]/95 backdrop-blur-md'
+        className={`site-footer page-gutters inset-x-0 bottom-0 z-40 h-[var(--site-footer-height)] shrink-0 border-t border-[#405671]/10 bg-[#cfd9e5]/95 backdrop-blur-md ${isMobile ? 'relative' : 'fixed'}`}
         style={
           isMobile
             ? { zIndex: 9000, backgroundColor: '#c3cfdd', opacity: 1 }

@@ -1,14 +1,20 @@
 'use client';
 
-import Image from 'next/image';
+import ThemeAwareProjectImage from './ThemeAwareProjectImage';
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import type {
   KeyboardEvent as ReactKeyboardEvent,
   MouseEvent as ReactMouseEvent,
   PointerEvent as ReactPointerEvent,
 } from 'react';
-import { portfolioProjects } from './projectData';
+import { portfolioProjects, responsiveProjectOrder } from './projectData';
 import { setWorkLayoutPreference } from './workLayoutPreference';
 
 const classicOrder = [
@@ -18,6 +24,14 @@ const classicOrder = [
   'professional-cleaning',
   'lumen-festival',
 ];
+const carouselViewportQuery = '(min-width: 48rem) and (max-width: 74.999rem)';
+const subscribeToCarouselViewport = (onChange: () => void) => {
+  const media = window.matchMedia(carouselViewportQuery);
+  media.addEventListener('change', onChange);
+  return () => media.removeEventListener('change', onChange);
+};
+const getCarouselViewportSnapshot = () =>
+  window.matchMedia(carouselViewportQuery).matches;
 const classicThemeBySlug: Record<string, 'dark' | 'light'> = {
   'furniture-landscapes': 'dark',
   'beans-place': 'light',
@@ -35,6 +49,16 @@ const classicProjects = classicOrder
     number: String(index + 1).padStart(2, '0'),
     dark: classicThemeBySlug[project.slug] === 'dark',
   }));
+const responsiveProjects = responsiveProjectOrder
+  .map((slug) => portfolioProjects.find((project) => project.slug === slug))
+  .filter((project): project is (typeof portfolioProjects)[number] =>
+    Boolean(project),
+  )
+  .map((project, index) => ({
+    ...project,
+    number: String(index + 1).padStart(2, '0'),
+    dark: index % 2 === 1,
+  }));
 
 export default function PortfolioWorkPage({
   embedded = false,
@@ -45,6 +69,11 @@ export default function PortfolioWorkPage({
   showFanOption?: boolean;
   rememberLayout?: boolean;
 }) {
+  const carouselViewport = useSyncExternalStore(
+    subscribeToCarouselViewport,
+    getCarouselViewportSnapshot,
+    () => false,
+  );
   const carouselRef = useRef<HTMLElement>(null);
   const carouselAnimationRef = useRef<number | null>(null);
   const holdDelayRef = useRef<number | null>(null);
@@ -73,7 +102,7 @@ export default function PortfolioWorkPage({
     if (!carousel) return;
     const handleWheel = (event: WheelEvent) => {
       const compactCarousel = window.matchMedia(
-        '(min-width: 48rem) and (max-width: 79.999rem)',
+        '(min-width: 48rem) and (max-width: 74.999rem)',
       ).matches;
       if (!compactCarousel || Math.abs(event.deltaX) >= Math.abs(event.deltaY))
         return;
@@ -244,6 +273,7 @@ export default function PortfolioWorkPage({
   return (
     <main
       id={embedded ? 'work' : undefined}
+      data-mobile-section-theme={embedded ? 'light' : undefined}
       className={`${embedded ? 'scroll-mt-[var(--site-header-height)] md:scroll-mt-[var(--site-header-height-wide)] lg:h-auto' : 'work-viewport-page work-classic-page viewport-page'} page-gutters flex flex-col bg-[#e2e8f2]/80 lg:overflow-hidden`}
     >
       <header className='relative z-[100] mx-auto mb-[clamp(0.625rem,1.5svh,1rem)] flex w-full max-w-[var(--content-max)] shrink-0 items-center justify-between gap-[var(--fluid-section-gap)] overflow-visible rounded-[var(--fluid-radius)] border border-[#405671]/10 bg-white/45 px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.65rem,1.4vh,0.75rem)]'>
@@ -281,7 +311,10 @@ export default function PortfolioWorkPage({
           aria-label='Selected projects'
           className={`${embedded ? 'grid-cols-1 sm:grid-cols-2' : 'h-full grid-cols-1'} work-classic-grid grid min-h-0 gap-[clamp(0.625rem,min(1.25vw,1.5svh),1rem)]`}
         >
-          {classicProjects.map((project) => (
+          {(embedded || carouselViewport
+            ? responsiveProjects
+            : classicProjects
+          ).map((project) => (
             <article
               id={`project-${project.slug}`}
               key={project.title}
@@ -308,17 +341,16 @@ export default function PortfolioWorkPage({
               }
               className={`group relative flex min-h-0 cursor-pointer snap-center flex-col overflow-hidden rounded-2xl shadow-[0_12px_35px_rgba(31,41,55,0.10)] ring-1 ring-[#2f3e5c]/8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#86a6c8] ${project.dark ? 'bg-[#1f2937] text-white' : 'bg-[#f2f4f7] text-[#111]'}`}
             >
-              <div className='work-card-preview relative aspect-[16/10] min-h-[clamp(8.75rem,18vw,11.25rem)] shrink-0 overflow-hidden bg-[#afc2d5] xl:aspect-square'>
-                <Image
-                  src={project.image}
+              <div className='work-card-preview relative min-h-[clamp(8.75rem,18vw,11.25rem)] shrink-0 overflow-hidden bg-[#afc2d5] xl:aspect-square'>
+                <ThemeAwareProjectImage
+                  lightSrc={project.image}
+                  darkSrc={project.darkImage}
                   alt={project.imageAlt}
                   fill
                   sizes='(max-width: 767px) 88vw, (max-width: 1279px) 50vw, 25vw'
-                  className='object-cover object-top transition duration-700 group-hover:scale-[1.025]'
+                  className={`object-cover object-top transition duration-700 ${project.slug === 'professional-cleaning' ? 'scale-[1.025] group-hover:scale-[1.045]' : 'group-hover:scale-[1.025]'}`}
                 />
-                <span
-                  className='absolute top-4 left-4 rounded-full border border-white/15 bg-[#1f2937]/90 px-3 py-1.5 text-[10px] font-bold tracking-[0.15em] text-white shadow-[0_5px_16px_rgba(15,23,42,0.22)] backdrop-blur-md'
-                >
+                <span className='absolute top-4 left-4 rounded-full border border-white/15 bg-[#1f2937]/90 px-3 py-1.5 text-[10px] font-bold tracking-[0.15em] text-white shadow-[0_5px_16px_rgba(15,23,42,0.22)] backdrop-blur-md'>
                   {project.number}
                 </span>
               </div>
@@ -363,7 +395,11 @@ export default function PortfolioWorkPage({
                 </Link>
                 {project.liveHref && (
                   <Link
-                    href={project.liveHref}
+                    href={
+                      embedded
+                        ? `${project.liveHref}${project.liveHref.includes('?') ? '&' : '?'}portfolioReturn=mobile&project=${project.slug}`
+                        : project.liveHref
+                    }
                     className={`work-card-live-link pointer-events-auto inline-flex items-center gap-1.5 justify-self-start text-left text-[9px] font-bold tracking-[0.12em] whitespace-nowrap uppercase 2xl:justify-self-end 2xl:text-right ${project.dark ? 'text-white hover:text-[#b8cadc]' : 'text-[#111] hover:text-[#405671]'}`}
                   >
                     {project.liveLabel ?? 'Open project'}{' '}

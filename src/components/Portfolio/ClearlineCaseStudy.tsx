@@ -2,6 +2,8 @@ import type { PortfolioProject } from './projectData';
 import Image from 'next/image';
 import Link from 'next/link';
 import ReturnToWork from './ReturnToWork';
+import ProjectWebsiteLink from './ProjectWebsiteLink';
+import ThemeAwareProjectImage from './ThemeAwareProjectImage';
 
 const principles = [
   {
@@ -59,7 +61,10 @@ export default function ClearlineCaseStudy({
       >
         <ReturnToWork originClassName='text-[#526777]' />
         <div className='grid lg:grid-cols-[0.9fr_1.1fr]'>
-          <div data-case-intro className='fluid-card-space flex min-h-[clamp(24rem,55svh,35rem)] flex-col justify-between'>
+          <div
+            data-case-intro
+            className='fluid-card-space flex min-h-[clamp(24rem,55svh,35rem)] flex-col justify-between'
+          >
             <div>
               <p
                 className='mt-10 text-xs font-bold tracking-[0.18em] uppercase'
@@ -106,13 +111,14 @@ export default function ClearlineCaseStudy({
                 {project.status}
               </span>
               {project.liveHref && (
-                <Link
+                <ProjectWebsiteLink
                   href={project.liveHref}
+                  project={project.slug}
                   className='case-study-action case-study-action--primary rounded-full px-5 py-2.5 text-xs font-bold tracking-[0.12em] text-white uppercase transition'
                   style={{ backgroundColor: '#1f1f1f' }}
                 >
                   {project.liveLabel} ↗
-                </Link>
+                </ProjectWebsiteLink>
               )}
               {project.conceptHref && (
                 <Link
@@ -130,11 +136,13 @@ export default function ClearlineCaseStudy({
           </div>
 
           <div
+            data-clearline-hero-preview
             className='grid min-h-[clamp(22rem,55svh,35rem)] place-items-center p-[clamp(1.25rem,3vw,2.5rem)]'
             style={{ backgroundColor: '#dfeaf5' }}
           >
             <div
               data-glow-card
+              data-clearline-browser-preview
               className='relative aspect-[16/10] w-full overflow-hidden rounded-xl border bg-white shadow-[0_22px_55px_rgba(31,41,55,0.2)]'
               style={{ borderColor: 'rgba(31,31,31,.12)' }}
             >
@@ -150,8 +158,9 @@ export default function ClearlineCaseStudy({
                 <span className='size-2 rounded-full bg-[#b9c9d4]' />
                 <span className='size-2 rounded-full bg-[#6f8798]' />
               </div>
-              <Image
-                src={project.heroImage ?? project.image}
+              <ThemeAwareProjectImage
+                lightSrc={project.heroImage ?? project.image}
+                darkSrc={project.darkHeroImage ?? project.darkImage}
                 alt='Clearline Services landing page without the portfolio close control'
                 fill
                 priority
@@ -248,7 +257,7 @@ export default function ClearlineCaseStudy({
                     >
                       {item.number}
                     </p>
-                    <h3 className='mt-2 whitespace-nowrap text-base font-semibold text-white! [text-shadow:0_2px_10px_rgba(0,0,0,.9)]'>
+                    <h3 className='mt-2 text-base font-semibold whitespace-nowrap text-white! [text-shadow:0_2px_10px_rgba(0,0,0,.9)]'>
                       {item.title}
                     </h3>
                   </div>
@@ -276,7 +285,10 @@ export default function ClearlineCaseStudy({
             />
           </div>
           <div className='clearline-case-grid items-start'>
-            <article data-clearline-mockup-card='collage' className='overflow-hidden rounded-xl border border-[#526777]/12 bg-white p-5 shadow-[0_14px_34px_rgba(31,41,55,.12)]'>
+            <article
+              data-clearline-mockup-card='collage'
+              className='overflow-hidden rounded-xl border border-[#526777]/12 bg-white p-5 shadow-[0_14px_34px_rgba(31,41,55,.12)]'
+            >
               <div className='flex items-end justify-between gap-4 pb-4'>
                 <div>
                   <p
@@ -436,7 +448,7 @@ export default function ClearlineCaseStudy({
 
             <article
               data-clearline-mockup-card='about'
-              className='flex self-stretch flex-col rounded-xl p-5 sm:p-6'
+              className='flex flex-col self-stretch rounded-xl p-5 sm:p-6'
               style={{ backgroundColor: '#ffffff' }}
             >
               <p
@@ -509,7 +521,10 @@ export default function ClearlineCaseStudy({
                   A cleaner space starts here.
                 </h3>
               </div>
-              <div data-clearline-quote-panel className='rounded-xl border border-[#526777]/20 bg-[#e4edf3] p-3.5 shadow-[0_12px_30px_rgba(31,41,55,.14)] sm:p-4'>
+              <div
+                data-clearline-quote-panel
+                className='rounded-xl border border-[#526777]/20 bg-[#e4edf3] p-3.5 shadow-[0_12px_30px_rgba(31,41,55,.14)] sm:p-4'
+              >
                 <p
                   className='text-[9px] font-bold tracking-[0.12em] uppercase'
                   style={{ color: '#1f1f1f' }}

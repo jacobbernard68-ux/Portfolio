@@ -19,7 +19,8 @@ const cards = [
     linkUrl: '/work/vintage-barbershop',
   },
   {
-    imgUrl: '/images/portfolio/cleaning-a.png',
+    imgUrl: '/images/portfolio/clearline/site-preview-tall-light.png',
+    darkImgUrl: '/images/portfolio/clearline/site-preview-tall-dark.png',
     alt: 'Clearline precision',
     label: 'Clearline Services',
     linkUrl: '/work/professional-cleaning',
