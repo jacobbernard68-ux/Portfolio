@@ -259,6 +259,31 @@ html[data-theme='dark'] .site-content article.bg-\[\#f2f4f7\] {
   border: 1px solid rgb(184 202 220 / 0.2);
 }
 
+/* Semantic card themes preserve the curated rhythm when cards stack. */
+html[data-theme='dark'] .site-content [data-card-theme='dark'] {
+  background-color: #121d29 !important;
+  color: #f4f8fc !important;
+}
+
+html[data-theme='dark'] .site-content [data-card-theme='light'] {
+  background-color: #31475b !important;
+  color: #f4f8fc !important;
+}
+
+html[data-theme='dark']
+  .site-content
+  [data-card-theme]
+  :is(h2, .work-card-case-link) {
+  color: #eef5fb !important;
+}
+
+html[data-theme='dark']
+  .site-content
+  [data-card-theme]
+  :is(p, span, .work-card-live-link) {
+  color: #c4d3e1 !important;
+}
+
 /* Secondary actions remain visibly lighter than primary actions without glowing. */
 html[data-theme='dark'] .site-content :is(a, button).bg-\[\#e2e8f2\],
 html[data-theme='dark'] .site-content :is(a, button).bg-\[\#b8cadc\],
@@ -536,9 +561,9 @@ html[data-theme='dark'] .case-return-link--inline {
 }
 
 html[data-theme='dark'] .case-return-link--floating {
-  border-color: rgb(203 220 237 / 0.3) !important;
-  background-color: rgb(24 36 50 / 0.94) !important;
-  box-shadow: 0 12px 30px rgb(0 0 0 / 0.38) !important;
+  margin: 0;
+  background-color: #172432 !important;
+  backdrop-filter: none !important;
 }
 
 html[data-theme='dark'] .case-return-link:hover {
@@ -580,6 +605,27 @@ html[data-theme='dark']
   ):focus-visible {
   outline: 2px solid #9fc5f4;
   outline-offset: 3px;
+}
+
+@media (max-width: 59.999rem) {
+  [data-case-theme] [data-case-intro] {
+    min-width: 0;
+  }
+
+  [data-case-theme] [data-case-intro] > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  [data-case-theme] [data-case-intro] :is(h1, p) {
+    overflow-wrap: anywhere;
+  }
+
+  [data-case-theme] .case-study-action {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
 }
 
 html[data-theme='dark']
@@ -1344,6 +1390,60 @@ html[data-theme='dark'] [data-resume-modal-section] article.bg-\[\#1f2937\] p {
   :root {
     --content-max: min(92rem, calc(100vw - (var(--page-gutter) * 2)));
     --fluid-card-padding: clamp(1.25rem, 2vw, 3rem);
+  }
+}
+
+/* At 80rem the former five-column row began stretching away from the
+   moderate-desktop proportions. Six tracks yield three equal cards and let
+   an incomplete final row center itself without fixing the total card count. */
+@media (min-width: 80rem) {
+  .work-classic-page {
+    height: auto !important;
+    min-height: calc(
+      100svh - var(--site-header-height-wide) - var(--site-footer-height)
+    );
+    overflow: visible !important;
+  }
+
+  .work-classic-page .work-classic-stage {
+    max-width: 72rem;
+  }
+
+  .work-classic-page .work-classic-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    grid-auto-rows: auto;
+    overflow: visible !important;
+  }
+
+  .work-classic-page .work-classic-grid > article {
+    grid-column: span 2;
+    min-height: 32rem;
+  }
+
+  .work-classic-page .work-classic-grid > article:last-child:nth-child(3n + 2) {
+    grid-column: 4 / span 2;
+  }
+
+  .work-classic-page .work-classic-grid > article:last-child:nth-child(3n + 1) {
+    grid-column: 3 / span 2;
+  }
+
+  .work-classic-page
+    .work-classic-grid
+    > article:nth-last-child(2):nth-child(3n + 1) {
+    grid-column: 2 / span 2;
+  }
+
+  .work-classic-page .work-card-preview {
+    aspect-ratio: 16 / 10 !important;
+    min-height: 0;
+    flex: 0 0 auto;
+  }
+
+  .work-classic-page .work-card-body {
+    height: auto;
+    flex: 1 1 auto;
+    overflow: visible !important;
   }
 }
 

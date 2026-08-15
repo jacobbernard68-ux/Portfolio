@@ -13,11 +13,18 @@ import { setWorkLayoutPreference } from './workLayoutPreference';
 
 const classicOrder = [
   'furniture-landscapes',
-  'vintage-barbershop',
   'beans-place',
+  'vintage-barbershop',
   'professional-cleaning',
   'lumen-festival',
 ];
+const classicThemeBySlug: Record<string, 'dark' | 'light'> = {
+  'furniture-landscapes': 'dark',
+  'beans-place': 'light',
+  'vintage-barbershop': 'dark',
+  'professional-cleaning': 'light',
+  'lumen-festival': 'dark',
+};
 const classicProjects = classicOrder
   .map((slug) => portfolioProjects.find((project) => project.slug === slug))
   .filter((project): project is (typeof portfolioProjects)[number] =>
@@ -26,7 +33,7 @@ const classicProjects = classicOrder
   .map((project, index) => ({
     ...project,
     number: String(index + 1).padStart(2, '0'),
-    dark: index % 2 === 0,
+    dark: classicThemeBySlug[project.slug] === 'dark',
   }));
 
 export default function PortfolioWorkPage({
@@ -272,7 +279,7 @@ export default function PortfolioWorkPage({
         <section
           ref={carouselRef}
           aria-label='Selected projects'
-          className={`${embedded ? 'grid-cols-1 sm:grid-cols-2' : 'h-full grid-cols-1 xl:grid-cols-5 xl:grid-rows-1'} work-classic-grid grid min-h-0 gap-[clamp(0.625rem,min(1.25vw,1.5svh),1rem)]`}
+          className={`${embedded ? 'grid-cols-1 sm:grid-cols-2' : 'h-full grid-cols-1'} work-classic-grid grid min-h-0 gap-[clamp(0.625rem,min(1.25vw,1.5svh),1rem)]`}
         >
           {classicProjects.map((project) => (
             <article
@@ -281,6 +288,7 @@ export default function PortfolioWorkPage({
               role='link'
               tabIndex={0}
               aria-label={`Open ${project.title} case study`}
+              data-card-theme={project.dark ? 'dark' : 'light'}
               data-cursor-reactive={project.dark ? 'dark' : 'light'}
               onClick={(event) =>
                 openConcept(
