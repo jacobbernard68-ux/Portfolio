@@ -20,9 +20,10 @@ import { setWorkLayoutPreference } from './workLayoutPreference';
 const classicOrder = [
   'furniture-landscapes',
   'beans-place',
+  'backend-data-systems',
   'vintage-barbershop',
-  'professional-cleaning',
   'lumen-festival',
+  'professional-cleaning',
 ];
 const carouselViewportQuery = '(min-width: 48rem) and (max-width: 74.999rem)';
 const subscribeToCarouselViewport = (onChange: () => void) => {
@@ -35,7 +36,16 @@ const getCarouselViewportSnapshot = () =>
 const classicThemeBySlug: Record<string, 'dark' | 'light'> = {
   'furniture-landscapes': 'dark',
   'beans-place': 'light',
+  'backend-data-systems': 'dark',
+  'vintage-barbershop': 'light',
+  'lumen-festival': 'dark',
+  'professional-cleaning': 'light',
+};
+const responsiveThemeBySlug: Record<string, 'dark' | 'light'> = {
+  'beans-place': 'light',
   'vintage-barbershop': 'dark',
+  'backend-data-systems': 'light',
+  'furniture-landscapes': 'dark',
   'professional-cleaning': 'light',
   'lumen-festival': 'dark',
 };
@@ -57,7 +67,7 @@ const responsiveProjects = responsiveProjectOrder
   .map((project, index) => ({
     ...project,
     number: String(index + 1).padStart(2, '0'),
-    dark: index % 2 === 1,
+    dark: responsiveThemeBySlug[project.slug] === 'dark',
   }));
 
 export default function PortfolioWorkPage({
@@ -279,17 +289,17 @@ export default function PortfolioWorkPage({
       <header className='relative z-[100] mx-auto mb-[clamp(0.625rem,1.5svh,1rem)] flex w-full max-w-[var(--content-max)] shrink-0 items-center justify-between gap-[var(--fluid-section-gap)] overflow-visible rounded-[var(--fluid-radius)] border border-[#405671]/10 bg-white/45 px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.65rem,1.4vh,0.75rem)]'>
         <div>
           <p className='text-[10px] font-bold tracking-[0.2em] text-[#607795] uppercase'>
-            Portfolio · 2026
+            Broader portfolio · 2026
           </p>
           <h1 className='mt-1 text-[clamp(1.05rem,5.25vw,1.5rem)] font-semibold tracking-[-0.04em] whitespace-nowrap text-[#111] sm:text-[clamp(1.875rem,3.5vw,2.5rem)] sm:whitespace-normal md:text-[clamp(1.25rem,2.5vw,1.75rem)] md:whitespace-nowrap xl:text-[clamp(1.875rem,3.5vw,2.5rem)] xl:whitespace-normal'>
-            From Concept to Experience
+            All Projects
           </h1>
         </div>
         {!embedded && showFanOption && (
           <div className='flex items-center gap-4'>
             <p className='hidden max-w-[360px] text-right text-sm leading-6 text-slate-600 md:block xl:max-w-[480px]'>
-              Review the project details here, or switch to the interactive
-              collection for a more visual experience.
+              Explore a broader curated collection of portfolio-worthy work
+              across design and development.
             </p>
             <span className='relative hidden shrink-0 lg:inline-flex'>
               <Link
@@ -297,7 +307,7 @@ export default function PortfolioWorkPage({
                 onClick={() => setWorkLayoutPreference('fan')}
                 className='inline-flex rounded-full border border-[#405671]/25 bg-[#c7d2de] px-4 py-2 text-[10px] font-bold tracking-[0.14em] text-[#2f3e5c] uppercase transition hover:bg-[#b8cadc] focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
               >
-                Fan layout
+                View Featured Work
               </Link>
             </span>
           </div>
@@ -308,7 +318,7 @@ export default function PortfolioWorkPage({
       >
         <section
           ref={carouselRef}
-          aria-label='Selected projects'
+          aria-label='Broader selected project collection'
           className={`${embedded ? 'grid-cols-1 sm:grid-cols-2' : 'h-full grid-cols-1'} work-classic-grid grid min-h-0 gap-[clamp(0.625rem,min(1.25vw,1.5svh),1rem)]`}
         >
           {(embedded || carouselViewport

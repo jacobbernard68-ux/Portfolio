@@ -11,6 +11,7 @@ import ClearlineCaseStudy from '@/components/Portfolio/ClearlineCaseStudy';
 import LumenCaseStudy from '@/components/Portfolio/LumenCaseStudy';
 import ReturnToWork from '@/components/Portfolio/ReturnToWork';
 import ProjectWebsiteLink from '@/components/Portfolio/ProjectWebsiteLink';
+import BackendDataSystemsCaseStudy from '@/components/Portfolio/BackendDataSystemsCaseStudy';
 
 type Props = { params: Promise<{ slug: string }> };
 export const generateStaticParams = () =>
@@ -28,6 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectPage({ params }: Props) {
   const project = getPortfolioProject((await params).slug);
   if (!project) notFound();
+  if (project.slug === 'backend-data-systems')
+    return <BackendDataSystemsCaseStudy project={project} />;
   if (project.slug === 'vintage-barbershop')
     return <BarbershopCaseStudy project={project} />;
   if (project.slug === 'professional-cleaning')

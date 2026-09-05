@@ -28,6 +28,16 @@ const badges = [
     image: '/images/badges/javascript.png',
     alignment: 'translate-y-2',
   },
+  {
+    name: 'ReactJS Framework Developer badge',
+    image: '/images/badges/react-js.png',
+    alignment: 'translate-y-2',
+  },
+  {
+    name: 'MySQL Backend Developer badge',
+    image: '/images/badges/mysql.png',
+    alignment: 'translate-y-2',
+  },
 ];
 
 const modalSectionTopPadding = 8;
@@ -42,7 +52,7 @@ const sections: Section[] = [
     content: [
       {
         heading: 'Frontend Developer · UI Designer',
-        body: 'Frontend Developer and UI Designer with 15 years of enterprise IT experience and a passion for building responsive, user-focused web applications. Skilled in HTML, CSS, JavaScript, React, and Figma, with experience creating modern interfaces that emphasize usability, accessibility, and maintainable code. I combine technical problem-solving with thoughtful design to create intuitive digital experiences.',
+        body: 'Frontend Developer and UI Designer with 16 years of enterprise IT experience and a passion for building responsive, user-focused web applications. Skilled in HTML, CSS, JavaScript, React, and Figma, with practical coursework in Node.js, Express, REST APIs, MySQL, and MongoDB that supports data-aware interface development. I create modern interfaces that emphasize usability, accessibility, and maintainable code while combining technical problem-solving with thoughtful design.',
       },
     ],
   },
@@ -85,7 +95,7 @@ const sections: Section[] = [
     title: 'Technical skills',
     label: 'Toolkit',
     preview:
-      'React, JavaScript, responsive CSS, Figma, accessibility, Git, Linux, Python, and enterprise troubleshooting.',
+      'React, JavaScript, responsive CSS, Figma, accessibility, Git, and practical backend and database integration.',
     content: [
       {
         heading: 'Frontend',
@@ -94,6 +104,10 @@ const sections: Section[] = [
       {
         heading: 'UI / UX',
         body: 'Figma, wireframing, typography, visual hierarchy, accessibility (WCAG), and information architecture.',
+      },
+      {
+        heading: 'Backend & data',
+        body: 'Node.js, Express, REST APIs, MySQL, SQL, relational database design, CRUD operations, JOINs, aggregate queries, transactions, MongoDB document data, and authentication fundamentals.',
       },
       { heading: 'Tools', body: 'Git, GitHub, VS Code, and Chrome DevTools.' },
       {
@@ -107,7 +121,7 @@ const sections: Section[] = [
     title: 'Projects',
     label: 'Selected work',
     preview:
-      'A React coffee shop, JavaScript barbershop, personal portfolio, and a complete Figma interface concept.',
+      'Selected frontend, interface, and data-driven work ranging from visual concepts to backend-connected applications.',
     content: [
       {
         heading: 'The Bean’s Place',
@@ -125,6 +139,11 @@ const sections: Section[] = [
         body: 'A responsive portfolio showcasing frontend projects, UI case studies, and technical experience through a consistent design system.',
       },
       {
+        heading: 'Backend & Data Systems',
+        meta: 'React · Express · MySQL · MongoDB',
+        body: 'A consolidated coursework case study tracing progression from a MySQL-connected student portal to hybrid-data and authenticated commerce applications.',
+      },
+      {
         heading: 'UI Design Concept',
         meta: 'Figma',
         body: 'A complete website interface emphasizing typography, layout systems, visual hierarchy, and responsive user experience.',
@@ -136,7 +155,7 @@ const sections: Section[] = [
     title: 'Technical training',
     label: 'Development',
     preview:
-      'Hands-on study across semantic HTML, modern CSS, JavaScript, React, APIs, accessibility, and application architecture.',
+      'Hands-on study across semantic HTML, modern CSS, JavaScript, React, MySQL, APIs, accessibility, and application architecture.',
     content: [
       {
         heading: 'HTML & CSS',
@@ -149,6 +168,10 @@ const sections: Section[] = [
       {
         heading: 'React',
         body: 'Components, JSX, props, state, hooks, Context API, routing, and component composition.',
+      },
+      {
+        heading: 'Backend & data systems',
+        body: 'Node.js and Express REST APIs connected to MySQL and MongoDB, including relational schema design, CRUD operations, JOINs, aggregation, transactions, document data, and authentication concepts.',
       },
     ],
   },
@@ -474,7 +497,7 @@ export default function ResumeSections({
                         Professional badges
                       </h2>
                     </header>
-                    <ul className='grid grid-cols-[repeat(auto-fit,minmax(min(9rem,100%),11rem))] justify-center gap-4 p-5 sm:gap-5 sm:p-6'>
+                    <ul className='grid grid-cols-1 justify-center gap-4 p-5 sm:grid-cols-2 sm:gap-5 sm:p-6 lg:grid-cols-4'>
                       {badges.map((badge) => (
                         <li key={badge.image} className='flex justify-center'>
                           <Image
@@ -483,7 +506,7 @@ export default function ResumeSections({
                             width={1600}
                             height={1600}
                             sizes='(max-width: 640px) 144px, 176px'
-                            className={`h-auto w-full object-contain ${badge.alignment}`}
+                            className={`h-auto w-full max-w-44 object-contain ${badge.alignment}`}
                           />
                         </li>
                       ))}

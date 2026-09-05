@@ -48,23 +48,23 @@ export default function PortfolioWorkFanPage() {
       <header className='relative z-[100] mx-auto mb-[clamp(0.625rem,1.5svh,1rem)] flex w-full max-w-[var(--content-max)] shrink-0 items-center justify-between gap-[var(--fluid-section-gap)] overflow-visible rounded-[var(--fluid-radius)] border border-[#405671]/10 bg-white/45 px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.65rem,1.4vh,0.75rem)]'>
         <div>
           <p className='text-[10px] font-bold tracking-[0.2em] text-[#607795] uppercase'>
-            Portfolio · 2026
+            Curated showcase · 2026
           </p>
           <h1 className='mt-1 text-[clamp(1.05rem,5.25vw,1.5rem)] font-semibold tracking-[-0.04em] whitespace-nowrap text-[#111] sm:text-[clamp(1.875rem,3.5vw,2.5rem)] sm:whitespace-normal md:text-[clamp(1.25rem,2.5vw,1.75rem)] md:whitespace-nowrap xl:text-[clamp(1.875rem,3.5vw,2.5rem)] xl:whitespace-normal'>
-            From Concept to Experience
+            Featured Work
           </h1>
         </div>
         <div className='flex items-center gap-4'>
           <p className='hidden max-w-[360px] text-right text-sm leading-6 text-slate-600 md:block xl:max-w-[480px]'>
-            This fan brings the portfolio into one visual collection: choose a
-            card to see how each concept became a working experience.
+            A focused selection of the projects I most want you to see, from
+            early concept through working experience.
           </p>
           <Link
             href='/work/classic'
             onClick={() => setWorkLayoutPreference('classic')}
             className='shrink-0 rounded-full border border-[#405671]/25 bg-[#c7d2de] px-4 py-2 text-[10px] font-bold tracking-[0.14em] text-[#2f3e5c] uppercase transition hover:bg-[#b8cadc] focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
           >
-            Classic layout
+            Show All Projects
           </Link>
         </div>
       </header>

@@ -166,11 +166,37 @@ export const portfolioProjects: readonly PortfolioProject[] = [
     liveHref: '/furniture-website/Index.html',
     liveLabel: 'Open website',
   },
+  {
+    number: '06',
+    slug: 'backend-data-systems',
+    title: 'Backend & Data Systems',
+    type: 'Database & backend coursework · 2026',
+    summary:
+      'A progression of database-connected applications exploring Express APIs, relational and document data, authentication, transactions, and data-driven React interfaces.',
+    image: '/images/portfolio/backend-data/commerce-reporting.svg',
+    heroImage: '/images/portfolio/backend-data/systems-overview.svg',
+    imageAlt:
+      'Editorial architecture graphic connecting React interfaces, Express APIs, MySQL, and MongoDB',
+    skills: ['Node.js', 'Express', 'MySQL', 'MongoDB', 'React'],
+    dark: true,
+    status: 'Selected classroom applications · 2026',
+    challenge:
+      'Move beyond interface-only exercises and understand how application screens communicate with APIs, authentication, and persistent relational and document data.',
+    approach:
+      'Build a sequence of classroom applications that progressed from a MySQL-connected student portal to React systems combining Express, MySQL, MongoDB, authentication, transactions, and reporting.',
+    outcome:
+      'A practical foundation in backend and database concepts, along with a clearer understanding of the security and production-hardening work required beyond a classroom implementation.',
+    gallery: [
+      '/images/portfolio/backend-data/commerce-reporting.svg',
+      '/images/portfolio/backend-data/helpdesk-hybrid-data.svg',
+    ],
+  },
 ];
 
 export const responsiveProjectOrder = [
   'beans-place',
   'vintage-barbershop',
+  'backend-data-systems',
   'furniture-landscapes',
   'professional-cleaning',
   'lumen-festival',

@@ -2,9 +2,9 @@ import PortfolioWorkPage from '@/components/Portfolio/WorkPage';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Selected Work · Classic Layout | Jacob Bernard',
+  title: 'All Projects | Jacob Bernard',
   description:
-    'The original grid presentation of selected work by Jacob Bernard.',
+    'A broader curated collection demonstrating the range of Jacob Bernard’s design and development capabilities.',
 };
 
 export default function ClassicWorkPage() {

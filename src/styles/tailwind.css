@@ -761,6 +761,24 @@ html[data-theme='dark'] .site-content :is(a, button).bg-\[\#607795\]:hover {
   --case-pill-text: #1b272d;
 }
 
+/* Case studies without a project-specific palette retain the same return-pill
+   geometry in light mode that the global dark treatment already provides. */
+html:not([data-theme='dark']) .case-return-link--inline {
+  margin: -0.45rem -0.7rem;
+  border: 1px solid var(--case-control-border, rgb(82 103 119 / 0.24));
+  border-radius: 9999px;
+  background-color: var(--case-control-bg, #dce7f0) !important;
+  padding: 0.45rem 0.7rem;
+  color: var(--case-control-text, #354d61) !important;
+  box-shadow: 0 7px 20px rgb(15 23 42 / 0.14);
+}
+
+html:not([data-theme='dark']) .case-return-link:hover {
+  border-color: var(--case-control-border, rgb(82 103 119 / 0.4));
+  background-color: var(--case-control-hover, #ccdbe7) !important;
+  color: var(--case-control-text, #354d61) !important;
+}
+
 [data-case-theme] .case-return-link--inline {
   margin: -0.45rem -0.7rem;
   border: 1px solid var(--case-control-border);
