@@ -1844,6 +1844,11 @@ html[data-theme='dark'] [data-resume-modal-section] article.bg-\[\#1f2937\] p {
   }
 }
 
+/* Let case-study gutters and content share one native scroll surface. */
+.case-study-viewport {
+  overscroll-behavior-y: contain;
+}
+
 /* Short desktop viewports must grow with their content instead of clipping it. */
 @media (min-width: 64rem) and (max-height: 47.499rem) {
   .viewport-page {

@@ -1,5 +1,7 @@
 'use client';
 
+import CloseIcon from './CloseIcon';
+
 import Image from 'next/image';
 import {
   type PointerEvent as ReactPointerEvent,
@@ -377,19 +379,7 @@ export default function ResumeSections({
                 aria-label={`Close ${active.title}`}
                 className='absolute top-3 right-3 z-30 grid size-11 place-items-center rounded-full bg-[#1f2937] text-[0] text-white shadow-lg transition hover:bg-black focus-visible:ring-2 focus-visible:ring-[#1f2937] focus-visible:ring-offset-2 focus-visible:outline-none'
               >
-                <svg
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  className='size-5'
-                  aria-hidden='true'
-                >
-                  <path
-                    d='m7 7 10 10M17 7 7 17'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                    strokeLinecap='round'
-                  />
-                </svg>
+                <CloseIcon />
               </button>
               <div
                 ref={modalScroll}

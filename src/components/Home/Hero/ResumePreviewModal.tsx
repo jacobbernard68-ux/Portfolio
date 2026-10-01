@@ -1,5 +1,7 @@
 'use client';
 
+import CloseIcon from '@/components/Portfolio/CloseIcon';
+
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -74,9 +76,9 @@ export default function ResumePreviewModal({
           type='button'
           onClick={onClose}
           aria-label='Close Resume preview'
-          className='absolute top-2.5 right-2.5 z-10 grid size-10 place-items-center rounded-full bg-[#1f2937] text-xl text-white shadow-lg transition hover:bg-black focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
+          className='absolute top-2.5 right-2.5 z-10 grid size-11 shrink-0 place-items-center rounded-full bg-[#1f2937] text-xl text-white shadow-lg transition hover:bg-black focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
         >
-          ×
+          <CloseIcon />
         </button>
       </section>
     </div>,

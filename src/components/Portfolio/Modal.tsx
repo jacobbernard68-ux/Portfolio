@@ -1,5 +1,7 @@
 'use client';
 
+import CloseIcon from './CloseIcon';
+
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
@@ -59,21 +61,9 @@ export default function Modal({
           type='button'
           onClick={onClose}
           aria-label={`Close ${title}`}
-          className='absolute top-3 right-3 z-20 grid size-10 place-items-center rounded-full bg-[#1f2937] text-[0] text-white shadow-lg transition hover:bg-black focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
+          className='absolute top-3 right-3 z-20 grid size-11 shrink-0 place-items-center rounded-full bg-[#1f2937] text-[0] text-white shadow-lg transition hover:bg-black focus-visible:ring-2 focus-visible:ring-[#607795] focus-visible:ring-offset-2 focus-visible:outline-none'
         >
-          <svg
-            viewBox='0 0 24 24'
-            fill='none'
-            className='size-5'
-            aria-hidden='true'
-          >
-            <path
-              d='m7 7 10 10M17 7 7 17'
-              stroke='currentColor'
-              strokeWidth='2'
-              strokeLinecap='round'
-            />
-          </svg>
+          <CloseIcon />
         </button>
         {children}
       </section>

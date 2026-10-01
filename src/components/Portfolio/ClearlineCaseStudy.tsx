@@ -52,11 +52,11 @@ export default function ClearlineCaseStudy({
   ];
 
   return (
-    <main className='viewport-page page-gutters bg-[#e2e8f2]/80 lg:overflow-hidden'>
+    <main data-internal-scroll className='case-study-viewport viewport-page page-gutters bg-[#e2e8f2]/80 lg:overflow-y-auto'>
       <article
-        data-case-theme='clearline'
         data-internal-scroll
-        className='no-scrollbar relative mx-auto max-w-[min(90rem,100%)] overflow-hidden rounded-[var(--fluid-radius)] shadow-[0_12px_35px_rgba(31,41,55,0.1)] ring-1 ring-[#2f3e5c]/8 lg:h-full lg:overflow-y-auto'
+        data-case-theme='clearline'
+        className='no-scrollbar relative mx-auto max-w-[min(90rem,100%)] overflow-hidden rounded-[var(--fluid-radius)] shadow-[0_12px_35px_rgba(31,41,55,0.1)] ring-1 ring-[#2f3e5c]/8'
         style={{ backgroundColor: '#c8d5e3' }}
       >
         <ReturnToWork originClassName='text-[#526777]' />

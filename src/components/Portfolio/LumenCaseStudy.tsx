@@ -40,11 +40,11 @@ export default function LumenCaseStudy({
   ];
 
   return (
-    <main className='viewport-page page-gutters bg-[#dce4ed] lg:overflow-hidden'>
+    <main data-internal-scroll className='case-study-viewport viewport-page page-gutters bg-[#dce4ed] lg:overflow-y-auto'>
       <article
-        data-case-theme='lumen'
         data-internal-scroll
-        className='no-scrollbar relative mx-auto max-w-[min(90rem,100%)] overflow-hidden rounded-[var(--fluid-radius)] bg-[#11171b] text-[#f5f7f8] shadow-[0_14px_42px_rgba(16,24,32,.22)] ring-1 ring-white/10 lg:h-full lg:overflow-y-auto'
+        data-case-theme='lumen'
+        className='no-scrollbar relative mx-auto max-w-[min(90rem,100%)] overflow-hidden rounded-[var(--fluid-radius)] bg-[#11171b] text-[#f5f7f8] shadow-[0_14px_42px_rgba(16,24,32,.22)] ring-1 ring-white/10'
       >
         <ReturnToWork tone='dark' originClassName='text-[#d7e0e3]' />
         <div className='grid lg:grid-cols-[0.88fr_1.12fr]'>
@@ -154,10 +154,10 @@ export default function LumenCaseStudy({
             {chapters.map((chapter, index) => (
               <article
                 key={chapter.day}
-                className={`overflow-hidden rounded-xl border border-white/10 ${index === 1 ? 'bg-[#1a2025] lg:-translate-y-2' : 'bg-[#34444a]'}`}
+                className={`overflow-hidden rounded-xl border border-white/10 ${index === 1 ? 'bg-[#1a2025]' : 'bg-[#34444a]'}`}
               >
                 <figure
-                  className={`relative ${index === 1 ? 'aspect-[4/3]' : 'aspect-[16/11]'}`}
+                  className='relative aspect-[16/11]'
                 >
                   <Image
                     src={chapter.image}

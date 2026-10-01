@@ -1,5 +1,6 @@
 "use client";
 
+import CloseIcon from '@/components/Portfolio/CloseIcon';
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -21,7 +22,7 @@ export default function LumenStagePage() {
       <div className="mx-auto flex min-h-[72px] max-w-[1250px] items-center justify-between pl-6 pr-20 sm:pr-24">
         <Link href="#overview" className="text-xl font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f5f7f8]">Lumen Stage</Link>
         <nav aria-label="Festival navigation" className="hidden items-center gap-6 text-base md:flex">{navItems.map(([label, href]) => <a key={label} href={href} className="transition hover:text-white hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">{label}</a>)}</nav>
-        <div className="flex items-center gap-3 md:hidden"><Link href="/work/lumen-festival" className="text-[10px] font-bold uppercase tracking-[0.14em]">Case study</Link><button type="button" aria-expanded={menuOpen} aria-controls="festival-mobile-nav" onClick={() => setMenuOpen((open) => !open)} className="grid size-10 place-items-center rounded-full border border-white/30 text-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">{menuOpen ? "×" : "≡"}<span className="sr-only">Toggle menu</span></button></div>
+        <div className="flex items-center gap-3 md:hidden"><Link href="/work/lumen-festival" className="text-[10px] font-bold uppercase tracking-[0.14em]">Case study</Link><button type="button" aria-expanded={menuOpen} aria-controls="festival-mobile-nav" onClick={() => setMenuOpen((open) => !open)} className="grid size-11 shrink-0 place-items-center rounded-full border border-white/30 text-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">{menuOpen ? <CloseIcon /> : "≡"}<span className="sr-only">Toggle menu</span></button></div>
       </div>
       {menuOpen && <nav id="festival-mobile-nav" aria-label="Mobile festival navigation" className="grid border-t border-[#839195] bg-[#3a4a50] px-6 py-3 md:hidden">{navItems.map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)} className="border-b border-white/10 py-3 text-sm last:border-0">{label}</a>)}</nav>}
     </header>

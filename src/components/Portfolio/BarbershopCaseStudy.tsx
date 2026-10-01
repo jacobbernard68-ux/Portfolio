@@ -15,11 +15,11 @@ export default function BarbershopCaseStudy({
   ];
 
   return (
-    <main className='viewport-page page-gutters bg-[#e2e8f2]/80 lg:overflow-hidden'>
+    <main data-internal-scroll className='case-study-viewport viewport-page page-gutters bg-[#e2e8f2]/80 lg:overflow-y-auto'>
       <article
-        data-case-theme='barber'
         data-internal-scroll
-        className='no-scrollbar relative mx-auto max-w-[min(90rem,100%)] overflow-hidden rounded-[var(--fluid-radius)] bg-[#f2ece4] shadow-[0_12px_35px_rgba(31,41,55,0.1)] ring-1 ring-[#2f3e5c]/8 lg:h-full lg:overflow-y-auto'
+        data-case-theme='barber'
+        className='no-scrollbar relative mx-auto max-w-[min(90rem,100%)] overflow-hidden rounded-[var(--fluid-radius)] bg-[#f2ece4] shadow-[0_12px_35px_rgba(31,41,55,0.1)] ring-1 ring-[#2f3e5c]/8'
       >
         <ReturnToWork originClassName='text-[#8a2f2f]' />
         <div className='grid lg:grid-cols-[0.9fr_1.1fr]'>

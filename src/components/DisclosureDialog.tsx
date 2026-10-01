@@ -1,5 +1,7 @@
 'use client';
 
+import CloseIcon from '@/components/Portfolio/CloseIcon';
+
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const disclosureEvent = 'portfolio:open-disclosure';
@@ -98,7 +100,7 @@ export default function DisclosureDialog() {
             </h2>
           </div>
           <button ref={closeRef} type='button' onClick={close} aria-label='Close disclosure' className='grid size-11 shrink-0 place-items-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] text-xl text-[var(--theme-text)] transition hover:bg-[var(--theme-control-hover)] focus-visible:ring-2 focus-visible:ring-[var(--theme-focus)] focus-visible:ring-offset-2 focus-visible:outline-none'>
-            ×
+            <CloseIcon />
           </button>
         </div>
         <p id='disclosure-copy' className='mt-5 text-sm leading-6 text-[var(--theme-text)] sm:text-base sm:leading-7'>

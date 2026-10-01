@@ -1,5 +1,7 @@
 'use client';
 
+import CloseIcon from '@/components/Portfolio/CloseIcon';
+
 import { FormEvent, useEffect, useRef, useState } from 'react';
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string };
@@ -84,9 +86,9 @@ export default function PortfolioChat() {
               type='button'
               onClick={() => setOpen(false)}
               aria-label='Close AI chat'
-              className='grid size-8 place-items-center rounded-full hover:bg-white/10'
+              className='grid size-11 shrink-0 place-items-center rounded-full hover:bg-white/10'
             >
-              ×
+              <CloseIcon />
             </button>
           </header>
           <div

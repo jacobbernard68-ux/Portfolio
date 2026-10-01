@@ -55,9 +55,9 @@ export default function ReturnToWork({
     };
     alignFloatingControl();
     window.addEventListener('resize', alignFloatingControl);
-    const scrollContainer = origin.closest<HTMLElement>(
-      '[data-internal-scroll]',
-    );
+    const scrollContainer =
+      origin.closest<HTMLElement>('.case-study-viewport') ??
+      origin.closest<HTMLElement>('[data-internal-scroll]');
     const usesInternalScroll = scrollContainer
       ? scrollContainer.scrollHeight > scrollContainer.clientHeight &&
         ['auto', 'scroll'].includes(getComputedStyle(scrollContainer).overflowY)

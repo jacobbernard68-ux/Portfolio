@@ -1,5 +1,6 @@
 'use client';
 
+import CloseIcon from '@/components/Portfolio/CloseIcon';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -357,9 +358,9 @@ export default function ClearlineServicesPage() {
                 type='button'
                 onClick={() => setSubmitted(false)}
                 aria-label='Close confirmation'
-                className='grid size-10 shrink-0 place-items-center rounded-full border border-black/15 text-xl hover:bg-[#eef2f5]'
+                className='grid size-11 shrink-0 place-items-center rounded-full border border-black/15 text-xl hover:bg-[#eef2f5]'
               >
-                ×
+                <CloseIcon />
               </button>
             </div>
             <p

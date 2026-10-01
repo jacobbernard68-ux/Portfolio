@@ -20,7 +20,7 @@ const Hero = ({ embedded = false }: { embedded?: boolean }) => {
         <div className='grid min-h-0 min-w-0 flex-1 grid-cols-[minmax(0,1fr)] min-[60rem]:grid-cols-[minmax(0,1fr)_minmax(19rem,0.42fr)]'>
           <div className='home-primary-panel relative flex min-w-0 flex-col items-center justify-center px-[clamp(1rem,3vw,2rem)] py-[clamp(1rem,4vh,3rem)] text-center'>
             <div className='flex w-full flex-col items-center'>
-              <h1 className='mt-[clamp(0.5rem,2vh,1.25rem)] max-w-[56.25rem] text-[clamp(2.5rem,9vw,6.5rem)] leading-[0.91] font-bold tracking-[-0.065em] text-[#111] min-[60rem]:text-[clamp(3.25rem,5.8vw,6.5rem)]'>
+              <h1 className='mt-[clamp(0.5rem,2vh,1.25rem)] max-w-[56.25rem] text-[clamp(2.5rem,9vw,6.5rem)] leading-[1.05] font-bold tracking-[-0.065em] text-[#111] min-[60rem]:text-[clamp(3.25rem,5.8vw,6.5rem)]'>
                 Thoughtful design.{' '}
                 <span className='text-[#607795]'>Built to work.</span>
               </h1>
@@ -61,7 +61,7 @@ const Hero = ({ embedded = false }: { embedded?: boolean }) => {
                     src='/images/jacob-bernard-headshot.png'
                     alt='Professional headshot of Jacob Bernard'
                     fill
-                    sizes='(max-width: 639px) 112px, 128px'
+                    sizes='(max-width: 711px) 64px, (max-width: 1422px) 9vw, 128px'
                     className='object-cover object-[50%_34%]'
                   />
                 </div>

@@ -36,10 +36,10 @@ export default function BackendDataSystemsCaseStudy({
   project: PortfolioProject;
 }) {
   return (
-    <main className='viewport-page page-gutters bg-[var(--theme-page)] lg:overflow-hidden'>
+    <main data-internal-scroll className='case-study-viewport viewport-page page-gutters bg-[var(--theme-page)] lg:overflow-y-auto'>
       <article
         data-internal-scroll
-        className='no-scrollbar relative mx-auto h-full max-w-[min(90rem,100%)] overflow-y-auto rounded-[var(--fluid-radius)] border border-[var(--theme-border)] bg-[var(--theme-surface)] text-[var(--theme-text)] shadow-[0_18px_55px_var(--theme-shadow)]'
+        className='no-scrollbar relative mx-auto max-w-[min(90rem,100%)] overflow-hidden rounded-[var(--fluid-radius)] border border-[var(--theme-border)] bg-[var(--theme-surface)] text-[var(--theme-text)] shadow-[0_18px_55px_var(--theme-shadow)]'
       >
         <ReturnToWork originClassName='text-[var(--theme-muted)]' />
 

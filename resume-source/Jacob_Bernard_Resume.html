@@ -1,171 +1,143 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Jacob Bernard — Frontend Developer and UI Designer Resume</title>
-    <style>
-      @page { size: Letter; margin: 0.42in 0.5in; }
-      * { box-sizing: border-box; }
-      html, body { margin: 0; padding: 0; }
-      body {
-        color: #263238;
-        background: #fff;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 9.15pt;
-        line-height: 1.28;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-      header {
-        display: grid;
-        grid-template-columns: 1fr 0.8in;
-        align-items: center;
-        gap: 0.22in;
-        padding: 0.02in 0.1in 0.1in;
-      }
-      h1 { margin: 0; color: #18394a; font-size: 24pt; line-height: 1; letter-spacing: 0.7pt; }
-      .title { margin: 4px 0 6px; color: #405b67; font-size: 11.2pt; font-weight: 700; }
-      .links { margin: 0; color: #405b67; font-size: 8.7pt; }
-      .headshot { width: 0.76in; height: 0.76in; object-fit: cover; object-position: 50% 30%; border-radius: 50%; border: 1px solid #b8cadc; }
-      section { margin-top: 0.085in; }
-      h2 {
-        margin: 0 0 3px;
-        border-bottom: 1px solid #b8cadc;
-        color: #18394a;
-        font-size: 10.4pt;
-        line-height: 1.15;
-      }
-      p { margin: 0; }
-      .summary { padding: 0 0.08in; }
-      .skills-table, .badges-table { width: calc(100% - 0.16in); margin: 0 0.08in; border-collapse: collapse; table-layout: fixed; }
-      .skills-table td {
-        border: 1px solid #fff;
-        background: #eaf0f2;
-        padding: 3px 5px;
-        color: #405b67;
-        font-size: 8.45pt;
-        font-weight: 700;
-        text-align: center;
-      }
-      .additional { margin: 3px 0.08in 0; font-size: 8.65pt; }
-      .entry { margin: 4px 0.08in 0; break-inside: avoid; }
-      .entry:first-of-type { margin-top: 0; }
-      .entry-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-      h3 { margin: 0; color: #202c32; font-size: 9.35pt; line-height: 1.15; }
-      .meta { margin-top: 1px; color: #66777f; font-size: 8.25pt; font-style: italic; }
-      ul { margin: 2px 0 0; padding-left: 14px; }
-      li { margin: 0.5px 0; }
-      .experience .entry { margin-top: 3px; }
-      .experience li { margin-top: 1px; }
-      .badges-table { margin-top: 4px; }
-      .badges-table td {
-        width: 50%;
-        border: 1px solid #d4e0e5;
-        background: #f3f6f7;
-        padding: 7px 10px;
-        vertical-align: middle;
-      }
-      .badge { display: grid; grid-template-columns: 0.58in 1fr; align-items: center; gap: 9px; }
-      .badge img { width: 0.55in; height: 0.55in; object-fit: contain; }
-      .badge strong { display: block; color: #18394a; font-size: 8.9pt; }
-      .badge span { display: block; margin-top: 1px; color: #66777f; font-size: 7.9pt; }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div>
-        <h1>JACOB BERNARD</h1>
-        <p class="title">FRONTEND DEVELOPER | UI DESIGNER</p>
-        <p class="links">github.com/jacobbernard68-ux &nbsp;|&nbsp; linkedin.com/in/jacobbernard159</p>
-      </div>
-      <img class="headshot" src="../../public/images/jacob-bernard-headshot.png" alt="Professional headshot of Jacob Bernard" />
-    </header>
-
-    <section>
-      <h2>PROFESSIONAL SUMMARY</h2>
-      <p class="summary">UI-focused frontend developer and designer backed by 16 years of enterprise IT experience. Builds responsive, accessible interfaces with <strong>React, JavaScript, HTML, CSS, and Figma</strong>, combining component-based development with strong visual hierarchy, usability, and systems thinking. Brings hands-on web platform experience and a design-focused approach to modern frontend development.</p>
-    </section>
-
-    <section>
-      <h2>SKILLS</h2>
-      <table class="skills-table" aria-label="Technical skills">
-        <tbody>
-          <tr><td>React</td><td>JavaScript ES6+</td><td>HTML5</td><td>CSS3</td></tr>
-          <tr><td>Figma</td><td>Responsive Design</td><td>Accessibility / WCAG</td><td>Context API</td></tr>
-          <tr><td>Git / GitHub</td><td>CSS Grid</td><td>Flexbox</td><td>Chrome DevTools</td></tr>
-        </tbody>
-      </table>
-      <p class="additional"><strong>Additional:</strong> JSX, state management, DOM manipulation, Fetch API, routing, hooks, semantic HTML, Linux, Python, enterprise IT systems</p>
-    </section>
-
-    <section>
-      <h2>SELECTED FRONTEND &amp; UI PROJECTS</h2>
-      <article class="entry">
-        <h3>The Bean's Place</h3>
-        <p class="meta">React Commerce Experience | React, JSX, Context API, CSS</p>
-        <ul>
-          <li>Built a responsive specialty-coffee storefront using reusable React components and component-based interface architecture.</li>
-          <li>Implemented shared cart state with React Context API to coordinate product and cart behavior across the application.</li>
-          <li>Developed a consistent product-discovery interface for desktop and mobile layouts.</li>
-        </ul>
-      </article>
-      <article class="entry">
-        <h3>Vintage Barbershop</h3>
-        <p class="meta">Responsive Service Website | HTML, CSS, JavaScript</p>
-        <ul>
-          <li>Developed a responsive service website using semantic HTML, CSS Grid, Flexbox, and JavaScript.</li>
-          <li>Built interactive service details, mobile navigation, and a client-side booking calendar.</li>
-          <li>Structured the interface around clear information hierarchy and responsive behavior.</li>
-        </ul>
-      </article>
-      <article class="entry">
-        <h3>Portfolio &amp; UI Case Studies</h3>
-        <p class="meta">Frontend Development + Interface Design | React, Figma</p>
-        <ul>
-          <li>Designed and developed a responsive portfolio integrating frontend projects with detailed UI case studies.</li>
-          <li>Created reusable interface patterns centered on visual hierarchy, consistency, and guided content exploration.</li>
-          <li>Used Figma and frontend implementation together to translate interface concepts into functional web experiences.</li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="experience">
-      <h2>PROFESSIONAL EXPERIENCE</h2>
-      <article class="entry">
-        <h3>Defense Intelligence Agency</h3>
-        <p class="meta">Data Systems &amp; IT Operations Manager | May 2021 - Jul 2026</p>
-        <ul><li>Supported high-availability enterprise systems, coordinated multidisciplinary technical work, and improved technical workflows.</li></ul>
-      </article>
-      <article class="entry">
-        <h3>1st Information Operations Battalion</h3>
-        <p class="meta">Senior IT Specialist | Oct 2018 - May 2021</p>
-        <ul><li>Supported Linux-based operational systems, maintained platform reliability, and developed Python automation scripts.</li></ul>
-      </article>
-      <article class="entry">
-        <h3>21st Theater Sustainment Command</h3>
-        <p class="meta">IT Specialist, Web Platforms | Aug 2015 - Oct 2018</p>
-        <ul>
-          <li>Developed command-level internal web platforms and improved navigation and information architecture.</li>
-          <li>Customized HTML interface templates adopted at higher organizational levels.</li>
-        </ul>
-      </article>
-      <article class="entry">
-        <h3>Earlier Enterprise IT Experience</h3>
-        <p class="meta">IT Specialist / IT Support Technician | Mar 2011 - Aug 2015</p>
-        <ul><li>Developed internal websites, supported enterprise IT infrastructure, and provided hardware, software, and end-user support.</li></ul>
-      </article>
-    </section>
-
-    <section>
-      <h2>PROFESSIONAL BADGES</h2>
-      <table class="badges-table" aria-label="Professional badges">
-        <tbody>
-          <tr>
-            <td><div class="badge"><img src="../../public/images/badges/html-css.png" alt="HTML and CSS Web Designer badge" /><div><strong>HTML &amp; CSS</strong><span>Web Designer</span></div></div></td>
-            <td><div class="badge"><img src="../../public/images/badges/javascript.png" alt="JavaScript Professional Developer badge" /><div><strong>JavaScript</strong><span>Professional Developer</span></div></div></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><title>Jacob Bernard — Resume</title><style>@page { size: Letter; margin: .5in .6in; }
+* { box-sizing: border-box; } body { margin: 0; color: #263238; font: 9.5pt/1.28 Arial, sans-serif; }
+.profile { display: flex; justify-content: space-between; align-items: center; }
+.headshot { width: .76in; height: .76in; object-fit: cover; object-position: 50% 30%; border-radius: 50%; }
+.skills { width: 100%; border-collapse: collapse; table-layout: fixed; margin-bottom: 5pt; }
+.skills td { background: #eaf0f2; border: 1px solid white; padding: 4pt; text-align: center; font-size: 8.45pt; font-weight: bold; }
+ul { margin: 2pt 0 4pt; padding-left: 14pt; }
+.page + .page { break-before: page; } h1 { font-size: 24pt; margin: 0; }
+h1, h2, .title { color: #18394a; } .title { font-weight: bold; font-size: 11pt; }
+h2 { font-size: 10.4pt; margin: 8pt 0 4pt; border-bottom: 1px solid #b8cadc; }
+h3 { font-size: 10pt; margin: 5pt 0 0; } p { margin: 0 0 4pt; }
+.meta { color: #526985; font-size: 9pt; font-style: italic; } article { break-inside: avoid; }
+.badges { display: grid; grid-template-columns: repeat(2, 1fr); background: #f3f6f7; }
+.badges > div { padding: 6pt; border: 1px solid #d4e0e5; display: flex; align-items: center; gap: 9pt; } .badges img { width: 40pt; height: 40pt; } .badges p { font-size: 9pt; font-weight: bold; }
+</style></head><body><main class="page">
+<header class="profile"><div><h1>JACOB BERNARD</h1><p class="title">FRONTEND DEVELOPER | UI DESIGNER</p><p>github.com/jacobbernard68-ux | linkedin.com/in/jacobbernard159</p></div><img class="headshot" src="../public/images/jacob-bernard-headshot.png" alt="Jacob Bernard"></header>
+<section><h2>PROFESSIONAL SUMMARY</h2>
+<article>
+<p>Frontend Developer and UI Designer with 16 years of enterprise IT experience and a passion for building responsive, user-focused web applications. Skilled in HTML, CSS, JavaScript, React, and Figma, with practical coursework in Node.js, Express, REST APIs, MySQL, and MongoDB that supports data-aware interface development. I create modern interfaces that emphasize usability, accessibility, and maintainable code while combining technical problem-solving with thoughtful design.</p>
+</article>
+</section>
+<section><h2>TECHNICAL SKILLS</h2>
+<table class="skills">
+<tr>
+<td>React</td>
+<td>JavaScript ES6+</td>
+<td>HTML5</td>
+<td>CSS3</td>
+</tr>
+<tr>
+<td>Figma</td>
+<td>Responsive Design</td>
+<td>Accessibility / WCAG</td>
+<td>Context API</td>
+</tr>
+<tr>
+<td>Git / GitHub</td>
+<td>Node.js / Express</td>
+<td>MySQL / SQL</td>
+<td>MongoDB</td>
+</tr>
+</table>
+<article>
+<p><strong>Frontend:</strong> HTML5, CSS3, JavaScript (ES6+), React, JSX, responsive web design, component-based architecture, Context API, state management, DOM manipulation, and Fetch API.</p>
+</article>
+<article>
+<p><strong>UI / UX:</strong> Figma, wireframing, typography, visual hierarchy, accessibility (WCAG), and information architecture.</p>
+</article>
+<article>
+<p><strong>Backend &amp; data:</strong> Node.js, Express, REST APIs, MySQL, SQL, relational database design, CRUD operations, JOINs, aggregate queries, transactions, MongoDB document data, and authentication fundamentals.</p>
+</article>
+<article>
+<p><strong>Tools:</strong> Git, GitHub, VS Code, and Chrome DevTools.</p>
+</article>
+<article>
+<p><strong>Additional:</strong> Linux, Python, enterprise IT, technical troubleshooting, and process improvement.</p>
+</article>
+</section>
+<section><h2>PROJECTS</h2>
+<article>
+<h3>The Bean’s Place</h3>
+<p class="meta">React</p>
+<ul><li>Responsive coffee shop application featuring reusable components, Context API shopping-cart state, interactive UI, and modern React practices.</li></ul>
+</article>
+<article>
+<h3>The Classic Cut</h3>
+<p class="meta">HTML · CSS · JavaScript</p>
+<ul><li>Modern barbershop website demonstrating responsive layouts, DOM manipulation, event-driven interaction, semantic HTML, CSS Grid, Flexbox, and a mobile-first approach.</li></ul>
+</article>
+<article>
+<h3>Personal Portfolio</h3>
+<p class="meta">React</p>
+<ul><li>A responsive portfolio showcasing frontend projects, UI case studies, and technical experience through a consistent design system.</li></ul>
+</article>
+<article>
+<h3>Backend &amp; Data Systems</h3>
+<p class="meta">React · Express · MySQL · MongoDB</p>
+<ul><li>A consolidated coursework case study tracing progression from a MySQL-connected student portal to hybrid-data and authenticated commerce applications.</li></ul>
+</article>
+<article>
+<h3>UI Design Concept</h3>
+<p class="meta">Figma</p>
+<ul><li>A complete website interface emphasizing typography, layout systems, visual hierarchy, and responsive user experience.</li></ul>
+</article>
+</section>
+</main>
+<main class="page">
+<header><p class="title">JACOB BERNARD | EXPERIENCE &amp; DEVELOPMENT</p></header>
+<section><h2>EXPERIENCE</h2>
+<article>
+<h3>Defense Intelligence Agency</h3>
+<p class="meta">Data Systems &amp; IT Operations Manager · May 2021–July 2026</p>
+<ul><li>Supported high-availability enterprise systems, improved workflows, managed hardware lifecycle processes, and translated complex technical issues across multidisciplinary teams.</li></ul>
+</article>
+<article>
+<h3>1st Information Operations Battalion</h3>
+<p class="meta">Senior IT Specialist · Oct 2018–May 2021</p>
+<ul><li>Supported Linux-based operational systems, created Python automation, coordinated maintenance, and maintained platform reliability.</li></ul>
+</article>
+<article>
+<h3>21st Theater Sustainment Command</h3>
+<p class="meta">IT Specialist, Web Platforms · Aug 2015–Oct 2018</p>
+<ul><li>Developed internal web platforms, improved navigation and information architecture, and created interface improvements adopted at higher organizational levels.</li></ul>
+</article>
+<article>
+<h3>51st Expeditionary Signal Battalion</h3>
+<p class="meta">Information Technology Specialist · Mar 2013–Aug 2015</p>
+<ul><li>Developed internal websites, strengthened organizational communication, and supported enterprise IT infrastructure.</li></ul>
+</article>
+<article>
+<h3>716th Military Police Battalion</h3>
+<p class="meta">IT Support Technician · Mar 2011–Mar 2013</p>
+<ul><li>Provided end-user support, maintained hardware and software, and resolved technical issues.</li></ul>
+</article>
+</section>
+<section><h2>TECHNICAL TRAINING</h2>
+<article>
+<p><strong>HTML &amp; CSS:</strong> Semantic HTML, responsive design, Flexbox, CSS Grid, accessibility, forms, and animations.</p>
+</article>
+<article>
+<p><strong>JavaScript:</strong> ES6+, DOM manipulation, event handling, Fetch API, asynchronous programming, objects, and arrays.</p>
+</article>
+<article>
+<p><strong>React:</strong> Components, JSX, props, state, hooks, Context API, routing, and component composition.</p>
+</article>
+<article>
+<p><strong>Backend &amp; data systems:</strong> Node.js and Express REST APIs connected to MySQL and MongoDB, including relational schema design, CRUD operations, JOINs, aggregation, transactions, document data, and authentication concepts.</p>
+</article>
+</section>
+<section><h2>CORE STRENGTHS</h2>
+<article>
+<h3>How I work</h3>
+<p>Frontend development, UI design, problem solving, technical communication, cross-functional collaboration, continuous learning, and attention to detail. My approach brings structure to complexity and keeps the user’s path clear.</p>
+</article>
+</section>
+<section><h2>PROFESSIONAL BADGES</h2><div class="badges">
+<div><img src="../public/images/badges/html-css.png" alt="HTML and CSS Web Designer"><p>HTML and CSS Web Designer</p></div>
+<div><img src="../public/images/badges/javascript.png" alt="JavaScript Professional Developer"><p>JavaScript Professional Developer</p></div>
+<div><img src="../public/images/badges/react-js.png" alt="ReactJS Framework Developer"><p>ReactJS Framework Developer</p></div>
+<div><img src="../public/images/badges/mysql.png" alt="MySQL Backend Developer"><p>MySQL Backend Developer</p></div>
+</div></section>
+</main></body></html>
